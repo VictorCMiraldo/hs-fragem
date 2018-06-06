@@ -1,4 +1,4 @@
-module Fragem.Syntax.FromMidi where
+module Fragem.Syntax.FromMidi (fromMidi) where
 
 import Control.Monad
 import Data.Function (on)
@@ -9,10 +9,6 @@ import qualified Data.Map   as M
 
 import           Fragem.Syntax
 
-testfile = "dataset/sample/sample2.mid"
-testfile2 = "dataset/sample/sample3.mid"
-hanon = "dataset/hanon/Hanon 1.mid"
-
 -- |A midi time signature consists in four values.
 --  @TimeSignature nn dd cc bb@ where
 --
@@ -22,8 +18,6 @@ hanon = "dataset/hanon/Hanon 1.mid"
 --    bb - 32nd node per MIDI quarter note
 --
 -- http://www.deluge.co/?q=midi-tempo-bpm
-
-main = Midi.importFile testfile 
 
 -- |Is a 'Midi.Message' a time signature?
 isTimeSig :: Midi.Message -> Bool
@@ -69,6 +63,9 @@ getNoteEvents = sortBy go . process M.empty 0 . simplify
     -- a NoteOn event we add it on a map and record when it was "on".
     -- Once we see a "NoteOff" event we look up when was the note on,
     -- and compute the interval.
+    --
+    -- TODO: We can identify ties by noticing that the duration of
+    --       a note spans accross a measure bound.
     process :: M.Map Key Ticks
             -> Ticks
             -> [(Midi.Ticks , Bool , Int)]
@@ -117,3 +114,17 @@ convertTrack (TimeSig n d) (Midi.TicksPerBeat bt) tr
     convert (_ , delta , k) = Note (durationInterp (fromIntegral delta / fromIntegral nbt))
                                    (Pitch k)
                                    False
+
+-- |Main function here; given a midi file, returns a list of
+--  sections. One for each track of the file.
+--
+--  TODO: We still do NOT support changes in time signatures
+--        nor sectionswith multiple notes at the same time.
+fromMidi :: FilePath -> IO (Either String [Section])
+fromMidi file = either (Left . id) (Right . go)
+            <$> Midi.importFile file
+  where
+    go :: Midi.Midi -> [Section]
+    go midi = let tracks = Midi.tracks midi 
+                  tsig   = getTimeSig tracks
+               in map (convertTrack tsig (Midi.timeDiv midi)) tracks

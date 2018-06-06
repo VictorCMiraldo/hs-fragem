@@ -7,47 +7,15 @@ data Duration
   = Simple Int 
   -- |A @Dot d@ lasts for @d + .5*d@ of a measure.
   | Dot Duration
+  -- |A @Irregular n d@ lasts for
+  | Irregular Int Duration
   deriving (Eq , Show , Ord)
-
-{-
-  -- |Lasts 8 measures
-  = Maxima
-  -- |Lasts 4 measures
-  | Longa
-  -- |Lasts 2 measures
-  | Double
-  -- |Lasts 1 measure
-  | Whole
-  -- |Lasts 1/2 measure
-  | Half
-  -- |Lasts 1/4 measure
-  | Quarter
-  -- |Lasts 1/8 measure
-  | Eighth
-  -- |Lasts 1/16 measure
-  | Sixteenth
-  -- |Lasts 1/32 measure
-  | TirtySecond
-  -- |Lasts 1/64 measure
-  | SixtyFourth
--}
-
-{-
-durationRecip Maxima      = 0.125
-durationRecip Longa       = 0.25
-durationRecip Double      = 0.5
-durationRecip Whole       = 1
-durationRecip Half        = 2
-durationRecip Quarter     = 4
-durationRecip Eighth      = 8
-durationRecip Sixteenth   = 16
-durationRecip TirtySecond = 32
-durationRecip SixtyFourth = 64
--}
 
 -- |Returns the fraction of the measure used by the duration.
 durationValue :: Duration -> Float
 durationValue (Simple i) = 1 / (2 ** (fromIntegral i))
+durationValue (Irregular n d)
+  = durationValue d * (fromIntegral n - 1) / fromIntegral n
 durationValue (Dot d)
   = let nd  = countDots d + 1
         nd' = 2 ** nd
@@ -60,31 +28,28 @@ durationValue (Dot d)
 
 -- |Interpolates a float in a duration. We play a game close
 --  to Newton's method here.
+--
+--  TODO: Add how many dots should we consider; this changes
+--        everything.
 durationInterp :: Float -> Duration
 durationInterp f
   = let start = Simple (-2)
      in go f start (dist (durationValue start) f)
   where
+    dist :: Float -> Float -> Float
+    dist x y = abs (x - y)
 
-dist :: Float -> Float -> Float
-dist x y = abs (x - y)
+    down :: Duration -> Duration
+    down (Simple i) = Dot (Simple (i + 1))
+    down (Dot x)    = x
 
-down :: Duration -> Duration
-{- down (Dot (Simple i))             = (Simple i) 
-down (Dot (Dot (Simple i)))       = (Dot (Simple i)) 
-down (Dot (Dot (Dot (Simple i)))) = (Dot (Dot (Simple i))) 
-down (Simple i)                   = Dot (Dot (Dot (Simple (i+1)))) 
--}
-down (Simple i) = Dot (Simple (i + 1))
-down (Dot x)    = x
-
-go :: Float -> Duration -> Float -> Duration
-go tgt cand d
-  = let cand' = down cand
-        d' = dist (durationValue cand') tgt
-     in if d' < d 
-        then go tgt cand' d'
-        else cand
+    go :: Float -> Duration -> Float -> Duration
+    go tgt cand d
+      = let cand' = down cand
+            d' = dist (durationValue cand') tgt
+         in if d' < d 
+            then go tgt cand' d'
+            else cand
 
 -- |A 'NotePitch' can be a rest or a pitch.
 data NotePitch
@@ -116,3 +81,17 @@ data Section = Section
 -- |Musical time signature.
 data TimeSig = TimeSig Int Int
   deriving (Eq , Show , Ord)
+
+-------------------------
+-- * Some Processing * --
+-------------------------
+
+-- VCM: TODO: Refactor this somewhere else
+
+(.+) :: Duration -> Duration -> Duration
+p .+ q = durationInterp (durationValue p + durationValue q)
+
+-- |@interpolateBy n ms@ will return a list of pitches as
+--  seen at every @n@th beat.
+interpolateBy :: Duration -> [Measure] -> [[Int]]
+interpolateBy = undefined
