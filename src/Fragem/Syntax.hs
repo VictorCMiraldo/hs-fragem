@@ -1,6 +1,10 @@
 module Fragem.Syntax where
 
+-- |An 'Offset' is an absolute amount of ticks counting
+--  from the start of the piece.
 type Offset = Int
+
+-- |Ticks is the unit of time used throughout MIDI
 type Ticks  = Int
 
 -- |A 'Note' has a duration, a pitch and it might be tied

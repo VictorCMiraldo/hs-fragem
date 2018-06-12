@@ -168,12 +168,17 @@ step2TimeSigChange :: Midi.Ticks -> Midi.Ticks -> Step2 Bool
 step2TimeSigChange t t'
   = (/=) <$> step2TimeSigFor t <*> step2TimeSigFor t'
 
+-- |The MIDI ticks-per-beat gives us how many ticks
+--  does a quarter note takes.
 step2TicksPerMeasure :: Midi.Ticks -> Step2 Midi.Ticks
 step2TicksPerMeasure t
   = do (TimeSig n _) <- step2TimeSigFor t
        tpb           <- ticksPerBeat <$> get
        return $ n * tpb
 
+-- |Was there a measure change between these ticks?
+--  IMPORTANT: this function does not subtract the ticks
+--             from previous sections.
 step2MeasureChange :: Midi.Ticks -> Midi.Ticks -> Step2 Bool
 step2MeasureChange t t'
   = do tsigChange <- step2TimeSigChange t t'
@@ -182,6 +187,7 @@ step2MeasureChange t t'
        else do tpm <- step2TicksPerMeasure t -- its the same for t' since timesig did NOT change
                return (t `div` tpm /= t' `div` tpm)
 
+-- |Monadic variant of 'groubBy'
 groupByM :: (Monad m) => (a -> a -> m Bool) -> [a] -> m [[a]]
 groupByM cond []     = return []
 groupByM cond (x:xs) = go [x] xs
@@ -212,6 +218,10 @@ midiGetSections midi = evalState (go $ Midi.tracks midi) (step2PrepareState midi
     splitMS (x:xs)
       = do tpb <- ticksPerBeat <$> get
            ts  <- step2TimeSigFor (offset x)
+           -- XXX: BUG:
+           -- VCM: This is not that simple; we have to subtract
+           --      the amount of ticks on the previous groups to get
+           --      an accurate version
            ms  <- groupByM (\(t0 , _ , _) (t1 , _ , _) -> not <$> step2MeasureChange t0 t1) (x:xs)
            return (Section ts tpb
                   $ map (Measure . map mkNote) ms)
@@ -220,7 +230,8 @@ midiGetSections midi = evalState (go $ Midi.tracks midi) (step2PrepareState midi
     mkNote :: NoteEvent -> Note
     mkNote (offset , dur , pitch) = Note offset dur pitch
     
--- 
+-- |Given a MIDI file, returns the list of 'Voice's in it
+--  or an error.
 fromMidi :: FilePath -> IO (Either String [Voice])
 fromMidi file
   = do res <- Midi.importFile file
