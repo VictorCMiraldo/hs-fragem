@@ -19,6 +19,10 @@ library
   exposed-modules:     Fragem.Math
                  ,     Fragem.Syntax
                  ,     Fragem.Syntax.FromMidi
+                 ,     Fragem.Metrics.InnerMetric
+                 ,     Fragem.Metrics.BeatMetric
+                 ,     Fragem.Metrics.Base
+                 ,     Fragem.Metrics
   -- other-modules:       
   -- other-extensions:    
   build-depends:       base >=4.10 && <4.11
