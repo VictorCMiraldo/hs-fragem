@@ -5,6 +5,7 @@ module Fragem.Metrics
   ) where
 
 import Fragem.Syntax
+import Fragem.Syntax.Examples
 import Fragem.Metrics.Base        as Base
 import Fragem.Metrics.BeatMetric  as BM
 import Fragem.Metrics.InnerMetric as IM

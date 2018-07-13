@@ -23,3 +23,15 @@ groupsOf n ls
 -- Essentially, we assign a weight to each tick and at zoom
 -- level 'n', we only look at ticks with weight at least 'n'.
 type Metric = M.Map Ticks Int
+
+-- |Given a metric over some measures; we will produce the
+--  /zoom/ levels based on that.
+--
+--  PRECONDITION: All noteDelays are elements
+--                of the metric
+zoomAt :: Int -> Metric -> [Measure] -> [Measure]
+zoomAt n metric = map (Measure . filter go . measureNotes)
+  where
+    go :: Note -> Bool
+    go nt | Just k <- M.lookup (noteDelay nt) metric
+         = k >= n

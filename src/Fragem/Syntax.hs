@@ -16,7 +16,10 @@ data Note = Note
   , noteDuration :: Ticks
   -- | Pitch of the note (or rest)
   , notePitch    :: Int
-  } deriving (Eq , Show , Ord)
+  } deriving (Eq , Ord)
+
+instance Show Note where
+  show (Note nd ndur p) = show nd ++ "+" ++ show ndur ++ ";" ++ show p
 
 -- |Musical time signature.
 data TimeSig = TimeSig
@@ -28,25 +31,21 @@ data TimeSig = TimeSig
 newtype Measure = Measure { measureNotes :: [Note] }
   deriving (Eq , Show , Ord)
 
--- |The notes in a measure have absolute offsets; sometimes
---  we want to look at them as 'delays' instead of absolute offsets.
---  We call these 'DelayMeasure'
-newtype DelayMeasure = DelayMeasure { delayMeasureNotes :: [Note] }
-  deriving (Eq , Show , Ord)
+-- |Concatenate the notes of n measures into a
+--  single group of notes; useful for computing the mass
+--  over intervals that are bigger than a measure.
+regroupMeasure :: Int -> [Measure] -> [[Note]]
+regroupMeasure n ls
+  | length ls < n = []
+  | otherwise
+  = let ls0 = take n ls
+        ls1 = drop n ls
+     in concat (map measureNotes ls0) : regroupMeasure n ls1
 
-{-
+-- |Extract a given number of measures from a section
+extractMeasures :: Int -> Section -> [Measure]
+extractMeasures i = take i . sectionMeasures
 
--- |If possible, i.e, no overlapping notes, takes
---  bunch of measures and compute the delay between notes
---  instead of their absolute offset from the
---  beginning of the piece.
-relativizeMeasures :: [Measure] -> Maybe [DelayMeasure]
-relativizeMeasures ms = map go ms
-  where
-    first 
-    
-    go
--}
 
 -- |A 'Section' consists in a a list of measures in a given time signature.
 data Section = Section

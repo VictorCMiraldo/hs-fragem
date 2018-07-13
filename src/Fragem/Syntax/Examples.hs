@@ -8,10 +8,6 @@ import Fragem.Syntax
 -- * Some Examples * --
 -----------------------
 
--- |Only some selected measures from Hanon 1
-extractMeasures :: Int -> Section -> [Measure]
-extractMeasures i = take i . sectionMeasures
-
 -- Treble cleff from Hanon's first etude
 hanon1_treble_full :: Section
 hanon1_treble_full = Section (TimeSig 2 4) 240

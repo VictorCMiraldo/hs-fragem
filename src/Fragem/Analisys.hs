@@ -2,47 +2,59 @@ module Fragem.Analisys where
 
 import Fragem.Syntax
 import Fragem.Syntax.Examples
+import Fragem.Metrics
+
 import Fragem.Math
 
--------------------------------------
--- * Zooming in and out Measures * --
--------------------------------------
-
--- XXX: BUG: VCM:
---  If the denominator of a time-signature
---  is not four, these might be fundamentally wrong.
-
--- |How many ticks between each strong beat?
-beatStrong :: Section -> Ticks
-beatStrong (Section (TimeSig n 4) tpb _)
-  = n * tpb
-
--- |How many ticks between each weak beat
-beatWeak :: Section -> Ticks
-beatWeak (Section (TimeSig n 4) tpb _)
-  = tpb
-
--- |Accounting for syncopated beats
-beatSyncope :: Section -> Ticks
-beatSyncope (Section (TimeSig n 4) tpb _)
-  = tpb / 2
-
--- |Keeps only the notes as seen at @detla@ ticks
---  of distance.
-measureAt :: Ticks -> Measure -> [Note]
-measureAt delta (Measure ns) = go 0 ns
-  where
-    go acu []               = []
-    go 0   (n:ns) = n : go (noteDuration n) ns
-    go acu (n:ns)
-      | acu + (noteDuration n) <= delta
-      = go (acu + noteDuration n) ns
-      | otherwise
-      = n : go (acu + noteDuration n - delta) ns 
 
 ------------------
 -- * Fractals * --
 ------------------
+
+-- |Returns nothing if we have less than 2 notes.
+notesMass :: [Note] -> Maybe Double
+notesMass ps
+  | length ps < 2 = Nothing
+  | otherwise
+  = let (n:ns) = ps
+     in Just (go (fromIntegral $ noteDuration n) n ns)
+  where
+    go :: Double -> Note -> [Note] -> Double
+    go acu _    []     = acu
+    go acu prev (n:ns)
+      = let acu' = acu + hyp prev n
+                       + fromIntegral (noteDuration n)
+         in go acu' n ns
+
+    hyp :: Note -> Note -> Double
+    hyp (Note d1 dur1 p1) (Note d2 dur2 p2)
+      = let pitchD = fromIntegral $ p2 - p1
+            timeD  = fromIntegral $ (d1 + dur1) - d2        
+         in sqrt $ (pitchD ^ 2) + (timeD ^ 2)
+
+type Scaling = Double
+type Mass    = Double
+
+dim :: Scaling -> Mass -> Mass -> Double
+dim s a0 a1 = logBase s (a1 / a0)
+
+dimPitches :: [Note] -> [Note] -> Double
+dimPitches p1 p2
+  = case (,) <$> notesMass p1 <*> notesMass p2 of
+      Just (p1' , p2') -> dim 2 p1' p2'
+      Nothing          -> error "Note groupd must have at least 2 notes!"
+
+{-
+
+-- VCM: should we just consider triangles
+--      or rectangles and triangles too?
+fractalMass :: [Note] -> Double
+fractalMass ns
+  | length ps < 2 = error "Too little notes"
+  | otherwise     = go ns
+  where
+
+-}
 
 {-
 
