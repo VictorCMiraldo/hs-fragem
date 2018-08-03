@@ -1,12 +1,9 @@
-
-{-# Language TypeSynonymInstances #-}
 {-# Language FlexibleInstances #-}
-import System.Random
+module Fragem.Melodycreate.Qcgen2 where
 
+import Control.Arrow ((***))
 import Test.QuickCheck
 import Codec.Midi
-import Data.Array
-import Data.Default
 
 type Pitch = Int
 type Note = (Pitch, Ticks, Acc)
@@ -36,7 +33,6 @@ midiSkeleton mel =  Midi {
          ]
        }
 
-
 keydown :: Pitch -> Acc -> MidiEvent
 keydown k d =  (0,NoteOn {channel = 0, key = k, velocity = d})
 
@@ -52,9 +48,55 @@ createMidi f notes = exportFile  f $ midiSkeleton $ concat $ map  playnote notes
 testMelody :: Melody 
 testMelody = [(60, 480, 2), (60, 960, 3), (60, 480, 1), (60, 480, 2), (60, 480, 2)]
 
+genPitch :: Gen Pitch
+genPitch = frequency [(1 , choose (0,24))
+                     ,(2 , choose (24,60))
+                     ,(1 , choose (60,84))
+                     ]
+
+genTicks :: Gen Ticks
+genTicks = oneof $ map return [120, 240, 360, 480, 600, 720, 840, 960, 1080]
+
+genVelocity :: Gen Int
+genVelocity = choose (0 , 5)
+
+genNote :: Gen Note
+genNote = (,,) <$> genPitch <*> genTicks <*> genVelocity
+
+genBar :: Gen [Note]
+genBar = go 0
+  where
+    barDuration = 4 * 480
+    
+    go dur
+      | dur >= barDuration = return []
+      | otherwise
+      = do t <- genTicks `suchThat` (\ t -> t + dur <= barDuration)
+           n <- genPitch
+           v <- genVelocity
+           rest <- go (dur + t)
+           return $ (n , t , v) : rest
+
+
+-- |Receives a bunch of non-random bars and with
+--  a probability puts them in a random place within
+--  random bars
+--
+--  > genComplicatedMelody [(2 , ionianUp) , (1, ionianDown)] 1
+--
+--  Generates a piece where 50% of the bars are ionianUp, 25% are
+--  ionianDown and 25% are random.
+genComplicatedMelody :: [(Int , [Note])] -> Int -> Gen Melody
+genComplicatedMelody myBars randomFreq
+  = concat <$> (listOf $ frequency $ (randomFreq , genBar) : map (id *** return) myBars)
+
+genMelody :: Gen Melody
+genMelody = listOf genNote
+{-
 -- Quickcheck  Part
 instance Arbitrary Pitch where
     arbitrary = elements (Pitch <$> choose (0,80))
+-}
 
 -- genMelody ::  Gen Melody
 -- genMelody = do
