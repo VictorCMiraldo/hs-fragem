@@ -1,10 +1,7 @@
 module Fragem.Melodycreate.Withrhy where 
 
-import System.Random
-
 import Codec.Midi
-import Data.Array
-import Data.Default
+import Test.QuickCheck
 
 type Pitch = Int
 type Note = (Pitch, Ticks, Acc)
@@ -12,6 +9,7 @@ type Degree = Int
 type Acc = Int
 type Melody = [Note]
 type MidiEvent = (Ticks, Message)
+
 
 midiSkeleton :: Track Ticks -> Midi
 midiSkeleton mel =  Midi {
