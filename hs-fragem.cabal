@@ -19,6 +19,7 @@ library
   exposed-modules:     Fragem.Syntax
                  ,     Fragem.Syntax.FromMidi
                  ,     Fragem.Syntax.Examples
+                 ,     Fragem.Analisys
                  ,     Fragem.Metrics.InnerMetric
                  ,     Fragem.Metrics.BeatMetric
                  ,     Fragem.Metrics.Base
@@ -29,6 +30,20 @@ library
                ,       HCodecs
                ,       containers
                ,       mtl
- 	       ,       QuickCheck
+               ,       QuickCheck
   hs-source-dirs:      src
   default-language:    Haskell2010
+
+executable fragem-dims
+  hs-source-dirs: executables
+  main-is:        FragemDims.hs
+  language:       Haskell2010
+  ghc-options:    -O2
+  build-depends:  base
+               ,  hs-fragem
+               ,  cmdargs
+               ,  gitrev
+               ,  mtl
+             
+
+  

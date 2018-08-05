@@ -4,9 +4,6 @@ import Fragem.Syntax
 import Fragem.Syntax.Examples
 import Fragem.Metrics
 
-import Fragem.Math
-
-
 ------------------
 -- * Fractals * --
 ------------------

@@ -42,6 +42,16 @@ regroupMeasure n ls
         ls1 = drop n ls
      in concat (map measureNotes ls0) : regroupMeasure n ls1
 
+-- |Same as 'regroupMeasure', but employs a sliding
+--  window technique.
+regroupMeasureSlide :: Int -> [Measure] -> [[Note]]
+regroupMeasureSlide n ls
+  | length ls < n = []
+  | otherwise
+  = let ls0 = take n ls
+        ls1 = tail ls
+        in concat (map measureNotes ls0) : regroupMeasureSlide n ls1
+
 -- |Extract a given number of measures from a section
 extractMeasures :: Int -> Section -> [Measure]
 extractMeasures i = take i . sectionMeasures
