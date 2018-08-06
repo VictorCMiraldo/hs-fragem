@@ -154,8 +154,10 @@ runAnalisys opts section = do
   when (optDebug opts)
     $ do putStrLn ("max metric zoom level: " ++ show (maximum $ metricLevels metric))
          putStrLn ("Notes at: " ++ show zoomA)
+         putStrLn ("Mass: "     ++ show (notesMass $ concat notesA))
          putStrLn (prettyNotes (sectionTPB section) 8 $ concat notesA)
          putStrLn ("Notes at: " ++ show zoomB)
+         putStrLn ("Mass: "     ++ show (notesMass $ concat notesB))
          putStrLn (prettyNotes (sectionTPB section) 8 $ concat notesB)
 
   return $ zipWith dimPitches notesA notesB
