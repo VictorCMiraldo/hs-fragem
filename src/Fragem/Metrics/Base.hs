@@ -2,6 +2,7 @@
 module Fragem.Metrics.Base where
 
 import qualified Data.Map as M
+import qualified Data.List as L
 
 import           Fragem.Syntax
 
@@ -35,3 +36,7 @@ zoomAt n metric = map (Measure . filter go . measureNotes)
     go :: Note -> Bool
     go nt | Just k <- M.lookup (noteDelay nt) metric
          = k >= n
+
+-- |Returns the available zoom-levels in a metric
+metricLevels :: Metric -> [Int]
+metricLevels = L.nub . map snd . M.toList
