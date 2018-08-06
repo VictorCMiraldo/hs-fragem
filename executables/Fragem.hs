@@ -65,6 +65,7 @@ options = Options
       &= help "Use a sliding window"
   } &= help "fragem-dims v0.0.0"
     &= summary ("fragem-dims [" ++ $(gitBranch) ++ "@" ++ $(gitHash) ++ "]")
+    &= verbosity
     &= details
        [ "Returns a list of fractal dimensions of the measures in a"
        , "MIDI file"
@@ -91,6 +92,7 @@ go opts = do
   errWhen (not . isJust $ optFile opts)
           "No file provided"
   midi <- ExceptT $ fromMidi (fromJust $ optFile opts) 
+  lift $ whenLoud (printMidiInfo midi)
   errWhen (length midi <= optVoice opts)
           "Not enough voices"
   let Voice voice = midi !! (optVoice opts)
@@ -99,6 +101,9 @@ go opts = do
   warnWhen (length voice > 1)
            "This voice has multiple sections, we will only look at the first."
   return $ runAnalisys opts (head voice)
+
+printMidiInfo :: [Voice] -> IO ()
+printMidiInfo _ = putStrLn "a-ha"
 
 runAnalisys :: Options -> Section -> [Double]
 runAnalisys opts section =
