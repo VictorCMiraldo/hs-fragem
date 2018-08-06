@@ -146,7 +146,7 @@ runAnalisys opts section = do
            else regroupMeasure
   let sect' = case optInterval opts of
                 Nothing            -> sect
-                Just (start , end) -> take (end - start) $ drop (start - 1) sect
+                Just (start , end) -> take (end - start + 1) $ drop (start - 1) sect
   let notesA = mS (optMeasureGroup opts)
              $ zoomAt zoomA metric sect'
   let notesB = mS (optMeasureGroup opts)

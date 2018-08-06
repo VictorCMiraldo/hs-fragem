@@ -99,8 +99,8 @@ prettyNotes :: Int -> Int -> [Note] -> String
 prettyNotes tpb cc []
   = "   | EMPTY"
 prettyNotes tpb cc ns
-  = unlines . onLast ((printf "%2d |" maxY ++) . drop 4)
-            . on 0   ((printf "%2d |" minY ++) . drop 4)
+  = unlines . on 0   ((printf "%2d |" maxY ++) . drop 4)
+            . onLast ((printf "%2d |" minY ++) . drop 4)
             $ map ("   |" ++) (markBars $ map go $ reverse [minY .. maxY])
   where
     (maxY , minY) = foldr (\n (yM , ym) -> (notePitch n `max` yM , notePitch n `min` ym))
