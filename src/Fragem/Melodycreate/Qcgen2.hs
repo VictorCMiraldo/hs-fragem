@@ -92,57 +92,7 @@ genComplicatedMelody myBars randomFreq
 
 genMelody :: Gen Melody
 genMelody = listOf genNote
-{-
--- Quickcheck  Part
-instance Arbitrary Pitch where
-    arbitrary = elements (Pitch <$> choose (0,80))
--}
 
--- genMelody ::  Gen Melody
--- genMelody = do
---     chord  <- arbitrary
---     chordqual <- arbitrary
---     -- such that
-    -- return $ Chordseq chord chordqual
-
-
--- makeNote a b c = Note (a,b,c)
-
-
--- instance Arbitrary Melody where
---     arbitrary = do
---             pitch <- choose (0, 80)
---             -- dur <- choose [120, 240, 360, 480, 600, 720, 840, 960, 1080]
---             dur <- choose (120, 480)
---             acc <- choose (1, 10)
---             return $ [makeNote pitch dur acc]
-
--- example1: T
--- generate arbitrary :: IO ([Bool],Double)
-
--- example2: F
--- newtype Prime a = Prime a deriving Show
--- instance (Integral a, Arbitrary a) => Arbitrary (Prime a) where
---   arbitrary = do
---     x <- frequency [ (10, choose (0, 1000))
---                    , (5, choose (1001, 10000))
---                    , (1, choose (10001, 50000))
---                    ]
---     return $ x
-
--- prop_PrimeSum_v4 :: Prime Int -> Prime Int -> Property
--- prop_PrimeSum_v4 (Prime p) (Prime q) =
---     p > 2 && q > 2 ==> classify (p < 1000 || q < 1000) "has small prime" $ even (p + q)
-
--- example1 conti:
--- a number between 1 and 100
--- newtype Guess = Guess Int
---   deriving (Eq, Num, Ord, Read, Show)
-
--- instance Random Guess where
---   randomR (Guess lo, Guess hi) g = let (x, g') = randomR (lo, hi) g
---                                    in (Guess x, g')
---   random = randomR (Guess 1, Guess 100)
-
--- instance Arbitrary Guess where
---   arbitrary = Guess <$> choose (1, 100)
+-- Generate n random pieces
+createrandom :: FilePath -> Int -> IO()
+createrandom f n = (flip map [0..n] $ exportFile f $ midiSkeleton $ concat $ map playnote genMelody

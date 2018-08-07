@@ -35,9 +35,9 @@ import Fragem.Metrics.Base
 --  > metricWeight metricTest1
 --  >  == fromList [(42,1),(132,4),(162,2),(192,3),(252,3),(372,2),(402,1)]
 --
-metricInner :: [Measure] -> Metric
-metricInner
-  = go . preprocess . map measureNotes
+metricInner :: Int -> [Measure] -> Metric
+metricInner n
+  = M.unions . map (go . preprocess . map measureNotes) . groupsOf n
   where
     -- Puts all the onsets in a map and returs
     -- a pairwise list of notes to be further processed.

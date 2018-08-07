@@ -33,7 +33,6 @@ isNoteEvent (Midi.NoteOn  _ _ _) = True
 isNoteEvent (Midi.NoteOff _ _ _) = True
 isNoteEvent _                    = False
 
-
 --------------------------------
 -- * Processing a Midi File * --
 --------------------------------
@@ -204,7 +203,9 @@ groupByM cond (x:xs) = go [x] xs
 -- |Return the sections of a midi file. The outer list has the same
 --  length as the number of tracks in the midi file.
 midiGetSections :: Midi.Midi -> [[Section]]
-midiGetSections midi = evalState (go $ Midi.tracks midi) (step2PrepareState midi)
+midiGetSections midi
+  = filter (/= [])
+  $ evalState (go $ Midi.tracks midi) (step2PrepareState midi)
   where
     go :: [Midi.Track Midi.Ticks] -> Step2 [[Section]]
     go = mapM (\tr -> splitTS (midiGetNoteEvents tr) >>= mapM splitMS)
