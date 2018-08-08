@@ -46,6 +46,9 @@ example1 (zoomA , zoomB) nmeasures groupsize
                  mapM_ (putStrLn . show) res
                  putStrLn "---------------"
                  return res
+         Right x
+           -> error "The default case (Right x) is being run. No idea what it should do. Something to check about the voice in midi. "
+
 -- Interstingly; note how
 --
 --  > example1 (4,3) 10 2

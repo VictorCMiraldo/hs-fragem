@@ -94,5 +94,9 @@ genMelody :: Gen Melody
 genMelody = listOf genNote
 
 -- Generate n random pieces
-createrandom :: FilePath -> Int -> IO()
-createrandom f n = (flip map [0..n] $ exportFile f $ midiSkeleton $ concat $ map playnote genMelody
+createrandom :: FilePath -> IO()
+createrandom f = generate genMelody >>= createMidi f
+
+createNrandom :: Int -> IO()
+createNrandom n = mapM_ createrandom ((map ("./"++) filelist))
+  where filelist = zipWith (++) (map show [1..n]) (replicate n ".mid")
