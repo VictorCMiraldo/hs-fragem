@@ -1,0 +1,7 @@
+Controlled randomness: 
+1) ij221: ionian/jump/random=2/2/1, default duration 480, default velocity 2, default no transpose
+2) ij224: ionian/jump/random=2/2/4, default duration 480, default velocity 2, default no transpose
+3) ij224-240: ionian/jump/random=2/2/4, duration 240, default velocity 2, default no transpose
+4) ij224-240-2: ionian/jump/random=2/2/4, duration 240, default velocity 2, command: createNComplicatedMelody [(2, ionian), (2, jump8), (2,(transposeNotes 2 ionian)), (2,(transposeNotes 2 jump8))] 4 100
+
+5) iji2a2-22224: createNComplicatedMelody [(2, ionian), (2, jump8), (2,(transposeNotes 2 ionian)), (2,(transposeNotes 2 aeolian))] 4 100

@@ -1,0 +1,39 @@
+R plotting log:
+
+!!!!!! The line segment ratios (without the problematic unit) represent compression! When the 
+
+Promising: 
+* From ij221 that the random parts corresponds to rapid changes in the time series of fractal dimension
+   - different window size give different resolution
+   - a change in the patterns would also affect the value
+   - it becomes less obvious what are the big changes
+* From ij221 to ij224, there are more bumps, it seems :TODO:
+* The window sizes seem to have a smooth change between 2-4-8 when applying a sliding window
+
+Puzzles:
+* The sliding window option created a very different effect than the hopping window. 
+!!!!!!!!! from looking at another example of ij224, realising that this is actually good. It represents the regularity continously in time. The hopping one represents a different discrete comparison. 
+* Looking at the folkrnn results, many 0 values?
+
+Todos:
+* Put the pieces number into the right order
+
+* generate ground truth in where are the randomness
+    - how to evaluate: overlapping intervals, boundary extraction
+
+* Measure the distance between the time series
+    - plot distance matrix across the pieces, should be homogeous
+    - in different experiments, there will be a distribution of the distances, or simply of the fractal dimensions, should be different
+
+* Comparison with self similarity and kernel methods   
+
+* More understanding on the code 
+    - What notes are extracted exactly
+    - look into mass
+    - IMA
+
+* Start writing paper
+
+Done:
+
+* earth mover's distance
