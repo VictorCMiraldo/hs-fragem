@@ -1,0 +1,86 @@
+Next: threhold finding
+threhold as parameter -> grouping/clustering
+
+group works too but group1 is too small for some:
+➜  ij221-100 git:(irisdev) ✗ stack exec fragem -- --group=1 --threshold=0.001 --export=hanon1thre0.001x2y4 "../../../dataset/hanon/Hanon 1.mid"
+fragem: Note groupd must have at least 2 notes!
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Analisys.hs:42:27 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Analisys
+  
+with different zoom it's different:
+➜  ij221-100 git:(irisdev) ✗ stack exec fragem -- --zoom=2,4 --threshold=0.001 --export=hanon1thre0.001x2y4 "../../../dataset/hanon/Hanon 1.mid"
+~0.744806119566 0 2 4 6 8 10 12 14 16 18 20 22 24 26
+~0.000471623541 28
+
+Hanon: the grouping reflects the retrograde for hanon1
+➜  ij221-100 git:(irisdev) ✗ stack exec fragem -- --threshold=0 --export=hanon1thre0 "../../../dataset/hanon/Hanon 1.mid"
+~0.100739628262 0 16
+~0.100134680451 2 18
+~0.100183190676 4 20
+~0.100097816693 6 22
+~0.099790406463 8 24
+~0.100720157698 10 26
+~0.099233424214 12 14
+~0.004779165607 28
+
+for hanon2 different:
+➜  ij221-100 git:(irisdev) ✗ stack exec fragem -- --threshold=0 --export=hanon1thre0.001 "../../../dataset/hanon/Hanon 2.mid"
+~0.105604346340 0
+~0.103797122963 2
+~0.104522058274 4 20 24
+~0.103711799172 6 22
+~0.104780012304 8
+~0.104259893070 10
+~0.102971223510 12 14
+~0.105346591693 16
+~0.104055206632 18
+~0.104517841925 26
+
+Random on ij221: different degrees of jumping and randomness
+with 0:
+➜  ij221-100 git:(irisdev) ✗ stack exec fragem -- --threshold=0 --export=ij100thre0 ../../../dataset/ij221/100.mid
+~0.000000000000 0 2 4 6 8 10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42 44 46 48 50 56 58 60 62 64 66 68 70 72
+~0.179304059584 52
+~0.165739462745 54
+
+with -1:
+➜  ij221-100 git:(irisdev) ✗ stack exec fragem -- --threshold=-1 --export=ij100thre-1 ../../../dataset/ij221/100.mid
+~0.000000000000 0
+~0.000000000000 2
+~0.000000000000 4
+~0.000000000000 6
+~0.000000000000 8
+~0.000000000000 10
+~0.000000000000 12
+~0.000000000000 14
+~0.000000000000 16
+~0.000000000000 18
+~0.000000000000 20
+~0.000000000000 22
+~0.000000000000 24
+~0.000000000000 26
+~0.000000000000 28
+~0.000000000000 30
+~0.000000000000 32
+~0.000000000000 34
+~0.000000000000 36
+~0.000000000000 38
+~0.000000000000 40
+~0.000000000000 42
+~0.000000000000 44
+~0.000000000000 46
+~0.000000000000 48
+~0.000000000000 50
+~0.179304059584 52
+~0.165739462745 54
+~0.000000000000 56
+~0.000000000000 58
+~0.000000000000 60
+~0.000000000000 62
+~0.000000000000 64
+~0.000000000000 66
+~0.000000000000 68
+~0.000000000000 70
+~0.000000000000 72
+
+
