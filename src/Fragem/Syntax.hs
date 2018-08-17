@@ -1,5 +1,6 @@
 module Fragem.Syntax where
 
+import Data.List (transpose)
 import Text.Printf
 import Debug.Trace
 
@@ -95,13 +96,14 @@ metainfoVoices = unlines . concatMap ((["Voice: "] ++) . go)
 -- |Pretty prints a series of notes. The integer parameters
 --  tells how many ticks a char corresponds to.
 --  Normally, @ticks-per-beat@ and @8@ is a good choice.
-prettyNotes :: Int -> Int -> [Note] -> String
+prettyNotes :: Int -> Int -> [Note] -> [String]
 prettyNotes tpb cc []
-  = "   | EMPTY"
+  = ["   - EMPTY"]
 prettyNotes tpb cc ns
-  = unlines . on 0   ((printf "%2d |" maxY ++) . drop 4)
-            . onLast ((printf "%2d |" minY ++) . drop 4)
-            $ map ("   |" ++) (markBars $ map go $ reverse [minY .. maxY])
+  = transpose
+  . on 0   ((printf "%2d -" minY ++) . drop 4)
+  . onLast ((printf "%2d -" maxY ++) . drop 4)
+  $ map ("   -" ++) (markBars $ map go $ [minY .. maxY])
   where
     (maxY , minY) = foldr (\n (yM , ym) -> (notePitch n `max` yM , notePitch n `min` ym))
                     (0 , 300) ns
@@ -114,11 +116,11 @@ prettyNotes tpb cc ns
 
     
     complete m []
-      | m > 0 = replicate cc ' ' ++ "|" ++ complete (m - cc) []
+      | m > 0 = replicate cc ' ' ++ "-" ++ complete (m - cc) []
       | otherwise = []
     complete m l
-      | length l <= cc = l ++ replicate (cc - length l) ' ' ++ "|" ++ complete (m - cc) []
-      | otherwise      = take cc l ++ "|" ++ complete (m - cc) (drop cc l)
+      | length l <= cc = l ++ replicate (cc - length l) ' ' ++ "-" ++ complete (m - cc) []
+      | otherwise      = take cc l ++ "-" ++ complete (m - cc) (drop cc l)
 
     on 0 f (x:xs) = f x : xs
     on i f (x:xs) = x : on (i-1) f xs
@@ -142,5 +144,5 @@ prettyNotes tpb cc ns
     render acu [] = ""
     render acu ((o , t):rest)
       =  replicate (o - acu) ' '
-      ++ replicate t '-'
+      ++ replicate t '#'
       ++ render (o + t) rest
