@@ -1,12 +1,14 @@
 Next: threhold finding
 threhold as parameter -> grouping/clustering
 
+stucked with bash script not producing midi files...
+
 group works too but group1 is too small for some:
 ➜  ij221-100 git:(irisdev) ✗ stack exec fragem -- --group=1 --threshold=0.001 --export=hanon1thre0.001x2y4 "../../../dataset/hanon/Hanon 1.mid"
 fragem: Note groupd must have at least 2 notes!
 CallStack (from HasCallStack):
   error, called at src/Fragem/Analisys.hs:42:27 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Analisys
-  
+
 with different zoom it's different:
 ➜  ij221-100 git:(irisdev) ✗ stack exec fragem -- --zoom=2,4 --threshold=0.001 --export=hanon1thre0.001x2y4 "../../../dataset/hanon/Hanon 1.mid"
 ~0.744806119566 0 2 4 6 8 10 12 14 16 18 20 22 24 26
