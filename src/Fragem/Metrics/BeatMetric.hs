@@ -24,8 +24,12 @@ metricBeat ts tpb ms
     tphalf = tpb `div` 2
     
     beatWeights :: TimeSig -> [Int]
-    beatWeights (TimeSig 4 4) = [5,2,3,2,4,2,3,2]
     beatWeights (TimeSig 3 4) = [4,2,3,2,3,2]
+    beatWeights (TimeSig 4 4) = [5,2,3,2,4,2,3,2]
+    beatWeights (TimeSig 6 4) = [5,2,3,2,3,2,4,2,3,2,3,2]
+    beatWeights (TimeSig 12 4) = [6,2,3,2,3,2,4,2,3,2,3,2,5,2,3,2,3,2,4,2,3,2,3,2]
+    beatWeights (TimeSig 3 8) = [4,3,2]
+    beatWeights (TimeSig 2 2) = [4,2,4,2]
     beatWeights (TimeSig 2 4) = [4,2,3,2]
     beatWeights ts = error $ "beatWeights: not yet implemented for " ++ show ts
 
