@@ -1,0 +1,13 @@
+* digging into parameters
+window size: 1 2 4 8
+slide vs hop: s
+
+transformation: iji2a2 
+random proportion: ij224, ij221
+
+zoom levels
+
+- found out readr does not support rownames...
+
+* digging into different distance
+definitions and applicability

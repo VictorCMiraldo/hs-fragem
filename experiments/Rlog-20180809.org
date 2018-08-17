@@ -16,7 +16,6 @@ Puzzles:
 * Looking at the folkrnn results, many 0 values?
 
 Todos:
-* Put the pieces number into the right order
 
 * generate ground truth in where are the randomness
     - how to evaluate: overlapping intervals, boundary extraction
@@ -26,6 +25,7 @@ Todos:
     - in different experiments, there will be a distribution of the distances, or simply of the fractal dimensions, should be different
 
 * Comparison with self similarity and kernel methods   
+This is actually one sort of feature. Just as the novelty curves that frequently used in segmentation methods. 
 
 * More understanding on the code 
     - What notes are extracted exactly
@@ -34,6 +34,13 @@ Todos:
 
 * Start writing paper
 
+* Look at the bandwidth
+Already looking at the distrbutions of values. 
+Going back to the music is still manual. group size + time points = locations
+
+
 Done:
 
 * earth mover's distance
+* Put the pieces number into the right order
+Solved by putting the first column as song's name. 

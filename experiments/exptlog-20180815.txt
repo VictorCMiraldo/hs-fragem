@@ -1,24 +1,64 @@
 Running on bach:
-g=2
+*********** trying with group = 1
+g=1
+01saraba.mid
+
+g=1
 01allema.mid
+fragem: Note groupd must have at least 2 notes!
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Analisys.hs:42:27 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Analisys
 01couran.mid
+fragem: Note groupd must have at least 2 notes!
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Analisys.hs:42:27 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Analisys
 01gigue.mid
 fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
 CallStack (from HasCallStack):
   error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
 01minuet.mid
+fragem: Note groupd must have at least 2 notes!
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Analisys.hs:42:27 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Analisys
 01prelud.mid
+fragem: Note groupd must have at least 2 notes!
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Analisys.hs:42:27 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Analisys
 01saraba.mid
 04allema.mid
+fragem: Note groupd must have at least 2 notes!
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Analisys.hs:42:27 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Analisys
 04bourre.mid
 fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 2, timesigDenum = 2}
 CallStack (from HasCallStack):
   error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
 04couran.mid
+fragem: Note groupd must have at least 2 notes!
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Analisys.hs:42:27 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Analisys
 04gigue.mid
 fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 12, timesigDenum = 8}
 CallStack (from HasCallStack):
   error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+04prelud.mid
+fragem: Note groupd must have at least 2 notes!
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Analisys.hs:42:27 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Analisys
+04saraba.mid
+fragem: Note groupd must have at least 2 notes!
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Analisys.hs:42:27 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Analisys
+
+*********** trying cello piece,deleted the errors on the first one to see the plot - piece correspondence
+g=2
+01allema.mid
+01couran.mid
+01minuet.mid
+01prelud.mid
+01saraba.mid
+04allema.mid
+04couran.mid
 04prelud.mid
 04saraba.mid
 g=4

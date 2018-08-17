@@ -1,0 +1,17 @@
+* Bach
+Be careful that we are only taking the top voice
+** 04 prelud
+- V8, 0 because nothing on the top voice
+- The rhythm seems to be more important
+** 01 saraba
+- V5, periodic behaviour
+
+* Cleaning
+
+* Heatmap
+heatmap.2 is better.
+
+* Distance 
+Plain and earth mover and different variants. 
+
+Summarised in slides

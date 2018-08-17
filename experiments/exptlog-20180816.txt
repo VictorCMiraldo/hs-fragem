@@ -1,0 +1,375 @@
+Rerun folkrnn to get the name <-> row correspondence...
+
+X50.mid
+X51.mid
+X52.mid
+X53.mid
+X54.mid
+X55.mid
+X56.mid
+X57.mid
+X58.mid
+X59.mid
+X5.mid
+X60.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X61.mid
+X62.mid
+X63.mid
+X64.mid
+X65.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 9, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X66.mid
+X67.mid
+X68.mid
+X69.mid
+X6.mid
+X70.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X71.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 12, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X72.mid
+X73.mid
+X74.mid
+X75.mid
+X76.mid
+X77.mid
+X78.mid
+X79.mid
+X7.mid
+X80.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X81.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X82.mid
+X83.mid
+X84.mid
+X85.mid
+X86.mid
+X87.mid
+X88.mid
+X89.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X8.mid
+X90.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X91.mid
+X92.mid
+X93.mid
+X94.mid
+X95.mid
+X96.mid
+X97.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 12, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X98.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X99.mid
+X9.mid
+g=4
+X100.mid
+X10.mid
+X11.mid
+X12.mid
+X13.mid
+X14.mid
+X17.mid
+X18.mid
+X19.mid
+X1.mid
+X20.mid
+X23.mid
+X24.mid
+X25.mid
+X27.mid
+X29.mid
+X2.mid
+X30.mid
+X31.mid
+X32.mid
+X34.mid
+X35.mid
+X36.mid
+X37.mid
+X38.mid
+X39.mid
+X3.mid
+X40.mid
+X41.mid
+X42.mid
+X43.mid
+X44.mid
+X45.mid
+X46.mid
+X47.mid
+X48.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X49.mid
+X4.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X50.mid
+X51.mid
+X52.mid
+X53.mid
+X54.mid
+X55.mid
+X56.mid
+X57.mid
+X58.mid
+X59.mid
+X5.mid
+X60.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X61.mid
+X62.mid
+X63.mid
+X64.mid
+X65.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 9, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X66.mid
+X67.mid
+X68.mid
+X69.mid
+X6.mid
+X70.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X71.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 12, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X72.mid
+X73.mid
+X74.mid
+X75.mid
+X76.mid
+X77.mid
+X78.mid
+X79.mid
+X7.mid
+X80.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X81.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X82.mid
+X83.mid
+X84.mid
+X85.mid
+X86.mid
+X87.mid
+X88.mid
+X89.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X8.mid
+X90.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X91.mid
+X92.mid
+X93.mid
+X94.mid
+X95.mid
+X96.mid
+X97.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 12, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X98.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X99.mid
+X9.mid
+g=8
+X100.mid
+X10.mid
+X11.mid
+X12.mid
+X13.mid
+X14.mid
+X15.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X16.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X17.mid
+X18.mid
+X19.mid
+X1.mid
+X20.mid
+X21.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X22.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X23.mid
+X24.mid
+X25.mid
+X26.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X27.mid
+X28.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 12, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X29.mid
+X2.mid
+X30.mid
+X31.mid
+X32.mid
+X33.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X34.mid
+X35.mid
+X36.mid
+X37.mid
+X38.mid
+X39.mid
+X3.mid
+X40.mid
+X41.mid
+X42.mid
+X43.mid
+X44.mid
+X45.mid
+X46.mid
+X47.mid
+X48.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X49.mid
+X4.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X50.mid
+X51.mid
+X52.mid
+X53.mid
+X54.mid
+X55.mid
+X56.mid
+X57.mid
+X58.mid
+X59.mid
+X5.mid
+X60.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X61.mid
+X62.mid
+X63.mid
+X64.mid
+X65.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 9, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X66.mid
+X67.mid
+X68.mid
+X69.mid
+X6.mid
+X70.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X71.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 12, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X72.mid
+X73.mid
+X74.mid
+X75.mid
+X76.mid
+X77.mid
+X78.mid
+X79.mid
+X7.mid
+X80.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X81.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X82.mid
+X83.mid
+X84.mid
+X85.mid
+X86.mid
+X87.mid
+X88.mid
+X89.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X8.mid
+X90.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X91.mid
+X92.mid
+X93.mid
+X94.mid
+X95.mid
+X96.mid
+X97.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 12, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X98.mid
+fragem: beatWeights: not yet implemented for TimeSig {timesigNum = 6, timesigDenum = 8}
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Metrics/BeatMetric.hs:30:22 in hs-fragem-0.0.0-EHfk9bWrGfR9LEuRk7FbaB:Fragem.Metrics.BeatMetric
+X99.mid
+X9.mid

@@ -5,3 +5,4 @@
 *.ho
 .stack*
 .cabal*
+.vscode

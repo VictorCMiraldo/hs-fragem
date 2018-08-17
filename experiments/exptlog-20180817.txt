@@ -1,0 +1,8 @@
+rerunning folkrnn with all 1 2 4 8 (for all following)
+rerunning ij221
+rerunning ij224
+rerunning ij224-240
+rerunning ij224-240-2
+
+try zoom levels
+why does group=1 zoom=1,4 only has 5 values?
