@@ -2,7 +2,7 @@
 module Fragem.Syntax.Examples where
 
 import Fragem.Syntax
-
+import Fragem.Syntax.ToMidi
 
 -----------------------
 -- * Some Examples * --
@@ -277,5 +277,3 @@ bartok_section = Section (TimeSig 4 4) 240
             , Note 5160 600 64
             ]
   ]
-            
-            
