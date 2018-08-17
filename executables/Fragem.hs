@@ -32,6 +32,7 @@ data Options = Options
   , optInterval     :: Maybe (Int , Int)
   , optSlide        :: Bool
   , optInfoOnly     :: Bool
+  , optPrintHeader  :: Bool
   , optDebug        :: Bool
   } deriving (Eq , Show , Data , Typeable)
 
@@ -77,6 +78,11 @@ options = Options
       &= name "i" &= name "interval"
       &= typ "INT,INT"
       &= help "If present, consider only the selected interval of measures"
+  , optPrintHeader = def
+      &= explicit
+      &= name "header" &= name "h"
+      &= typ "BOOL"
+      &= help "Prints header about interval, grouping and sliding"
   , optDebug = def
       &= explicit
       &= name "debug" &= name "d"
@@ -95,7 +101,7 @@ main = cmdArgs options
    >>= runExceptT . go
    >>= \res -> case res of
                  Left err -> putStrLn $ "!! " ++ err
-                 Right ds -> mapM_ (putStrLn . printf "%.12f") ds
+                 Right ds -> mapM_ (\(ms , dim) -> putStrLn $ printf "%3d %.12f" ms dim) ds
 
 type M = ExceptT String IO
 
@@ -106,7 +112,7 @@ warnWhen :: Bool -> String -> M ()
 warnWhen True  = lift . putStrLn . ("** " ++)
 warnWhen False = const (return ())
 
-go :: Options -> M [Double]
+go :: Options -> M [(Int , Double)]
 go opts = do
   errWhen (not . isJust $ optFile opts)
           "No file provided"
@@ -123,7 +129,20 @@ go opts = do
               "Voice is empty, nothing to analyze"
       warnWhen (length voice > 1)
                "This voice has multiple sections, we will only look at the first."
-      lift $ runAnalisys opts (head voice)
+      let measureIdxs = if optSlide opts
+                        then [0 ..]
+                        else [0 , optMeasureGroup opts ..]
+      when (optPrintHeader opts)
+        $ lift $ printHeader opts
+      zip measureIdxs
+        <$> (lift $ runAnalisys opts (head voice))
+
+printHeader :: Options -> IO ()
+printHeader opts
+  =  putStrLn ("> measuregroup: " ++ show (optMeasureGroup opts))
+  >> putStrLn ("> sliding: "      ++ show (optSlide opts))
+  >> putStrLn ("> interval: "     ++ show (optInterval opts))
+  
 
 printMidiInfo :: [Voice] -> IO ()
 printMidiInfo voices
