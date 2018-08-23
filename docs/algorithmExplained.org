@@ -1,0 +1,54 @@
+* Hs-Fragem
+** Slogans:  
+- Hierachical modelling based on metrical positions of notes. 
+- Examine different levels of details (elaborations) in music.
+- Use visually inspired measurement for comparing between hierachies
+ 
+** Keywords
+- Metrical weights: assigning importance to notes based on their position on the grid given by the bars
+- Melodic reduction: Two theories in GTTM and Schenker. Could be used this the same paradigm, but we haven't implemented this yet. Relevant work from Conklin and Grooves. 
+- Hierachy: Viewing music from different levels of importance /details /variation s/elaborations /ornamentations. 
+- Zooming-in/out: inspired by fractal dimension calculation, going in-between hierachies, consider different levels of details
+- Mass: inspired by fractals and the visual correspondence of music objects (the uneven, irregular surface of music notes vs smooth, regular surface). A measurement for each level in the hierachy. Equals to $\sum \sqrt{duration^2 + pitchInterval^2}$. Intuitively, it's the sum of the lengths of the holding notes and the lengths of the lines connecting the two notes when there is a pitch change. 
+- Fractal/self-similarity dimension: taking ratios between different levels of mass, summarising the hierachical structure
+
+** Parameters: 
+- Zoom level: 1 -> consider all notes, 2 -> consider notes with weights >= 2, ...
+- Window size: how many bars are included in the analysis to produce one number
+- Sliding or hopping windows
+- Threshold: what is the maximum gaps between the two groups for them to be considered as belong to the same kind of pattern
+
+** Algorithm/Computation (producing the fractal dimension curve): 
+1. split the music entry into m parts, n bars per part
+2. perform the following actions for each bar
+   1) Create hierachy:
+      1. take the notes in the most important positions in the bar (for example, in a 4/4 bar, we have a importance grid of [5,2,3,2,4,2,3,2] in the resolution of a quiver; so only the notes on position of the first quiver will be taken)
+      2. take the notes in the most and the second most important positions in the bar (we have the positions of the first and the fifth quiver in this case) 
+      3. repeat till we consider all the importance levels
+   2) Compute measurement (mass) on the hierachy
+      1. Calculate the mass within one note: = duration in quarter length
+      2. Calculate the mass between two notes =  $\sum \sqrt{\Delta duration^2 + \Delta pitch^2}$ (eqv to the hypotenuse of the time and frequency difference)  
+      3. Sum up the mass (intuitively as the length of the line tracing through the notes in considerations)
+   3) Take ratios and the log of the mass between the selected two hierachies: $dim = log_2(mass_{I1}/mass_{I2}) 
+
+** Equations from Fractal dimensions: 
+- The Definition of "Mass": $$M\propto{s}^{-D}$$
+
+- Definition of "Fractal Dimension": $$-D=\frac{logM}{logs}$$
+
+** Modelling (in types)
+*** Model of music: [Time Signiture, [Voice]]
+This is the model we chose at the beginning of this project. (Not too restricted? We thought of incorporating for dimensions such as accents or dynamics. But is it better to focus on the metric structure only? It puts a limitation on the available corpora, but within the scope, it can be useful and already giving interesting results.)
+*** Model of mass: [Note] -> Maybe Double
+The types give much freedom to how we could calculate the "mass". We choose the length for now for the corresponding visual contours in music. For polyphony, we can extend this to the area enclosed by two voices, and it can capture the amount of contrary motions in the piece, which is crucial for counterpoint. 
+*** Model of metrical weights: TimeSig -> [Int]
+For each time signiture, we assign a list of integers of importance values to the positions of notes. Now we have a quiver as the resolution of the grid of the positions. New time signitures can be added and the resolution can be changed. 
+*** Model of computation: midi -> parameters -> [[Double], [midi]] 
+The input of frahem is midi files. From the parameters we introduced above, we can specify on which time scale and how many levels of hierachies we would like to analyse. The output is a time series of the fractal/self-similarity dimension. Based on the dimensions, we can also generate the patterns in the midi format with the same dimensions or up to a threshold. 
+*** Data type of patterns: using threshold?
+Might be a way to model patterns using the fractal dimensions. The type of patterns dependent on the threshold value? 
+
+** References: fractal inspired methods in time series analysis
+- Kantz, H., & Schreiber, T. (2004). Nonlinear time series analysis (Vol. 7). Cambridge university press.
+- Chakrabarti, D., & Faloutsos, C. (2002, November). F4: large-scale automated forecasting using fractals. In Proceedings of the eleventh international conference on Information and knowledge management (pp. 2-9). ACM.
+- Higuchi, Tomoyuki. "Approach to an irregular time series on the basis of the fractal theory." Physica D: Nonlinear Phenomena 31.2 (1988): 277-283.
