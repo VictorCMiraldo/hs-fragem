@@ -110,6 +110,7 @@ midiGetNoteEvents = sortBy go . process M.empty . simplify
             -> [NoteEvent]
     process m []
       | M.null m  = []
+      -- TODO: print out the actual unclosed notes.
       | otherwise = error "getNoteEvents: unclosed notes"
     process m ((offset , isOn , key):ks)
       | isOn      = process (M.insert key offset m) ks

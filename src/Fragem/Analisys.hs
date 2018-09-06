@@ -4,30 +4,25 @@ import Fragem.Syntax
 import Fragem.Syntax.Examples
 import Fragem.Metrics
 
+import Fragem.Math.Integral
+
 ------------------
 -- * Fractals * --
 ------------------
 
+toPoints :: [Note] -> [Point]
+toPoints = concatMap go
+  where
+    go :: Note -> [Point]
+    go (Note delay dur pitch)
+      = let d'   = fromIntegral delay
+            dur' = fromIntegral dur
+            p'   = fromIntegral pitch
+         in [ (d' , p') , (d' + dur' , p') ]
+            
 -- |Returns nothing if we have less than 2 notes.
 notesMass :: [Note] -> Maybe Double
-notesMass ps
-  | length ps < 2 = Nothing
-  | otherwise
-  = let (n:ns) = ps
-     in Just (go (fromIntegral $ noteDuration n) n ns)
-  where
-    go :: Double -> Note -> [Note] -> Double
-    go acu _    []     = acu
-    go acu prev (n:ns)
-      = let acu' = acu + hyp prev n
-                       + fromIntegral (noteDuration n)
-         in go acu' n ns
-
-    hyp :: Note -> Note -> Double
-    hyp (Note d1 dur1 p1) (Note d2 dur2 p2)
-      = let pitchD = fromIntegral $ p2 - p1
-            timeD  = fromIntegral $ (d1 + dur1) - d2        
-         in sqrt $ (pitchD ^ 2) + (timeD ^ 2)
+notesMass = Just . lengthOfSegment . toPoints
 
 type Scaling = Double
 type Mass    = Double
@@ -40,6 +35,12 @@ dimPitches p1 p2
   = case (,) <$> notesMass p1 <*> notesMass p2 of
       Just (p1' , p2') -> dim 2 p1' p2'
       Nothing          -> error "Note groupd must have at least 2 notes!"
+
+test :: [Note]
+test = [ Note 0   40 40
+       , Note 40  40 90
+       , Note 100 20 95
+       ]
 
 {-
 

@@ -21,6 +21,7 @@ library
                  ,     Fragem.Syntax.ToMidi
                  ,     Fragem.Syntax.Examples
                  ,     Fragem.Analisys
+                 ,     Fragem.Math.Integral
                  ,     Fragem.Metrics.InnerMetric
                  ,     Fragem.Metrics.BeatMetric
                  ,     Fragem.Metrics.Base
