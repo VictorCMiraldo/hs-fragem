@@ -1,0 +1,6 @@
+- Bach prelude: inner metric analysis does not work: it's all the same notes?!
+  zoom level difference! 3,20 worked!
+  stack exec fragem -- --zoom=3,9 --metric=InnerM "/home/irisren/Dropbox/111Projects/hs-fragem/dataset/jsbach/01prelud.mid"
+  
+- fugue2 very strange, killed many times, even with little bars
+stack exec fragem -- --interval=3,5 --zoom=1,2 --metric=InnerM "/home/irisren/Dropbox/111Projects/hs-fragem/dataset/jsbach/fugues/fugue2.mid"

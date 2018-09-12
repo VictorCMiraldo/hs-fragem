@@ -1,8 +1,8 @@
-dir=hanon
+dir=jsbach
 thre=0
 
 patfoldername=/home/irisren/Dropbox/111Projects/hs-fragem/experiments/extracted/
-filename="$dir-thre-$thre"
+filename="$dir-thre-$thre-s"
 
 
 for i in /home/irisren/Dropbox/111Projects/hs-fragem/dataset/$dir/* ; do
@@ -24,7 +24,7 @@ for i in /home/irisren/Dropbox/111Projects/hs-fragem/dataset/$dir/* ; do
     # echo "creating log file $logname"
     # touch $logname
 
-    stack exec fragem -- --threshold=$thre --export=$filename "/home/irisren/Dropbox/111Projects/hs-fragem/dataset/$dir/$name" | tee "$name.txt"
+    stack exec fragem -- --s --group=2 --threshold=$thre --export=$filename "/home/irisren/Dropbox/111Projects/hs-fragem/dataset/$dir/$name" | tee "$name.txt"
 
     cd ..
     cd ..
