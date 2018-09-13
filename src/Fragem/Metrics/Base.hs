@@ -36,6 +36,7 @@ zoomAt n metric = map (Measure . filter go . measureNotes)
     go :: Note -> Bool
     go nt | Just k <- M.lookup (noteDelay nt) metric
          = k >= n
+          | otherwise = False
 
 -- |Returns the available zoom-levels in a metric
 metricLevels :: Metric -> [Int]
