@@ -54,5 +54,6 @@ test-suite spec
   main-is: Spec.hs
   other-modules: Fragem.AnalisysSpec
                , Fragem.Syntax.FromMidiSpec
+               , Fragem.Math.IntegralSpec
   hs-source-dirs: test
   build-depends: hs-fragem , base , hspec , QuickCheck
