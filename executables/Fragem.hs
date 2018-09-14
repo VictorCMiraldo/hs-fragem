@@ -209,8 +209,8 @@ printMidiInfo voices
 dimensions :: Options -> Section -> IO [Double]
 dimensions opts section = do
   let (zA , zB) = optZoom opts
-  let zoomA = max zA zB
-  let zoomB = min zA zB
+  let zoomB = max zA zB
+  let zoomA = min zA zB
   let sect = sectionMeasures section
   let mF = case optMetric opts of
              BeatM  -> metricBeat (sectionSignature section)

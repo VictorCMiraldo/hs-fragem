@@ -33,10 +33,24 @@ type Metric = M.Map Ticks Int
 zoomAt :: Int -> Metric -> [Measure] -> [Measure]
 zoomAt n metric = map (Measure . filter go . measureNotes)
   where
+    metricMax = maximum (metricLevels metric)
+
+    -- Look into https://github.com/VictorCMiraldo/hs-fragem/issues/15
+    -- Metric levels are inverted inside the Fragem.Metrics folder:
+    --
+    -- Zoom level 0 means every note is present, the
+    -- greater the number, means less notes are present.
+    --
+    -- It is much more intuitive to have a bigger number
+    -- mean potentially more notes
+    trZoomLevel n
+      | metricMax - n < 1 = 1
+      | otherwise         = metricMax - n
+     
     go :: Note -> Bool
-    go nt | Just k <- M.lookup (noteDelay nt) metric
-         = k >= n
-          | otherwise = False
+    go nt = case M.lookup (noteDelay nt) metric of
+      Just k  -> k >= trZoomLevel n
+      Nothing -> False
 
 -- |Returns the available zoom-levels in a metric
 metricLevels :: Metric -> [Int]
