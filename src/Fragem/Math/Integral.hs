@@ -1,16 +1,21 @@
+{-# LANGUAGE TupleSections #-}
 -- Provides an interface to compute a n-dimensional integrals.
 module Fragem.Math.Integral where
 
+import Data.List
 import Control.Arrow ((***))
 import Debug.Trace
 
 type Point = (Double , Double)
 
-type LineSegment = (Point , Point)
+type Line = [Point]
 
 pointX , pointY :: Point -> Double
 pointX = fst
 pointY = snd
+
+(.+.) :: Point -> Point -> Point
+(ax , ay) .+. (bx , by) = (ax + bx , ay + by)
 
 -- * Auxiliary Monsters
 
@@ -22,7 +27,7 @@ distance (px , py) (cx , cy)
 -- * Gemoetric Constructions
 
 -- |Returns the length of a line segment.
-lengthOfSegment :: [Point] -> Double
+lengthOfSegment :: Line -> Double
 lengthOfSegment points
   | length points < 2 = 0
   | (p:ps) <- points  = go p ps
@@ -37,7 +42,7 @@ lengthOfSegment points
     --        ^^^ 
     --        
     --
-    go :: Point -> [Point] -> Double
+    go :: Point -> Line -> Double
     go _  [] = 0                                                  
     go p (q : rest) = distance p q + go q rest
 
@@ -45,13 +50,13 @@ lengthOfSegment points
 --
 --  PRECONDITION: the x coordinates are monotonically
 --                increasing in the list.
-areaOfSegment :: [Point] -> Double
+areaOfSegment :: Line -> Double
 areaOfSegment points
   | length points < 2 = 0
   -- TODO, enforce this precond here instead of requiring it.
   | (p:ps) <- points  = go p ps
   where
-    go :: Point -> [Point] -> Double
+    go :: Point -> Line -> Double
     go _ [] = 0
     go p@(px , py) (q@(qx , qy) : rest)
       = let deltaX = qx - px
@@ -59,78 +64,86 @@ areaOfSegment points
             trA    = deltaX * abs (py - qy) / 2
          in sqA + trA + go q rest
 
--- |Returns the area in between two lines
-areaInBetween :: [Point] -> [Point] -> Double
-areaInBetween n m
-  | length m < 2 || length n < 2 = 0
-  | otherwise
-  = let (m0 : ms) = m
-        (n0 : ns) = n
-        -- TODO!! write a test to ensure this does what we
-        --        think it does!
-        --        spec: map pointX (m':ms') == map pointX (n':ns')
-        m':ms' = completeLineWith (map pointX n) m0 ms
-        n':ns' = completeLineWith (map pointX m) n0 ns
-     in trace (show $ n':ns') $ go m' ms' n' ns'
-  where
-    go _ [] _ [] = 0
-    go (x,my) ((x' , my'):ms) (_,ny) ((_,ny'):ns)
-      -- do not cross!
-      | (my >= ny && my' >= ny')
-        || (ny >= my && ny' >= my')
-      = let area = 0.5 * (x' - x) * (abs (my - my') + abs (ny - ny'))
-         in trace (show [x,x',my,my',ny,ny'])
-          $ area + go (x',my') ms (x',ny') ns
-      | otherwise -- they cross!
-      = let dy1 = abs (my - ny)
-            dy2 = abs (my' - ny')
-            dx  = x'-x
-            myX = (dy2 / dy1) * dx
-         in trace "do cross"
-          $ dy1 * myX * 0.5 + dy2 * (dx - myX) * 0.5
-          + go (x',my') ms (x',ny') ns
-
-
-completeOneLine :: Double -> [Point] -> [Point]
-completeOneLine y []          = []
-completeOneLine y ((px,_):ps) = (px,y):completeOneLine y ps
+-- | Interpolates a line segment adding extra x coordinates
+--   on the correct y corrdinates.
+--
+--   Precondition: both lists are sorted
+completeLineWith :: [Double] -> Line -> Line
+completeLineWith xs []     = []
+completeLineWith xs (n:ns) = completeLineWith' xs n ns
 
 -- |Interpolates the second argument adding points in the
---  same x position as the first argument
-completeLineWith :: [Double] -> Point -> [Point] -> [Point]
-completeLineWith []     n ns  = ns
-completeLineWith (x:xs) n []
-  = [n]
-completeLineWith (x:xs) n0 (n:ns)
+--  same x position as the first argument. The list is
+--  already split into head and tail.
+--
+--  Precondition: both lists are sorted!
+completeLineWith' :: [Double] -> Point -> Line -> Line
+completeLineWith' []     n ns  = n : ns
+completeLineWith' (x:xs) n []
+  | x == pointX n = completeLineWith' xs n []
+  | x <  pointX n = (x , pointY n) : completeLineWith' xs n []
+  | x >  pointX n = n : map (, pointY n) (x:xs)
+completeLineWith' (x:xs) n0 (n:ns)
+  | x <  pointX n0
+    = (x , pointY n0) : completeLineWith' xs n0 (n:ns)
   | x == pointX n0 
-    = n0:completeLineWith xs n ns
+    = completeLineWith' xs n0 (n:ns)
   | x >  pointX n0 && x < pointX n
     = let x1 = x - pointX n0
           x2 = pointX n - pointX n0
           y1 = pointY n0
           y2 = pointY n
           newY = y1 + (x1 / x2 * (y2 - y1))
-       in n0:completeLineWith xs (x, newY) (n:ns)
-  | x > pointX n0 && x > pointX n
-    = n0:completeLineWith (x:xs) n ns
-  | otherwise = error $ show x ++ "; " ++ show ns
+       in n0:completeLineWith' xs (x, newY) (n:ns)
+  | x > pointX n0 && x >= pointX n
+    = n0:completeLineWith' (x:xs) n ns
   
-
-{-
-    complete pm ms pn ns
-      | pointX pm < pointX pn =  
--}
-
-{-
-     in go (m0 , m1) ms (n0 , n1) ns
+-- |Computes the volume of the frustum created by the given sections
+frustumVolume :: [Line] -> Double
+frustumVolume []        = error "frustumVolume: no lines"
+frustumVolume [l]       = lengthOfSegment l
+frustumVolume [l1 , l2] = areaOfSegment l1 + areaOfSegment l2
+frustumVolume ls
+  = let theta = 360 / fromIntegral (length ls)
+     in case preprocess ls of
+          (s1:s2:ss) -> go theta s1 (s2:ss)
+          _          -> error "frustumVolume: too few sections"
   where
-    go :: LineSegment -> [Point]
-       -> LineSegment -> [Point]
-       -> Double
-    go m@(m0 , m1) ms n@(n0 , n1) ns
-      = withCompleteSegments m n
-      
-      
-      = case compare (pointX m0) (pointX n0) of
-          EQ -> _
--}
+
+cube :: [Line]
+cube = replicate 4 [(0,1) , (1,1)]
+
+preprocess :: [Line] -> [(Double , [Double])]
+preprocess ls 
+  = let theta = 360 / fromIntegral (length ls)
+        xs  = nub . sort . concat . map (map pointX) $ ls
+        ls' = map (completeLineWith xs) ls
+     in map (\sect -> (pointX (head sect) , map pointY sect))
+      $ transpose ls'
+
+-- A section is specified by (x :: Double, ys :: [Double]).
+-- the idea is that the each coordinate in ys is actually seen
+-- as y cis \theta, in a slice for z = x.
+go :: Double -> (Double , [Double]) -> [(Double , [Double])] -> Double
+go theta hd [] = 0
+go theta (z0 , ys0) ((z1 , ys1):rs)
+ = let ys01 = zip ys0 ys1 ++ [head ys01]
+    in volume theta z0 z1 ys01 + go theta (z1 , ys1) rs
+
+volume :: Double -> Double -> Double -> [(Double , Double)] -> Double
+volume theta z0 z1 []  = 0
+volume theta z0 z1 [_] = 0
+volume theta z0 z1 ((a0 , a1) : (b0 , b1) : rest)
+ = volumeFrustumSection theta z0 z1 a0 a1 b0 b1
+ + volume theta z0 z1 ((b0 , b1) : rest)
+
+volumeFrustumSection :: Double -> Double -> Double -> Double
+                    -> Double -> Double -> Double -> Double
+volumeFrustumSection theta z0 z1 a0 a1 b0 b1
+ = 0.5 * sin theta ** 2 * (term z1 - term z0)
+ where
+   term x = a0*b0
+          + x^2 * 1/2 * a0        * (b1 - b0) 
+          + x^2 * 1/2 * (a1 - a0) * b0
+          + x^3 * 1/3 * (a1 - a0) * (b1 - b0)
+
