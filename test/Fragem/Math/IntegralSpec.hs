@@ -14,6 +14,9 @@ genSortedDoubles = do
   d2 <- arbitrary `suchThat` (/= d1)
   nub . sort . ([d1 , d2] ++) <$> listOf arbitrary
 
+genPositiveDouble :: Gen Double
+genPositiveDouble = choose (1e-4 , 1e2) 
+
 genLine :: Gen [Point]
 genLine = do
   xs <- genSortedDoubles
@@ -21,7 +24,7 @@ genLine = do
   return (zip xs ys)
   
 epsilon :: Double
-epsilon = 10e-8
+epsilon = 1e-7
 
 mcube :: Double -> [Line]
 mcube x = replicate 4 [(0 , x) , (1 , x)]
@@ -37,7 +40,7 @@ spec = do
 
     it "works under transpositions" $ property $
       forAll genLine $ \ l -> forAll arbitrary $ \ pt
-        -> (lengthOfSegment l - lengthOfSegment (map ((.+.) pt) l)) <= epsilon
+        -> abs (lengthOfSegment l - lengthOfSegment (map ((.+.) pt) l)) <= epsilon
       
   describe "completeLineWith" $ do
     it "is idempotent" $ property $
@@ -50,5 +53,7 @@ spec = do
                === nub (sort (lxs ++ xs))
 
   describe "frustumVolume" $ do
-    it "special case: cube" $ do
-      frustumVolume (replicate 4 [(0,sqrt 0.5) , (1,sqrt 0.5)]) `shouldBe` 1
+    it "special case: cube" $ property $ forAll genPositiveDouble $
+      \ side -> let x    = sqrt ( 2 * side ^ 2) / 2
+                    cube = replicate 4 [(0 , x) , (side , x)]
+                 in abs (frustumVolume cube - (side ^ 3)) <= epsilon

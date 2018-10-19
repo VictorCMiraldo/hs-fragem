@@ -104,45 +104,41 @@ frustumVolume []        = error "frustumVolume: no lines"
 frustumVolume [l]       = lengthOfSegment l
 frustumVolume [l1 , l2] = areaOfSegment l1 + areaOfSegment l2
 frustumVolume ls
-  = let theta = 360 / fromIntegral (length ls)
+  = let theta = (2*pi) / fromIntegral (length ls)
      in case preprocess ls of
           (s1:s2:ss) -> go theta s1 (s2:ss)
           _          -> error "frustumVolume: too few sections"
   where
+    preprocess :: [Line] -> [(Double , [Double])]
+    preprocess ls 
+      = let xs  = nub . sort . concat . map (map pointX) $ ls
+            ls' = map (completeLineWith xs) ls
+         in map (\sect -> (pointX (head sect) , map pointY sect))
+          $ transpose ls'
 
-cube :: Double -> [Line]
-cube x = replicate 4 [(0,x) , (1,x)]
+    -- A section is specified by (x :: Double, ys :: [Double]).
+    -- the idea is that the each coordinate in ys is actually seen
+    -- as y cis \theta, in a slice for z = x.
+    go :: Double -> (Double , [Double]) -> [(Double , [Double])] -> Double
+    go theta hd [] = 0
+    go theta (z0 , ys0) ((z1 , ys1):rs)
+     = let ys01 = zip ys0 ys1 ++ [head ys01]
+        in volume theta z0 z1 ys01 + go theta (z1 , ys1) rs
 
-preprocess :: [Line] -> [(Double , [Double])]
-preprocess ls 
-  = let theta = 360 / fromIntegral (length ls)
-        xs  = nub . sort . concat . map (map pointX) $ ls
-        ls' = map (completeLineWith xs) ls
-     in map (\sect -> (pointX (head sect) , map pointY sect))
-      $ transpose ls'
+    volume :: Double -> Double -> Double -> [(Double , Double)] -> Double
+    volume theta z0 z1 []  = 0
+    volume theta z0 z1 [_] = 0
+    volume theta z0 z1 ((a0 , a1) : (b0 , b1) : rest)
+     = volumeFrustumSection theta z0 z1 a0 a1 b0 b1
+     + volume theta z0 z1 ((b0 , b1) : rest)
 
--- A section is specified by (x :: Double, ys :: [Double]).
--- the idea is that the each coordinate in ys is actually seen
--- as y cis \theta, in a slice for z = x.
-go :: Double -> (Double , [Double]) -> [(Double , [Double])] -> Double
-go theta hd [] = 0
-go theta (z0 , ys0) ((z1 , ys1):rs)
- = let ys01 = zip ys0 ys1 ++ [head ys01]
-    in volume theta z0 z1 ys01 + go theta (z1 , ys1) rs
-
-volume :: Double -> Double -> Double -> [(Double , Double)] -> Double
-volume theta z0 z1 []  = 0
-volume theta z0 z1 [_] = 0
-volume theta z0 z1 ((a0 , a1) : (b0 , b1) : rest)
- = volumeFrustumSection theta z0 z1 a0 a1 b0 b1
- + volume theta z0 z1 ((b0 , b1) : rest)
-
-volumeFrustumSection :: Double -> Double -> Double -> Double
-                    -> Double -> Double -> Double -> Double
-volumeFrustumSection theta z0 z1 a0 a1 b0 b1
- = 0.5 * (sin theta ** 2) * (a0 * b0 + (term z1 - term z0))
- where
-   term x = x^2 * 1/2 * a0        * (b1 - b0) 
-          + x^2 * 1/2 * (a1 - a0) * b0
-          + x^3 * 1/3 * (a1 - a0) * (b1 - b0)
+    volumeFrustumSection :: Double -> Double -> Double -> Double
+                        -> Double -> Double -> Double -> Double
+    volumeFrustumSection theta z0 z1 a0 a1 b0 b1
+     = 0.5 * (sin theta ** 2) * (term z1 - term z0)
+     where
+       term x = x * a0 * b0
+              + x^2 * 1/2 * a0        * (b1 - b0) 
+              + x^2 * 1/2 * (a1 - a0) * b0
+              + x^3 * 1/3 * (a1 - a0) * (b1 - b0)
 
