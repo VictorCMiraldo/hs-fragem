@@ -21,7 +21,10 @@ genLine = do
   return (zip xs ys)
   
 epsilon :: Double
-epsilon = 10e-12
+epsilon = 10e-8
+
+mcube :: Double -> [Line]
+mcube x = replicate 4 [(0 , x) , (1 , x)]
 
 spec :: Spec
 spec = do
@@ -48,4 +51,4 @@ spec = do
 
   describe "frustumVolume" $ do
     it "special case: cube" $ do
-      frustumVolume (replicate 4 [(0,1) , (1,1)]) `shouldBe` 1
+      frustumVolume (replicate 4 [(0,sqrt 0.5) , (1,sqrt 0.5)]) `shouldBe` 1

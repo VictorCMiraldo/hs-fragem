@@ -110,8 +110,8 @@ frustumVolume ls
           _          -> error "frustumVolume: too few sections"
   where
 
-cube :: [Line]
-cube = replicate 4 [(0,1) , (1,1)]
+cube :: Double -> [Line]
+cube x = replicate 4 [(0,x) , (1,x)]
 
 preprocess :: [Line] -> [(Double , [Double])]
 preprocess ls 
@@ -140,10 +140,9 @@ volume theta z0 z1 ((a0 , a1) : (b0 , b1) : rest)
 volumeFrustumSection :: Double -> Double -> Double -> Double
                     -> Double -> Double -> Double -> Double
 volumeFrustumSection theta z0 z1 a0 a1 b0 b1
- = 0.5 * sin theta ** 2 * (term z1 - term z0)
+ = 0.5 * (sin theta ** 2) * (a0 * b0 + (term z1 - term z0))
  where
-   term x = a0*b0
-          + x^2 * 1/2 * a0        * (b1 - b0) 
+   term x = x^2 * 1/2 * a0        * (b1 - b0) 
           + x^2 * 1/2 * (a1 - a0) * b0
           + x^3 * 1/3 * (a1 - a0) * (b1 - b0)
 
