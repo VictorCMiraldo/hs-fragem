@@ -1,0 +1,5 @@
+a(x) := (a1 - a0) / (z1 - z0) * (x - z0) + a0;
+b(x) := (b1 - b0) / (z1 - z0) * (x - z0) + b0;
+changevar(integrate(sqrt(b(x)^2 * sin(t)^2 + (a(x) - b(x)*cos(t))^2) , x)
+         , x - a0 - b0 - y , y , x);
+radcan(%);
