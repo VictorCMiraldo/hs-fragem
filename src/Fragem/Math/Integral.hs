@@ -4,7 +4,7 @@ module Fragem.Math.Integral where
 
 import Data.List
 import Control.Arrow ((***))
-import Debug.Trace
+import Numeric.Tools.Integration
 
 type Point = (Double , Double)
 
@@ -150,7 +150,7 @@ frustumSectionVolume theta z0 z1 a0 a1 b0 b1
           + x^2 * 1/2 * (a1 - a0) * b0
           + x^3 * 1/3 * (a1 - a0) * (b1 - b0)
 
-
+{-
 frustumSectionSurface :: Double -> Double -> Double -> Double
                       -> Double -> Double -> Double -> Double
 frustumSectionSurface theta z0 z1 a0 a1 b0 b1
@@ -174,3 +174,18 @@ frustumSectionSurface theta z0 z1 a0 a1 b0 b1
                  k1xk2u = (k1xk2 ** 2) / u
               in u * logBase (exp 1) (abs (sqrt (1 + k1xk2u) + k1xk2 / sqrt u))
                + k1xk2 * sqrt u * sqrt (k1xk2u + 1)
+-}
+frustumSectionSurface :: Double -> Double -> Double -> Double
+                      -> Double -> Double -> Double -> Double
+frustumSectionSurface theta z0 z1 a0 a1 b0 b1
+  = quadBestEst $ quadRomberg defQuad (z0 , z1) term
+  where
+    da = a1 - a0
+    db = b1 - b0
+    dz = z1 - z0
+    
+    term x = let a x = da / dz * (x - z0) + a0
+                 b x = db / dz * (x - z0) + b0
+              in sqrt ( (      b x * cos theta) ** 2
+                      + (a x - b x * sin theta) ** 2
+                      )
