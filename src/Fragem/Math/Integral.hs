@@ -98,12 +98,20 @@ completeLineWith' (x:xs) n0 (n:ns)
   | x > pointX n0 && x >= pointX n
     = n0:completeLineWith' (x:xs) n ns
   
--- |Computes the volume of the frustum created by the given sections
-frustumVolume :: [Line] -> Double
-frustumVolume []        = error "frustumVolume: no lines"
-frustumVolume [l]       = lengthOfSegment l
-frustumVolume [l1 , l2] = areaOfSegment l1 + areaOfSegment l2
-frustumVolume ls
+-- |Computes the volume of the frustum created by the given sections using
+--  the specified "volume" function. The "volume" function receives as input
+--  in this order:
+--
+--   > vfs theta z0 z1 a0 a1 b0 b1
+--
+--  Where @theta@ is in radians, and @z0@ is time at 0.
+--    
+frustumVolume :: (Double -> Double -> Double -> Double -> Double -> Double -> Double -> Double)
+              -> [Line] -> Double
+frustumVolume vfs []        = error "frustumVolume: no lines"
+frustumVolume vfs [l]       = lengthOfSegment l
+frustumVolume vfs [l1 , l2] = areaOfSegment l1 + areaOfSegment l2
+frustumVolume vfs ls
   = let theta = (2*pi) / fromIntegral (length ls)
      in case preprocess ls of
           (s1:s2:ss) -> go theta s1 (s2:ss)
@@ -129,16 +137,40 @@ frustumVolume ls
     volume theta z0 z1 []  = 0
     volume theta z0 z1 [_] = 0
     volume theta z0 z1 ((a0 , a1) : (b0 , b1) : rest)
-     = volumeFrustumSection theta z0 z1 a0 a1 b0 b1
+     = vfs theta z0 z1 a0 a1 b0 b1
      + volume theta z0 z1 ((b0 , b1) : rest)
 
-    volumeFrustumSection :: Double -> Double -> Double -> Double
-                        -> Double -> Double -> Double -> Double
-    volumeFrustumSection theta z0 z1 a0 a1 b0 b1
-     = 0.5 * (sin theta ** 2) * (term z1 - term z0)
-     where
-       term x = x * a0 * b0
-              + x^2 * 1/2 * a0        * (b1 - b0) 
-              + x^2 * 1/2 * (a1 - a0) * b0
-              + x^3 * 1/3 * (a1 - a0) * (b1 - b0)
+frustumSectionVolume :: Double -> Double -> Double -> Double
+                     -> Double -> Double -> Double -> Double
+frustumSectionVolume theta z0 z1 a0 a1 b0 b1
+ = 0.5 * (sin theta ** 2) * (term z1 - term z0)
+ where
+   term x = x * a0 * b0
+          + x^2 * 1/2 * a0        * (b1 - b0) 
+          + x^2 * 1/2 * (a1 - a0) * b0
+          + x^3 * 1/3 * (a1 - a0) * (b1 - b0)
 
+
+frustumSectionSurface :: Double -> Double -> Double -> Double
+                      -> Double -> Double -> Double -> Double
+frustumSectionSurface theta z0 z1 a0 a1 b0 b1
+  = 1 / g * (term z1 - term z0)
+  where
+    da = a1 - a0
+    db = b1 - b0
+
+    k1 = 2 * da * db * cos theta + db ** 2 + da ** 2
+
+    k2 = (a0*b1 - a1*b0) * cos theta + b0 * db + a0 * da
+
+    g = 2 * k1 ** (2/3)
+
+    u = 2 * (2 * a0 * (-da) * b0 * b1 - (a1 - 2*a0)**2 * b0**2) * cos theta ** 2
+      + 4 * b0 * ( (-a0) * b1 ** 2 + (a1 + a0) * b0 * b1 - a1 * b0 ** 2) * cos theta
+      + (a0 * b1 - a1 * b0) ** 2
+      - a0 * a0 * b1 * b1
+    
+    term x = let k1xk2 = k1 * x + k2
+                 k1xk2u = (k1xk2 ** 2) / u
+              in u * logBase (exp 1) (abs (sqrt (1 + k1xk2u) + k1xk2 / sqrt u))
+               + k1xk2 * sqrt u * sqrt (k1xk2u + 1)

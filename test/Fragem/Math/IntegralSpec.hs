@@ -26,9 +26,6 @@ genLine = do
 epsilon :: Double
 epsilon = 1e-7
 
-mcube :: Double -> [Line]
-mcube x = replicate 4 [(0 , x) , (1 , x)]
-
 spec :: Spec
 spec = do
   describe "lengthOfSegment" $ do
@@ -52,8 +49,17 @@ spec = do
             in map fst (completeLineWith xs l)
                === nub (sort (lxs ++ xs))
 
-  describe "frustumVolume" $ do
+  describe "frustumVolume: volume" $ do
     it "special case: cube" $ property $ forAll genPositiveDouble $
       \ side -> let x    = sqrt ( 2 * side ^ 2) / 2
                     cube = replicate 4 [(0 , x) , (side , x)]
-                 in abs (frustumVolume cube - (side ^ 3)) <= epsilon
+                 in abs (frustumVolume frustumSectionVolume cube - (side ^ 3)) <= epsilon
+
+  describe "frustumVolume: surface" $ do
+    it "special case: cuboid" $ property $ forAll genPositiveDouble $
+      \ x -> let cube = replicate 4 [(0 , x) , (1 , x)]
+                 expect = 4 * sqrt (1 + x ** 2)
+                 res = frustumVolume frustumSectionSurface cube 
+              in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
+               $ abs (res - expect) <= epsilon
+
