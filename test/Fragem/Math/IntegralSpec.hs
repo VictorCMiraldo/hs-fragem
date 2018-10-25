@@ -58,7 +58,7 @@ spec = do
   describe "frustumVolume: surface" $ do
     it "special case: cuboid" $ property $ forAll genPositiveDouble $
       \ x -> let cube = replicate 4 [(0 , x) , (1 , x)]
-                 expect = 4 * sqrt (1 + x ** 2)
+                 expect = 4 * sqrt (x ** 2 + x ** 2)
                  res = frustumVolume frustumSectionSurface cube 
               in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
                $ abs (res - expect) <= epsilon
