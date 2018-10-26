@@ -186,6 +186,6 @@ frustumSectionSurface theta z0 z1 a0 a1 b0 b1
     
     term x = let a x = da / dz * (x - z0) + a0
                  b x = db / dz * (x - z0) + b0
-              in sqrt ( (      b x * cos theta) ** 2
-                      + (a x - b x * sin theta) ** 2
+              in sqrt ( (      b x * sin theta) ** 2
+                      + (a x - b x * cos theta) ** 2
                       )
