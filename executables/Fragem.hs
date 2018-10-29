@@ -59,9 +59,9 @@ options = Options
       &= typFile
       &= args
   , optFrustumMassType = 
-      enum [ FMT_Volume  &= name "fmv-volume"
+      enum [ FMT_Volume  &= explicit &= name "fmv-volume"
                          &= help "Use volume computation for polyphony"
-           , FMT_Surface &= name "fmv-surface"
+           , FMT_Surface &= explicit &= name "fmv-surface"
                          &= help "Use surface computation for polyphony"
            ]
   , optExportPats = Nothing
@@ -73,11 +73,15 @@ options = Options
       &= name "t" &= name "threshold"
       &= typ "FLOAT"
       &= help "group measures that have dimensions in a given threshold"
-  , optVoices = [0]
-      &= explicit
-      &= name "voice" &= name "c"
-      &= typ "INT"
-      &= help "which midi track to use"
+  , optVoices =
+      enum [ [0]     &= name "c0"
+           , [1]     &= name "c1"
+           , [2]     &= name "c2"
+           , [3]     &= name "c3"
+           , [4]     &= name "c4"
+           , [5]     &= name "c5"
+           , [6]     &= name "c6"
+           ] &= help "Select a given voice for analisys"
   , optMeasureGroup = 2
       &= explicit
       &= name "group" &= name "g"
@@ -155,8 +159,8 @@ go opts = do
       let voices      = map (midi !!) $ optVoices opts
       errWhen (voices == [])
               "No voices selected. Nothing to analyze"
-      warnWhen (length voices > 1)
-               "This voice has multiple sections, we will only look at the first."
+      warnWhen (any ((> 1) . length . pieceSections) voices)
+               "Some voices have multiple sections; use -d to figure out which"
       let measureStart = maybe 0 fst $ optInterval opts
       let measureIdxs = if optSlide opts
                         then [measureStart ..]
@@ -165,6 +169,7 @@ go opts = do
         $ lift $ printHeader opts
       -- compute the dimensions of the specified parts
       let sects = map (head . pieceSections) voices
+      liftIO $ putStrLn (show sects)
       dims <- zip measureIdxs <$> (lift $ dimensions opts sects)
       if (isJust $ optThreshold opts)
       then thresholdGroup opts (fromJust $ optThreshold opts) dims sects
