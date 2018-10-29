@@ -1,5 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE StandaloneDeriving #-}
 module Main (main) where
 
 import Control.Monad.Except
@@ -16,6 +17,7 @@ import Fragem.Syntax.FromMidi
 import Fragem.Syntax.ToMidi
 import Fragem.Metrics
 import Fragem.Analisys
+import Fragem.Math.Integral
 
 data Metrics
   = BeatM
@@ -25,19 +27,23 @@ data Metrics
 instance Default Metrics where
   def = BeatM
 
+deriving instance Data FrustumMassType
+deriving instance Typeable FrustumMassType
+
 data Options = Options
-  { optMetric       :: Metrics
-  , optFile         :: Maybe FilePath
-  , optVoice        :: Int
-  , optMeasureGroup :: Int
-  , optZoom         :: (Int , Int)
-  , optInterval     :: Maybe (Int , Int)
-  , optSlide        :: Bool
-  , optInfoOnly     :: Bool
-  , optPrintHeader  :: Bool
-  , optThreshold    :: Maybe Double
-  , optExportPats   :: Maybe FilePath
-  , optDebug        :: Bool
+  { optMetric          :: Metrics
+  , optFile            :: Maybe FilePath
+  , optVoices          :: [Int]
+  , optFrustumMassType :: FrustumMassType
+  , optMeasureGroup    :: Int
+  , optZoom            :: (Int , Int)
+  , optInterval        :: Maybe (Int , Int)
+  , optSlide           :: Bool
+  , optInfoOnly        :: Bool
+  , optPrintHeader     :: Bool
+  , optThreshold       :: Maybe Double
+  , optExportPats      :: Maybe FilePath
+  , optDebug           :: Bool
   } deriving (Eq , Show , Data , Typeable)
 
 options :: Options
@@ -52,6 +58,12 @@ options = Options
   , optFile = def
       &= typFile
       &= args
+  , optFrustumMassType = 
+      enum [ FMT_Volume  &= name "fmv-volume"
+                         &= help "Use volume computation for polyphony"
+           , FMT_Surface &= name "fmv-surface"
+                         &= help "Use surface computation for polyphony"
+           ]
   , optExportPats = Nothing
       &= name "e" &= name "export"
       &= typFile
@@ -61,9 +73,9 @@ options = Options
       &= name "t" &= name "threshold"
       &= typ "FLOAT"
       &= help "group measures that have dimensions in a given threshold"
-  , optVoice = 0
+  , optVoices = [0]
       &= explicit
-      &= name "voice" 
+      &= name "voice" &= name "c"
       &= typ "INT"
       &= help "which midi track to use"
   , optMeasureGroup = 2
@@ -138,12 +150,12 @@ go opts = do
   if (optInfoOnly opts)
     then return ()
     else do
-      errWhen (length midi <= optVoice opts)
+      errWhen (all (length midi <=) $ optVoices opts)
               "Not enough voices"
-      let Voice voice = midi !! (optVoice opts)
-      errWhen (voice == [])
-              "Voice is empty, nothing to analyze"
-      warnWhen (length voice > 1)
+      let voices      = map (midi !!) $ optVoices opts
+      errWhen (voices == [])
+              "No voices selected. Nothing to analyze"
+      warnWhen (length voices > 1)
                "This voice has multiple sections, we will only look at the first."
       let measureStart = maybe 0 fst $ optInterval opts
       let measureIdxs = if optSlide opts
@@ -152,18 +164,18 @@ go opts = do
       when (optPrintHeader opts)
         $ lift $ printHeader opts
       -- compute the dimensions of the specified parts
-      let sect = head voice
-      dims <- zip measureIdxs <$> (lift $ dimensions opts sect)
+      let sects = map (head . pieceSections) voices
+      dims <- zip measureIdxs <$> (lift $ dimensions opts sects)
       if (isJust $ optThreshold opts)
-      then thresholdGroup opts (fromJust $ optThreshold opts) dims sect
+      then thresholdGroup opts (fromJust $ optThreshold opts) dims sects
       else lift $ printDimensions dims
 
-thresholdGroup :: Options -> Double -> [(Int , Double)] -> Section -> M ()
-thresholdGroup opts thre dims sect
+thresholdGroup :: Options -> Double -> [(Int , Double)] -> [Section] -> M ()
+thresholdGroup opts thre dims sects
   = do let groups = makeGroups dims
        lift $ mapM_ printGroup groups
        when (isJust (optExportPats opts))
-         $ exportGroups opts (map (map fst) groups) sect
+         $ exportGroups opts (map (map fst) groups) sects
   where
     makeGroups [] = []
     makeGroups ((n , d):dims)
@@ -178,15 +190,15 @@ thresholdGroup opts thre dims sect
     average :: [Double] -> Double
     average ns = sum ns / fromIntegral (length ns)
 
-exportGroups :: Options -> [[Int]] -> Section -> M ()
-exportGroups opts gs sect
+exportGroups :: Options -> [[Int]] -> [Section] -> M ()
+exportGroups opts gs sects
   = lift $ flip mapM_ (zip [0..] gs) $ \(patN , msIdx)
-  -> let ms = concatMap fetch msIdx
-         file = format patN (fromJust $ optExportPats opts)
-      in sectionToMidi file (sect { sectionMeasures = ms })
+  -> let file = format patN (fromJust $ optExportPats opts)
+      in sectionsToMidi file (map (select msIdx) sects) 
   where
-    fetch :: Int -> [Measure]
-    fetch n = take (optMeasureGroup opts) (drop n $ sectionMeasures sect)
+    select :: [Int] -> Section -> Section
+    select ns s = s { sectionMeasures = concat $ map (\ idx
+               -> take (optMeasureGroup opts) (drop idx $ sectionMeasures s)) ns }
 
     format n str
       | ".mid" `isSuffixOf` str
@@ -206,12 +218,12 @@ printMidiInfo voices
   =  putStrLn "Midi Information: "
   >> putStrLn (metainfoVoices voices)
 
-dimensions :: Options -> Section -> IO [Double]
-dimensions opts section = do
+dimensions :: Options -> [Section] -> IO [Double]
+dimensions opts sections@(section:_) = do
   let (zA , zB) = optZoom opts
   let zoomB = max zA zB
   let zoomA = min zA zB
-  let sect = sectionMeasures section
+  let sects@(sect:_) = map sectionMeasures sections
   let mF = case optMetric opts of
              BeatM  -> metricBeat (sectionSignature section)
                                   (sectionTPB section)
@@ -220,25 +232,26 @@ dimensions opts section = do
   let mS = if optSlide opts
            then regroupMeasureSlide
            else regroupMeasure
-  let sect' = case optInterval opts of
-                Nothing            -> sect
-                Just (start , end) -> take (end - start + 1) $ drop (start - 1) sect
-  let notesA = mS (optMeasureGroup opts)
-             $ zoomAt zoomA metric sect'
-  let notesB = mS (optMeasureGroup opts)
-             $ zoomAt zoomB metric sect'
-  when (optDebug opts)
-    $ do putStrLn ("max metric zoom level: " ++ show (maximum $ metricLevels metric))
-         putStrLn ("Notes at: " ++ show zoomA)
-         putStrLn ("Mass: "     ++ show (notesMass $ concat notesA))
-         putStrLn ("Notes at: " ++ show zoomB)
-         putStrLn ("Mass: "     ++ show (notesMass $ concat notesB))
-         let nA = prettyNotes (sectionTPB section) 8 $ concat notesA
-             nB = prettyNotes (sectionTPB section) 8 $ concat notesB
-             res = if length nA >= length nB
-                   then zipWith (\a b -> a ++ "  |  " ++ b)
-                                nA (nB ++ repeat " ")
-                   else zipWith (\a b -> a ++ "  |  " ++ b)
-                                (nA ++ repeat (replicate (length $ head nA) ' ')) nB
-         putStrLn (unlines res)
-  return $ zipWith dimPitches notesA notesB
+  let sects' = case optInterval opts of
+                 Nothing            -> sects
+                 Just (start , end) -> map (take (end - start + 1) . drop (start - 1)) sects
+  let notesA = map ( mS (optMeasureGroup opts)
+                   . zoomAt zoomA metric) sects'
+  let notesB = map (mS (optMeasureGroup opts)
+                   . zoomAt zoomB metric) sects'
+  when (optDebug opts) $
+    do putStrLn ("max metric zoom level: " ++ show (maximum $ metricLevels metric))
+       putStrLn ("Mass: "     ++ show (notesMass (optFrustumMassType opts) $ concat notesA))
+       putStrLn ("Mass: "     ++ show (notesMass (optFrustumMassType opts) $ concat notesB))
+       mapM_ (uncurry debugInfoFor) (zip notesA notesB)
+  return $ zipWith (dimPitches (optFrustumMassType opts)) notesA notesB
+ where
+  debugInfoFor notesA notesB = do
+    let nA = prettyNotes (sectionTPB section) 8 $ concat notesA
+        nB = prettyNotes (sectionTPB section) 8 $ concat notesB
+        res = if length nA >= length nB
+              then zipWith (\a b -> a ++ "  |  " ++ b)
+                           nA (nB ++ repeat " ")
+              else zipWith (\a b -> a ++ "  |  " ++ b)
+                           (nA ++ repeat (replicate (length $ head nA) ' ')) nB
+    putStrLn (unlines res)

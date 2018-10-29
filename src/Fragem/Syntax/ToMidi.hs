@@ -1,4 +1,4 @@
-module Fragem.Syntax.ToMidi (sectionToMidi) where
+module Fragem.Syntax.ToMidi (sectionsToMidi) where
 
 import Control.Arrow ((***), (&&&))
 import Control.Monad
@@ -36,13 +36,14 @@ mkTimeSigMsg (TimeSig num denum)
     log2 :: Int -> Int
     log2 n = round $ logBase 2 (fromIntegral n)
 
--- |Translates a section to a midi
---  to a file.
-sectionToMidi :: FilePath -> Section -> IO ()
-sectionToMidi file (Section ts tpb ms)
+-- |Translates a list of sections to a midi
+--  Assumes that all sections have the same ticks-per-beat and time signature.
+sectionsToMidi :: FilePath -> [Section] -> IO ()
+sectionsToMidi file sects@(Section ts tpb _ : _)
   = Midi.exportFile file
   $ Midi.Midi Midi.MultiTrack
               (Midi.TicksPerBeat tpb)
-              [ mkTimeSigMsg ts
-              , Midi.fromAbsTime $ translate (concat $ map measureNotes ms)
-              ]
+              (mkTimeSigMsg ts 
+              : map (Midi.fromAbsTime . translate . concat . map measureNotes . sectionMeasures)
+                    sects
+              )

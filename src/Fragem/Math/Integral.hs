@@ -3,6 +3,7 @@
 module Fragem.Math.Integral where
 
 import Data.List
+import Data.Typeable
 import Control.Arrow ((***))
 import Numeric.Tools.Integration
 
@@ -97,7 +98,17 @@ completeLineWith' (x:xs) n0 (n:ns)
        in n0:completeLineWith' xs (x, newY) (n:ns)
   | x > pointX n0 && x >= pointX n
     = n0:completeLineWith' (x:xs) n ns
-  
+
+data FrustumMassType
+  = FMT_Volume
+  | FMT_Surface
+  deriving (Eq , Show)
+
+-- |Better interface to 'frustumVolume'
+volume :: FrustumMassType -> [Line] -> Double
+volume FMT_Volume  = frustumVolume frustumSectionVolume
+volume FMT_Surface = frustumVolume frustumSectionSurface
+
 -- |Computes the volume of the frustum created by the given sections using
 --  the specified "volume" function. The "volume" function receives as input
 --  in this order:
@@ -150,31 +161,6 @@ frustumSectionVolume theta z0 z1 a0 a1 b0 b1
           + x^2 * 1/2 * (a1 - a0) * b0
           + x^3 * 1/3 * (a1 - a0) * (b1 - b0)
 
-{-
-frustumSectionSurface :: Double -> Double -> Double -> Double
-                      -> Double -> Double -> Double -> Double
-frustumSectionSurface theta z0 z1 a0 a1 b0 b1
-  = 1 / g * (term z1 - term z0)
-  where
-    da = a1 - a0
-    db = b1 - b0
-
-    k1 = 2 * da * db * cos theta + db ** 2 + da ** 2
-
-    k2 = (a0*b1 - a1*b0) * cos theta + b0 * db + a0 * da
-
-    g = 2 * k1 ** (2/3)
-
-    u = 2 * (2 * a0 * (-da) * b0 * b1 - (a1 - 2*a0)**2 * b0**2) * cos theta ** 2
-      + 4 * b0 * ( (-a0) * b1 ** 2 + (a1 + a0) * b0 * b1 - a1 * b0 ** 2) * cos theta
-      + (a0 * b1 - a1 * b0) ** 2
-      - a0 * a0 * b1 * b1
-    
-    term x = let k1xk2 = k1 * x + k2
-                 k1xk2u = (k1xk2 ** 2) / u
-              in u * logBase (exp 1) (abs (sqrt (1 + k1xk2u) + k1xk2 / sqrt u))
-               + k1xk2 * sqrt u * sqrt (k1xk2u + 1)
--}
 frustumSectionSurface :: Double -> Double -> Double -> Double
                       -> Double -> Double -> Double -> Double
 frustumSectionSurface theta z0 z1 a0 a1 b0 b1
