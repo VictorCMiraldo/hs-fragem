@@ -1,3 +1,4 @@
+{-# LANGUAGE TupleSections #-}
 module Fragem.Syntax where
 
 import Data.List (transpose)
@@ -96,7 +97,7 @@ metainfoVoices = unlines . concatMap ((["Voice: "] ++) . go)
 -- |Pretty prints a series of notes. The integer parameters
 --  tells how many ticks a char corresponds to.
 --  Normally, @ticks-per-beat@ and @8@ is a good choice.
-prettyNotes :: Int -> Int -> [Note] -> [String]
+prettyNotes :: Int -> Int -> [[Note]] -> [String]
 prettyNotes tpb cc []
   = ["   - EMPTY"]
 prettyNotes tpb cc ns
@@ -106,7 +107,7 @@ prettyNotes tpb cc ns
   $ map ("   -" ++) (markBars $ map go $ [minY .. maxY])
   where
     (maxY , minY) = foldr (\n (yM , ym) -> (notePitch n `max` yM , notePitch n `min` ym))
-                    (0 , 300) ns
+                    (0 , 300) (concat ns)
 
     tpc = tpb `div` cc
 
@@ -130,19 +131,27 @@ prettyNotes tpb cc ns
     relative (n:ns) = n { noteDelay = 0}
                     : map (\x -> x { noteDelay = noteDelay x - noteDelay n }) ns
  
-    ns' = relative ns
+    ns' :: [(Int , Note)]
+    ns' = concatMap (\(i , ns) -> map (i,) ns) $ zip [0..] $ map relative ns
    
     go :: Int -> String
-    go line = let xs = map (\n -> (noteDelay n `div` tpc
-                                  ,noteDuration n `div` tpc))
-                     $ filter ((== line) . notePitch) ns'
+    go line = let xs = map (\(vc , n) -> (vc , noteDelay n `div` tpc
+                                             , noteDuration n `div` tpc))
+                     $ filter ((== line) . notePitch . snd) ns'
                in case xs of
                     []       -> ""
                     (ys:yss) -> render 0 (ys:yss)
 
-    render :: Offset -> [(Offset , Ticks)] -> String
+    render :: Offset -> [(Int , Offset , Ticks)] -> String
     render acu [] = ""
-    render acu ((o , t):rest)
+    render acu ((vc , o , t):rest)
       =  replicate (o - acu) ' '
-      ++ replicate t '#'
+      ++ replicate t (symbol vc)
       ++ render (o + t) rest
+
+    symbol :: Int -> Char
+    symbol 0 = '#'
+    symbol 1 = '%'
+    symbol 2 = '@'
+    symbol 3 = '&'
+    symbol n = head (show n)

@@ -31,9 +31,11 @@ dim s a0 a1 = logBase s (a1 / a0)
 
 dimPitches :: FrustumMassType -> [[Note]] -> [[Note]] -> Double
 dimPitches fmt p1 p2
+  | length p1 /= length p2 = error "dimPitches: Different number of voices!"
+  | otherwise
   = case (,) <$> notesMass fmt p1 <*> notesMass fmt p2 of
       Just (p1' , p2') -> dim 2 p1' p2'
-      Nothing          -> error "Note groupd must have at least 2 notes!"
+      Nothing          -> error "dimPitches: Note group must have at least 2 notes!"
 
 test :: [Note]
 test = [ Note 0   40 40
