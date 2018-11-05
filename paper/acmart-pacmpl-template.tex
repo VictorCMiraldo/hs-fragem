@@ -171,18 +171,68 @@ Transformations and musical patterns -> Haskell ->
 \section{Introduction}
 
 %\paragraph{MIR and functional programming}
+%DSL
+%Type
+%Many possibility to explore.
 
 \paragraph{Hierachical structures in music}
-Music is known to have rich hierachical structures. We model the hierachy based
-on metrical positions of the notes in music. 
+Music is known to have rich hierachical structures, from form to phrase,
+harmonic structures, melodic constructs, etc.. One can comprehend music at
+different time scales. There have been many theories on this topic, such as the
+General Theory of Tonal Music (GTTM) \cite{} and the Schekerian theory of melodic reduction
+\cite{}. By examining what is the backbone of the piece and where
+are the rest, we can view music from different levels of importance and details.
+
+\paragraph{Music Information Retrieval (MIR)}
+In the research area of MIR, with understandings in the hierachical structures in music, many
+useful tools were made: musical analysis assistant \cite{}, compositional tools
+\cite{} and information retrieval systems \cite{} just to list a few.
+There have been also much research on how one could understand, represent and extract the
+hierachical structures automatically. A balance and feedback loop between the theories and the
+applications have stimulated much interests in the topic of hierachies in music. 
+
+\paragraph{Metrical structures}
+Metrical structure plays an important role in the construction and the
+perception of the hierachical structures in music. Depending on the locations of
+the musical events on the metrical grid or their relational positions to other
+notes, one can assign metrical weights/importance to the notes. The notes at more important metrical
+positions form the anchors in the hierachical structure. 
 
 \paragraph{Fractal Geometry}
+Fractal geometry is an established area of mathematics. The box-counting way of
+calculating the fractal dimensions are known to be able to measure the roughness
+of contours. For example, the fractal dimension of the coastline of the United
+Kingdom is measured to be... and the ... for Sweden. It has been used in time
+series analysis, dynamical system, and where there is self-similarity in
+general. 
+
+Zooming-in/out: inspired by fractal dimension calculation, going in-between
+hierachies, consider different levels of details
+
+Mass: inspired by fractals and the visual correspondence of music objects (the
+uneven, irregular surface of music notes vs smooth, regular surface). A
+measurement for each level in the hierachy. Equals to
+∑duration2+pitchInterval2−−−−−−−−−−−−−−−−−−−−−−√. Intuitively, it's the sum of
+the lengths of the holding notes and the lengths of the lines connecting the two
+notes when there is a pitch change.
+
+Fractal/self-similarity dimension: taking ratios between different levels of
+mass, summarising the hierachical structure
+
 
 \paragraph{Musical features}
+Musical features refers to summarising music events numerically. There are
+available toolbox to calculate features, such as jMIR \cite{}, MIRtoolbox \cite{}, the FANTASTIC
+toolbox \cite{}. There are features such as.  One can either
+take the whole piece or take a series of sliding windows and obtain a time
+series of features. 
 
-\paragraph{Pattern discovery based on features}
+\paragraph{Pattern discovery and classification based on features}
+Musical pattern discovery is an active area of research. It faces many
+challenges \cite{}. By giving a known hierachy in the piece, we can calculate the 
 
 \paragraph{Our Methods}
+We use fractal geometry 
 
 \paragraph{Contributions}
 - Based on fractal geometry and the hierachical structures in music, we propose a
@@ -231,15 +281,59 @@ corpora and comparing the proposed feature with other existing features of music
       
    3) Take ratios and the log of the mass between the selected two hierachies: $dim = log_2(mass_{I1}/mass_{I2}) $
 
-
 \paragraph{Interpretting the feature}
+The feature consists of information from two dimensions, time and pitch. We use
+a few prototipical example note combinations to illustrate how the fractal
+dimensions could reflect the changes in music.
+
 \paragraph{The similarity dimension on one piece}
 
-\section{Experiment setting}
-
-
 \section{The Fragem package}
+The implementation of the tool is in a functional programming language, Haskell.
 
+\paragraph{From modelling music using data types}
+Model of music: [Time Signiture, [Voice]]
+
+Model of mass: [Note] -> Maybe Double
+The types give much freedom to how we could calculate the "mass". We choose the length for now for the corresponding visual contours in music. For polyphony, we can extend this to the area enclosed by two voices, and it can capture the amount of contrary motions in the piece, which is crucial for counterpoint.
+
+Model of metrical weights: TimeSig -> [Int]
+For each time signiture, we assign a list of integers of importance values to the positions of notes. Now we have a quiver as the resolution of the grid of the positions. New time signitures can be added and the resolution can be changed.
+
+Model of computation: midi -> parameters -> [[Double], [midi]]
+The input of frahem is midi files. From the parameters we introduced above, we can specify on which time scale and how many levels of hierachies we would like to analyse. The output is a time series of the fractal/self-similarity dimension. Based on the dimensions, we can also generate the patterns in the midi format with the same dimensions or up to a threshold.
+
+Types of patterns: threshold
+
+\paragraph{parameters}
+Zoom level: 1 -> consider all notes, 2 -> consider notes with weights >= 2, …
+Window size: how many bars are included in the analysis to produce one number
+Sliding or hopping windows
+Threshold: what is the maximum gaps between the two groups for them to be considered as belong to the same kind of pattern
+
+@Victor?
+
+\section{Experiment setting}
+\subsection{Data}
+\paragraph{Synthesised Data}
+
+\paragraph{Hanon}
+
+\paragraph{Bach}
+
+\subsection{Correlation with known features}
+Using PCA, we can decompose 
+
+\subsection{Classification}
+We use the synthesised data with two levels of randomness, the Hanon exercises
+and Bach's fugues for the classification experiment.
+
+Examining the heatmap, we see higher fractal dimension in the most complicated
+piece, Bach's WTC. 
+
+\subsection{Pattern discovery}
+Using the MIREX dataaset, we found more patterns than the annotations. But
+becuase t=if the
 
 \section{Results}
 
