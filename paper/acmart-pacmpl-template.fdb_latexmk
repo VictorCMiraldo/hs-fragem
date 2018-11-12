@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1541016232 "acmart-pacmpl-template.tex" "acmart-pacmpl-template.pdf" "acmart-pacmpl-template" 1541016233
+["pdflatex"] 1541408634 "acmart-pacmpl-template.tex" "acmart-pacmpl-template.pdf" "acmart-pacmpl-template" 1541408635
   "/etc/texmf/web2c/texmf.cnf" 1524593234 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertine/lbtn_25tcsq.enc" 1490133665 2921 8ca0eb0831f9bc5da080d3697cfe67bf ""
@@ -198,12 +198,12 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1520210507 32485 c64754543d8ac501bea6e75e209ea521 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1524593289 2700761 ac0584cc9514ab21918550a6948c4ee2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1539320265 4133350 89bc834907a31eded8d4be12be7074cc ""
-  "acmart-pacmpl-template.aux" 1541016232 2507 24d0be74bb0c1f16114a049ee6c4172e ""
-  "acmart-pacmpl-template.out" 1541016232 1296 98a1c3098882635bf8881116dc998ec6 ""
-  "acmart-pacmpl-template.tex" 1541016222 10044 e255ca828b69bc95d460c7cd6ee65f09 ""
-  "acmart.cls" 1538001181 88549 a77fa9c51ef3f8480f484c60325746bf ""
+  "acmart-pacmpl-template.aux" 1541408635 3590 0379112d7168c547cc07bfe5f57bb61a ""
+  "acmart-pacmpl-template.out" 1541408635 1962 18e1b37c62c81c53436c0b89a0d6c35f ""
+  "acmart-pacmpl-template.tex" 1541397611 15389 d9dae74b2524f2e7aeb6297afc2b679e ""
+  "acmart.cls" 1541344501 88549 a77fa9c51ef3f8480f484c60325746bf ""
   (generated)
   "acmart-pacmpl-template.log"
+  "acmart-pacmpl-template.aux"
   "acmart-pacmpl-template.pdf"
   "acmart-pacmpl-template.out"
-  "acmart-pacmpl-template.aux"

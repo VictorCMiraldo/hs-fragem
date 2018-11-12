@@ -314,15 +314,26 @@ Threshold: what is the maximum gaps between the two groups for them to be consid
 @Victor?
 
 \section{Experiment setting}
+After computing the fractal features, we test its properties on various corpora.
 \subsection{Data}
-\paragraph{Synthesised Data}
+\paragraph{Individual Bars}
+By varying pitch and duration in the minimalistic examples, we show how fractal
+dimensions perform on a spectrum of different repetitions.
 
+\paragraph{Synthesised Data}
+Using Ionian scale, repeated interval jumps, and different amount of randomness, we check the effectiveness of the fractal dimensions. As can be computed, the fractal dimensions can indeed differentiate amongst the three different regions.
 \paragraph{Hanon}
+We verify the fractal dimensions are invariant under inversion, retrograde,
+retrograde-inversion, chromatic transposition.
 
 \paragraph{Bach}
+Using different window length, we show the fractal dimensions are able to
+combine the pitch and duration information, show the changing points in the
+prelude piece.
 
 \subsection{Correlation with known features}
-Using PCA, we can decompose 
+We calculate the correlation between the fractal dimension with other musical
+features defined in jSymbolic2. 
 
 \subsection{Classification}
 We use the synthesised data with two levels of randomness, the Hanon exercises
@@ -332,8 +343,9 @@ Examining the heatmap, we see higher fractal dimension in the most complicated
 piece, Bach's WTC. 
 
 \subsection{Pattern discovery}
-Using the MIREX dataaset, we found more patterns than the annotations. But
-becuase t=if the
+Using the MIREX dataaset, we found more patterns than the annotations.
+
+We are extract some rhythmical patterns on not yet annotated dataset.
 
 \section{Results}
 
