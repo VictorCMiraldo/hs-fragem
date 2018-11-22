@@ -63,3 +63,40 @@ spec = do
               in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
                $ abs (res - expect) <= epsilon
 
+  describe "frustumVolume: volume" $ do
+    it "special case: perpendicular1" $ property $ forAll genPositiveDouble $
+      \x -> let perp = [[(0,0),(1,0),(1,1),(2,1)],[(0,3),(1,3),(2,3),(3,3)]]
+                expect = 10
+                res = frustumVolume frustumSectionVolume perp
+            in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
+               $ abs (res - expect) <= epsilon
+               
+  describe "frustumVolume: volume" $ do
+    it "special case: perpendicular4" $ property $ forAll genPositiveDouble $
+      \x -> let perp = replicate 4 [(0,0),(1,0),(1,1),(2,1)]
+                expect = 2
+                res = frustumVolume frustumSectionVolume perp
+            in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
+               $ abs (res - expect) <= epsilon
+               
+  describe "frustumVolume: volume" $ do
+    it "special case: perpendicular3" $ property $ forAll genPositiveDouble $
+      \x -> let perp = [[(0,0),(1,0),(1,1),(2,1)],[(0,3),(1,3),(2,3),(3,3)],[(0,0),(1,0),(1,1),(2,1)],[(0,3),(1,3),(2,3),(3,3)]]
+                expect = 4
+                res = frustumVolume frustumSectionVolume perp
+            in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
+               $ abs (res - expect) <= epsilon
+  describe "frustumVolume: volume" $ do
+    it "special case: perpendicular2" $ property $ forAll genPositiveDouble $
+      \x -> let perp = replicate 4 [(0,0),(1,0),(1,1),(2,1),(3,0),(4,0),(4,1)]
+                expect = 6.6
+                res = frustumVolume frustumSectionVolume perp
+            in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
+               $ abs (res - expect) <= epsilon
+  describe "frustumVolume: volume" $ do
+    it "special case: perpendicular3" $ property $ forAll genPositiveDouble $
+      \x -> let perp = [[(0,0),(1,0),(1,1),(2,1),(3,0),(4,0),(4,1)],[(1,0),(1,1),(2,1),(3,0),(4,0),(4,1)],[(1,1),(2,1),(3,0),(4,0),(4,1)]]
+                expect = 0.875
+                res = frustumVolume frustumSectionVolume perp
+            in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
+               $ abs (res - expect) <= epsilon
