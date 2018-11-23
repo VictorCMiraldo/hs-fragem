@@ -24,7 +24,11 @@ genLine = do
   return (zip xs ys)
   
 epsilon :: Double
-epsilon = 1e-7
+epsilon = 1e-2
+
+-- perp :: [Line] -> Double -> Double -> Bool
+-- perp lines expected resolution = (abs(res - expected) <= resolution)
+--   where res = frustumVolume frustumSectionVolume lines
 
 spec :: Spec
 spec = do
@@ -54,7 +58,7 @@ spec = do
       \ side -> let x    = sqrt ( 2 * side ^ 2) / 2
                     cube = replicate 4 [(0 , x) , (side , x)]
                  in abs (frustumVolume frustumSectionVolume cube - (side ^ 3)) <= epsilon
-
+ 
   describe "frustumVolume: surface" $ do
     it "special case: cuboid" $ property $ forAll genPositiveDouble $
       \ x -> let cube = replicate 4 [(0 , x) , (1 , x)]
@@ -63,40 +67,68 @@ spec = do
               in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
                $ abs (res - expect) <= epsilon
 
-  describe "frustumVolume: volume" $ do
-    it "special case: perpendicular1" $ property $ forAll genPositiveDouble $
-      \x -> let perp = [[(0,0),(1,0),(1,1),(2,1)],[(0,3),(1,3),(2,3),(3,3)]]
-                expect = 10
-                res = frustumVolume frustumSectionVolume perp
-            in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
-               $ abs (res - expect) <= epsilon
+  describe "frustumVolume: perpendicular" $ do
+    it "special case: one perpendicular, one stable" $
+      let perp = [[(0,0),(1,0),(1,1),(2,1)],[(0,3),(1,3),(2,3),(3,3)]]
+          expect = 10
+          res = frustumVolume frustumSectionVolume perp
+       in if (abs (res - expect) <= epsilon)
+           then True `shouldBe` True
+           else expectationFailure ("expected: " ++ show expect ++ "; got: " ++ show res)
+
+ -- how to package the function so that we can still show expect values and the result values? 
+ -- describe "frustumVolume: perpendicular" $ do
+ --    it "special case: perp1" $
+ --      let expect = 10 in
+ --        let desicion = perp [[(0,0),(1,0),(1,1),(2,1)],[(0,3),(1,3),(2,3),(3,3)] expect 1 in
+ --          if decision
+ --            then True `shouldBe` True
+ --            else expectationFailure ("expected: " ++ show expect ++ "; got: " ++ show res)
+
                
   describe "frustumVolume: volume" $ do
-    it "special case: perpendicular4" $ property $ forAll genPositiveDouble $
-      \x -> let perp = replicate 4 [(0,0),(1,0),(1,1),(2,1)]
-                expect = 2
-                res = frustumVolume frustumSectionVolume perp
-            in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
-               $ abs (res - expect) <= epsilon
+    it "special case: four perpendicular" $
+      let perp = replicate 4 [(0,0),(1,0),(1,1),(2,1)]
+          expect = 2
+          res = frustumVolume frustumSectionVolume perp
+            in if (abs (res - expect) <= epsilon)
+               then True `shouldBe` True
+               else expectationFailure ("expected: " ++ show expect ++ "; got: " ++ show res)
                
   describe "frustumVolume: volume" $ do
-    it "special case: perpendicular3" $ property $ forAll genPositiveDouble $
-      \x -> let perp = [[(0,0),(1,0),(1,1),(2,1)],[(0,3),(1,3),(2,3),(3,3)],[(0,0),(1,0),(1,1),(2,1)],[(0,3),(1,3),(2,3),(3,3)]]
-                expect = 4
-                res = frustumVolume frustumSectionVolume perp
-            in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
-               $ abs (res - expect) <= epsilon
+    it "special case: two perpendicular two stable" $
+      let perp = [[(0,0),(1,0),(1,1),(2,1)],[(0,3),(1,3),(2,3),(3,3)],[(0,0),(1,0),(1,1),(2,1)],[(0,3),(1,3),(2,3),(3,3)]]
+          expect = 4
+          res = frustumVolume frustumSectionVolume perp
+            in if (abs (res - expect) <= epsilon)
+               then True `shouldBe` True
+               else expectationFailure ("expected: " ++ show expect ++ "; got: " ++ show res)
+
+               
   describe "frustumVolume: volume" $ do
-    it "special case: perpendicular2" $ property $ forAll genPositiveDouble $
-      \x -> let perp = replicate 4 [(0,0),(1,0),(1,1),(2,1),(3,0),(4,0),(4,1)]
-                expect = 6.6
-                res = frustumVolume frustumSectionVolume perp
-            in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
-               $ abs (res - expect) <= epsilon
+    it "special case: longer perpendiculars" $ 
+      let perp = replicate 4 [(0,0),(1,0),(1,1),(2,1),(3,0),(4,0),(4,1)]
+          expect = 6.6666
+          res = frustumVolume frustumSectionVolume perp
+       in if (abs (res - expect) <= epsilon)
+               then True `shouldBe` True
+               else expectationFailure ("expected: " ++ show expect ++ "; got: " ++ show res)
+
+               
   describe "frustumVolume: volume" $ do
-    it "special case: perpendicular3" $ property $ forAll genPositiveDouble $
-      \x -> let perp = [[(0,0),(1,0),(1,1),(2,1),(3,0),(4,0),(4,1)],[(1,0),(1,1),(2,1),(3,0),(4,0),(4,1)],[(1,1),(2,1),(3,0),(4,0),(4,1)]]
-                expect = 0.875
-                res = frustumVolume frustumSectionVolume perp
-            in counterexample ("expected: " ++ show expect ++ "; got: " ++ show res)
-               $ abs (res - expect) <= epsilon
+    it "special case: shifted perpendiculars" $ 
+       let perp = [[(0,0),(1,0),(1,1),(2,1),(3,0),(4,0),(4,1)],[(1,0),(1,1),(2,1),(3,0),(4,0),(4,1)],[(1,1),(2,1),(3,0),(4,0),(4,1)]]
+           expect = 0.875
+           res = frustumVolume frustumSectionVolume perp
+            in if (abs (res - expect) <= epsilon)
+               then True `shouldBe` True
+               else expectationFailure ("expected: " ++ show expect ++ "; got: " ++ show res)
+                    
+  describe "frustumVolume: volume" $ do
+    it "special case: shifted perpendiculars" $ 
+       let perp = [[(0,0),(0.5,0),(0.5,1),(2,1),(3,0),(4,0),(4,1)],[(1,0),(1,1),(2,1),(0.5,0),(4,0),(4,1)],[(1,1),(2,1),(3,0),(4,0),(4,1)]]
+           expect = 0.875
+           res = frustumVolume frustumSectionVolume perp
+            in if (abs (res - expect) <= epsilon)
+               then True `shouldBe` True
+               else expectationFailure ("expected: " ++ show expect ++ "; got: " ++ show res)
