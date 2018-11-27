@@ -10,47 +10,121 @@
 Music is known to have rich hierarchical structures, ranging from global forms to
 local phrases, from harmonic progressions to melodic patterns. The hierarchical
 structures allow us to examine music at different levels of details and time
-scales. For example, as shown in Figure \ref{fig:eg}, on the right we have  There have been many musical theories on this topic, such as the
+scales. For example, as shown in Figure \ref{fig:egbach}, the original piece on the
+top two staffs in
+can be summarised by the chords in the third staffs; similarly, in Figure
+\ref{fig:egscale}, the patterns
+shown on the top staff can be progressively and hierarchically reduced to the
+bottom staff. There have been many musical theories on the hierarchical
+structure of music, such as the
 General Theory of Tonal Music (GTTM) \cite{lerdahl1985generative} and the Schenkerian theory of melodic reduction
 \cite{forte1959schenker}.
 
+% \begin{figure}
+%    \centering
+%     \begin{subfigure}[t]{0.5\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{eg.png}
+%         \caption{Two levels of hierarchies in Bach's Preludium in C
+%           major \cite{wiki:bach}: the original piece and the underlying chords.
+%           The details in the first two staffs can be summarised into the chords
+%           in the third staff. }
+%     \end{subfigure}%
+%     ~ 
+%     \begin{subfigure}[t]{0.5\textwidth}
+%         \centering
+%         \includegraphics[width=\linewidth]{egscale.png}
+%         \caption{Four levels of hierarchies in an artificial example using
+%           scales: from the top to the bottom staff, we have different levels of
+%           details in different levels of hierarchies. The notes in different
+%           levels of hierarchies are specified based on the metrical positions of
+%           the notes.  }
+%     \end{subfigure}
+%     \caption{Examples of hierarchical structures in music}
+%   \label{fig:eg}
+% \end{figure}
+
 \begin{figure}
-  \includegraphics[width=0.7\linewidth]{eg.png}
-  \caption{Reduction and hierarchical structure in Bach's Preludium in C major
-    (BWV 846a) \cite{wiki:bach} }
-  \label{fig:eg}
+  \includegraphics[width=0.7 \linewidth]{eg.png}
+  \caption{Two levels of hierarchies in Bach's Preludium in C
+          major \cite{wiki:bach}: the original piece and the underlying chords.
+          The details in the first two staffs can be summarised into the chords
+          in the third staff}
+  \label{fig:egbach}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=0.7 \linewidth]{egscale.png}
+  \caption{Four levels of hierarchies in an artificial example using
+          scales: from the top to the bottom staff, we have different levels of
+          details in different levels of hierarchies. The notes in different
+          levels of hierarchies are specified based on the metrical positions of
+          the notes.}
+  \label{fig:egscale}
 \end{figure}
 
 
 %By examining what is the backbone of the piece and  , we can view music from different levels of importance and details.
 \paragraph{Hierarchies in fractal geometry}
-Fractals have intrinsic
-hierarchical structures and fractal geometry is an established area of
-mathematics. The
-concept of fractal dimension has been devised to measure the amount of details
+
+One tool that could be used to study the hierarchical structure in music is
+fractal theory. Fractal geometry is an established area of
+mathematics that studies self-similar patterns on different levels of details. The
+concept of fractal dimension has been devised to measure the change of contents
 across different levels of hierarchies. In the one-dimensional case,
 the fractal dimensions takes into account of the line segment lengths at
-different levels of details, and intuitively, it measures the roughness of
-contours. Empirically, the fractal dimension can be measured given any contour
-using the box-counting method. For example, the coastline of the United
-Kingdom is measured to be 1.25 and the 1.22 for Ireland. The fractal theory has
-been widely used in time
-series analysis, dynamical system, and where there is self-similarity in
-general \cite{accardo1997use, higuchi1988approach}.
+different scales. For example, as shown in Figure \ref{fig:bc}, empirically, the
+fractal dimension can be measured given any contour. Therefore, given a segment
+of music, one can also use
+the box-counting method to
+calculate a parallel of the fractal dimension by looking into the different levels
+of details exhibited on different levels of hierarchies in music.
 
-\paragraph{Using fractal dimensions to characterising hierarchical musical structures}
-In this paper, we propose to use fractal theory to examine the hierarchical
-structures in music. We will inspect different levels of details in musical
-materials using the fractal dimensions which measure the roughness of melodic contours. 
+\begin{figure}
+  \includegraphics[width=0.7 \linewidth]{Great_Britain_Box.png}
+  \caption{Box-counting method on the coastline of the Great Britain is measured to be 1.25}
+  \label{fig:bc}
+\end{figure}
 
-\paragraph{Music Information Retrieval (MIR)}
+\paragraph{The fractal parallel in music}
+In this paper, inspired by the parallel between the box-counting scaling and the
+hierarchical structures in music, we propose to compute a fractal-inspired
+musical feature. Intuitively, the feature is computed based on the lengths of the line segments in-between the
+notes. Then the feature quantifies how the lengths change with zooming-in and -out of different levels of
+hierarchies in music. By construct, this feature measures and characterises
+different amounts of details in musical materials. By using synthesised data and
+real-world music data, we analytically demonstrate the properties of this
+feature and computationally show that this feature can be useful in corpus classification and
+pattern discovery. 
+
+\paragraph{Previous work}
+\subparagraph{Music Information Retrieval (MIR)}
 In the research area of MIR, many
 useful tools and investigation have been made to understand the hierachical
 structures of music. For example, there are music musical analysis assistant \cite{hamanaka2009interactive, hamanaka2005atta}, compositional tools
 \cite{hamanaka2004automatic, hamanaka2005automatic}, evaluation investigation \cite{mcfee2017evaluating, mcfee2015hierarchical} based on a variety of hierachical
-structure analysis in music. To the best of our knowledge, there has not been an
-attempt on using fractal dimensions for the analysis hierarchical structures of
-music.  
+structure analysis in music.
+\subparagraph{Fractal methods}
+Self-similarity concepts, and fractals in particular have inspired many research
+in audio and music analysis \cite{bigerelle2000fractal,hsu1990fractal,hsu1991self} and composition \cite{sukumaran2009generation,leach1995nature}. In other domain of applications, the fractal theory has
+been widely used in investigating time series, dynamical systems, and
+non-linearity \cite{accardo1997use, higuchi1988approach}.
+
+To the best of our
+knowledge, there has not been an
+attempt on computing the fractal dimensions equivalent in symbolic music by
+drawing the parallel between the box-counting method and hierarchical structures
+in music. 
+
+
+% \paragraph{Music Information Retrieval (MIR)}
+% In the research area of MIR, many
+% useful tools and investigation have been made to understand the hierachical
+% structures of music. For example, there are music musical analysis assistant \cite{hamanaka2009interactive, hamanaka2005atta}, compositional tools
+% \cite{hamanaka2004automatic, hamanaka2005automatic}, evaluation investigation \cite{mcfee2017evaluating, mcfee2015hierarchical} based on a variety of hierachical
+% structure analysis in music. To the best of our knowledge, there has not been an
+% attempt on using fractal dimensions for the analysis hierarchical structures of
+% music.  
 
 %There have been also much research on how one could understand, represent and extract the
 %hierachical structures automatically. A balance and feedback loop between the theories and the
@@ -63,7 +137,6 @@ music.
 % notes, one can assign metrical weights/importance to the notes. The notes at more important metrical
 % positions form the anchors in the hierachical structure. 
 
-
 % \paragraph{musical features}
 % musical features refers to summarising music events numerically. there are
 % available toolbox to calculate features, such as jmir \cite{mckay2018jsymbolic}, mirtoolbox \cite{lartillot2007matlab}, the fantastic
@@ -74,11 +147,11 @@ music.
 % been employ in much research \cite{ren2018feature, ren153analysis,
 %   bigo2018relevance}.
 
-\paragraph{Applications}
-Such fractal dimensions can be used as a musical feature or musical similarity in many MIR
-tasks. For example, for musical pattern discovery, we can use the fractal
-dimensions to discover repeated pattern with similar degrees of roughness in the
-melodic line. 
+% \paragraph{Applications}
+% Such fractal dimensions can be used as a musical feature or musical similarity in many MIR
+% tasks. For example, for musical pattern discovery, we can use the fractal
+% dimensions to discover repeated pattern with similar degrees of roughness in the
+% melodic line. 
 
 % Musical pattern discovery is an active subarea of MIR research. It faces many
 % challenges \cite{janssen2013finding}. A music feature can characterise one certain aspect of repetition of an excerpt and therefore can be
@@ -87,12 +160,11 @@ melodic line.
 \paragraph{Contributions}
 \begin{itemize}
 \item  Based on fractal geometry and the hierachical structures in music, we propose a
-new feature that measures the roughness of melodic contours in symbolic music.
-\item  Using the proposed feature, we present a toolset for musical analysis and
+new feature that measures the amount of details in symbolic music.
+\item  Using the proposed feature, we present a library for musical analysis and
   pattern discovery.
 \item  We showcase the effectiveness of our system on various
 corpora and comparing the proposed feature with other existing features of music. 
-
 \end{itemize}
 
 \section{The similarity dimension}
