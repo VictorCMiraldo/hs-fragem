@@ -8,12 +8,19 @@
 
 \paragraph{Hierarchical structures in music}
 Music is known to have rich hierarchical structures, ranging from global forms to
-local phrases, from harmonic progressions to melodic patterns. By
-creating a separation of the principal and the secondary elements, hierarchical
+local phrases, from harmonic progressions to melodic patterns. The hierarchical
 structures allow us to examine music at different levels of details and time
-scales. There have been many musical theories on this topic, such as the
+scales. For example, as shown in Figure \ref{fig:eg}, on the right we have  There have been many musical theories on this topic, such as the
 General Theory of Tonal Music (GTTM) \cite{lerdahl1985generative} and the Schenkerian theory of melodic reduction
 \cite{forte1959schenker}.
+
+\begin{figure}
+  \includegraphics[width=0.7\linewidth]{eg.png}
+  \caption{Reduction and hierarchical structure in Bach's Preludium in C major
+    (BWV 846a) \cite{wiki:bach} }
+  \label{fig:eg}
+\end{figure}
+
 
 %By examining what is the backbone of the piece and  , we can view music from different levels of importance and details.
 \paragraph{Hierarchies in fractal geometry}
