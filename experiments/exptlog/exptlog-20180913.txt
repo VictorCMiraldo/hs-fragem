@@ -1,0 +1,508 @@
+
+➜  experiments git:(irisdev) ✗ bash folderloop.sh
+g=8
+100.mid
+10.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+11.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+12.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+13.mid
+14.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+15.mid
+16.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+17.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+18.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+19.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+1.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+20.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+21.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+22.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+23.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+24.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+25.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+26.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+27.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+28.mid
+29.mid
+2.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+30.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+31.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+32.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+33.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+34.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+35.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+36.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+37.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+38.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+39.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+3.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+40.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+41.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+42.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+43.mid
+44.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+45.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+46.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+47.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+48.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+49.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+4.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+50.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+51.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+52.mid
+53.mid
+54.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+55.mid
+56.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+57.mid
+58.mid
+59.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+5.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+60.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+61.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+62.mid
+63.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+64.mid
+65.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+66.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+67.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+68.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+69.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+6.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+70.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+71.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+72.mid
+73.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+74.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+75.mid
+76.mid
+77.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+78.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+79.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+7.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+80.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+81.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+82.mid
+83.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+84.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+85.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+86.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+87.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+88.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+89.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+8.mid
+90.mid
+91.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+92.mid
+93.mid
+94.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+95.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+96.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+97.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+98.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+99.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+9.mid
+➜  experiments git:(irisdev) ✗ bash folderloop.sh
+g=4
+100.mid
+10.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+11.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+12.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+13.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+14.mid
+15.mid
+16.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+17.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+18.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+19.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+1.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+20.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+21.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+22.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+23.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+24.mid
+25.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+26.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+27.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+28.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+29.mid
+2.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+30.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+31.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+32.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+33.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+34.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+35.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+36.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+37.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+38.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+39.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+3.mid
+40.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+41.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+42.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+43.mid
+44.mid
+45.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+46.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+47.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+48.mid
+49.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+4.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+50.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+51.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+52.mid
+53.mid
+54.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+55.mid
+56.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+57.mid
+58.mid
+59.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+5.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+60.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+61.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+62.mid
+63.mid
+64.mid
+65.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+66.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+67.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+68.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+69.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+6.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+70.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+71.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+72.mid
+73.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+74.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+75.mid
+76.mid
+77.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+78.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+79.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+7.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+80.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+81.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+82.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+83.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+84.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+85.mid
+86.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+87.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+88.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+89.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+8.mid
+90.mid
+91.mid
+92.mid
+93.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+94.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+95.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+96.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+97.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+98.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+99.mid
+fragem: src/Fragem/Metrics/Base.hs:(37,5)-(38,17): Non-exhaustive patterns in function go
+
+9.mid

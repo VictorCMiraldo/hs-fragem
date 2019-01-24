@@ -1,0 +1,5 @@
+adding time signature: got it right this time! fragem happy, musescore happy and midi binaries make sense!
+learning 90 and 80 are notes on and off helped a lot
+
+one thing: had to add in one set of 90 80 from the simu header to stop fragem complain
+musescore looked good on both

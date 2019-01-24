@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{dim} \PYG{o+ow}{::} \PYG{k+kt}{Scaling} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Mass} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Mass} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Double}
+\PYG{n+nf}{dim} \PYG{n}{s} \PYG{n}{a0} \PYG{n}{a1} \PYG{o+ow}{=} \PYG{n}{logBase} \PYG{n}{s} \PYG{p}{(}\PYG{n}{a1} \PYG{o}{/} \PYG{n}{a0}\PYG{p}{)}
+\end{Verbatim}

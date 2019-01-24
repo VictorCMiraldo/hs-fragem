@@ -1,0 +1,25 @@
+\dfrac
+
+{\left(\left(-a_0^2b_1^2+\left(4a_0^2-2a_0a_1\right)b_0b_1+\left(-a_1^2+4a_0a_1-4a_0^2\right)b_0^2\right)cos\theta^2+b_0\left(-4a_0b_1^2+\left(4a_1+4a_0\right)b_0b_1-4a_1b_0^2\right)cos\theta+a_0^2b_1^2-2a_0a_1b_0b_1+a_1^2b_0^2\right)
+
+\ln
+
+	\left(\left|\sqrt{\frac{\left(\left(2\left(a_1-a_0\right)\left(b_1-b_0\right)cos\theta+\left(b_1-b_0\right)^2+\left(a_1-a_0\right)^2\right)x+\left(a_0b_1-a_1b_0\right)cos\theta+b_0b_1-b_0^2+a_0a_1-a_0^2\right)^2}{\left(-a_0^2b_1^2+\left(4a_0^2-2a_0a_1\right)b_0b_1+\left(-a_1^2+4a_0a_1-4a_0^2\right)b_0^2\right)cos\theta^2+b_0\left(-4a_0b_1^2+\left(4a_1+4a_0\right)b_0b_1-4a_1b_0^2\right)cos\theta+a_0^2b_1^2-2a_0a_1b_0b_1+a_1^2b_0^2}+1}
+
+	+
+
+	\frac{\left(2\left(a_1-a_0\right)\left(b_1-b_0\right)cos\theta+\left(b_1-b_0\right)^2+\left(a_1-a_0\right)^2\right)x+\left(a_0b_1-a_1b_0\right)cos\theta+b_0b_1-b_0^2+a_0a_1-a_0^2}{\sqrt{\left(-a_0^2b_1^2+\left(4a_0^2-2a_0a_1\right)b_0b_1+\left(-a_1^2+4a_0a_1-4a_0^2\right)b_0^2\right)cos\theta^2+b_0\left(-4a_0b_1^2+\left(4a_1+4a_0\right)b_0b_1-4a_1b_0^2\right)cos\theta+a_0^2b_1^2-2a_0a_1b_0b_1+a_1^2b_0^2}}\right|\right)}
+
+{2\left(2\left(a_1-a_0\right)\left(b_1-b_0\right)cos\theta+\left(b_1-b_0\right)^2+\left(a_1-a_0\right)^2\right)\sqrt{\left(\left(2a_1-2a_0\right)b_1+\left(2a_0-2a_1\right)b_0\right)cos\theta+b_1^2-2b_0b_1+b_0^2+a_1^2-2a_0a_1+a_0^2}} 
+
++
+
+\dfrac{\sqrt{\left(-a_0^2b_1^2+\left(4a_0^2-2a_0a_1\right)b_0b_1+\left(-a_1^2+4a_0a_1-4a_0^2\right)b_0^2\right)cos\theta^2+b_0\left(-4a_0b_1^2+\left(4a_1+4a_0\right)b_0b_1-4a_1b_0^2\right)cos\theta+a_0^2b_1^2-2a_0a_1b_0b_1+a_1^2b_0^2}\left(\left(2\left(a_1-a_0\right)\left(b_1-b_0\right)cos\theta+\left(b_1-b_0\right)^2+\left(a_1-a_0\right)^2\right)x+\left(a_0b_1-a_1b_0\right)cos\theta+b_0b_1-b_0^2+a_0a_1-a_0^2\right)
+
+\sqrt{
+
+\frac{\left(\left(2\left(a_1-a_0\right)\left(b_1-b_0\right)cos\theta+\left(b_1-b_0\right)^2+\left(a_1-a_0\right)^2\right)x+\left(a_0b_1-a_1b_0\right)cos\theta+b_0b_1-b_0^2+a_0a_1-a_0^2\right)^2}
+
+{\left(-a_0^2b_1^2+\left(4a_0^2-2a_0a_1\right)b_0b_1+\left(-a_1^2+4a_0a_1-4a_0^2\right)b_0^2\right)cos\theta^2+b_0\left(-4a_0b_1^2+\left(4a_1+4a_0\right)b_0b_1-4a_1b_0^2\right)cos\theta+a_0^2b_1^2-2a_0a_1b_0b_1+a_1^2b_0^2}+1}}
+
+{2\left(2\left(a_1-a_0\right)\left(b_1-b_0\right)cos\theta+\left(b_1-b_0\right)^2+\left(a_1-a_0\right)^2\right)\sqrt{\left(\left(2a_1-2a_0\right)b_1+\left(2a_0-2a_1\right)b_0\right)cos\theta+b_1^2-2b_0b_1+b_0^2+a_1^2-2a_0a_1+a_0^2}}

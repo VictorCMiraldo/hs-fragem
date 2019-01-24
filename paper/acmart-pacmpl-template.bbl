@@ -1,0 +1,177 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{12}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{Accardo, Affinito, Carrozzi, and
+  Bouquet}{Accardo et~al\mbox{.}}{1997}]%
+        {accardo1997use}
+\bibfield{author}{\bibinfo{person}{Agostino Accardo}, \bibinfo{person}{M
+  Affinito}, \bibinfo{person}{M Carrozzi}, {and} \bibinfo{person}{F Bouquet}.}
+  \bibinfo{year}{1997}\natexlab{}.
+\newblock \showarticletitle{Use of the fractal dimension for the analysis of
+  electroencephalographic time series}.
+\newblock \bibinfo{journal}{\emph{Biological cybernetics}}
+  \bibinfo{volume}{77}, \bibinfo{number}{5} (\bibinfo{year}{1997}),
+  \bibinfo{pages}{339--350}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Forte}{Forte}{1959}]%
+        {forte1959schenker}
+\bibfield{author}{\bibinfo{person}{Allen Forte}.}
+  \bibinfo{year}{1959}\natexlab{}.
+\newblock \showarticletitle{Schenker's conception of musical structure}.
+\newblock \bibinfo{journal}{\emph{Journal of Music Theory}}
+  \bibinfo{volume}{3}, \bibinfo{number}{1} (\bibinfo{year}{1959}),
+  \bibinfo{pages}{1--30}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Hamanaka, Hirata, and Tojo}{Hamanaka
+  et~al\mbox{.}}{2004}]%
+        {hamanaka2004automatic}
+\bibfield{author}{\bibinfo{person}{Masatoshi Hamanaka}, \bibinfo{person}{Keiji
+  Hirata}, {and} \bibinfo{person}{Satoshi Tojo}.}
+  \bibinfo{year}{2004}\natexlab{}.
+\newblock \showarticletitle{Automatic Generation of Grouping Structure based on
+  the GTTM.}. In \bibinfo{booktitle}{\emph{ICMC}}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Hamanaka, Hirata, and Tojo}{Hamanaka
+  et~al\mbox{.}}{2005a}]%
+        {hamanaka2005atta}
+\bibfield{author}{\bibinfo{person}{Masatoshi Hamanaka}, \bibinfo{person}{Keiji
+  Hirata}, {and} \bibinfo{person}{Satoshi Tojo}.}
+  \bibinfo{year}{2005}\natexlab{a}.
+\newblock \showarticletitle{ATTA: Automatic Time-Span Tree Analyzer Based on
+  Extended GTTM.}. In \bibinfo{booktitle}{\emph{ISMIR}},
+  Vol.~\bibinfo{volume}{5}. \bibinfo{pages}{358--365}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Hamanaka, Hirata, and Tojo}{Hamanaka
+  et~al\mbox{.}}{2005b}]%
+        {hamanaka2005automatic}
+\bibfield{author}{\bibinfo{person}{Masatoshi Hamanaka}, \bibinfo{person}{Keiji
+  Hirata}, {and} \bibinfo{person}{Satoshi Tojo}.}
+  \bibinfo{year}{2005}\natexlab{b}.
+\newblock \showarticletitle{Automatic Generation of Metrical Structure Based on
+  GTTM.}. In \bibinfo{booktitle}{\emph{ICMC}}. Citeseer.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Hamanaka and Tojo}{Hamanaka and Tojo}{2009}]%
+        {hamanaka2009interactive}
+\bibfield{author}{\bibinfo{person}{Masatoshi Hamanaka} {and}
+  \bibinfo{person}{Satoshi Tojo}.} \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{Interactive Gttm Analyzer.}. In
+  \bibinfo{booktitle}{\emph{ISMIR}}. \bibinfo{pages}{291--296}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Higuchi}{Higuchi}{1988}]%
+        {higuchi1988approach}
+\bibfield{author}{\bibinfo{person}{Tomoyuki Higuchi}.}
+  \bibinfo{year}{1988}\natexlab{}.
+\newblock \showarticletitle{Approach to an irregular time series on the basis
+  of the fractal theory}.
+\newblock \bibinfo{journal}{\emph{Physica D: Nonlinear Phenomena}}
+  \bibinfo{volume}{31}, \bibinfo{number}{2} (\bibinfo{year}{1988}),
+  \bibinfo{pages}{277--283}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Lerdahl and Jackendoff}{Lerdahl and
+  Jackendoff}{1985}]%
+        {lerdahl1985generative}
+\bibfield{author}{\bibinfo{person}{Fred Lerdahl} {and} \bibinfo{person}{Ray~S
+  Jackendoff}.} \bibinfo{year}{1985}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{A generative theory of tonal music}}.
+\newblock \bibinfo{publisher}{MIT press}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{McFee, Nieto, and Bello}{McFee
+  et~al\mbox{.}}{2015}]%
+        {mcfee2015hierarchical}
+\bibfield{author}{\bibinfo{person}{Brian McFee}, \bibinfo{person}{Oriol Nieto},
+  {and} \bibinfo{person}{Juan~Pablo Bello}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{Hierarchical Evaluation of Segment Boundary
+  Detection.}. In \bibinfo{booktitle}{\emph{ISMIR}}. \bibinfo{pages}{406--412}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{McFee, Nieto, Farbood, and Bello}{McFee
+  et~al\mbox{.}}{2017}]%
+        {mcfee2017evaluating}
+\bibfield{author}{\bibinfo{person}{Brian McFee}, \bibinfo{person}{Oriol Nieto},
+  \bibinfo{person}{Morwaread~M Farbood}, {and} \bibinfo{person}{Juan~Pablo
+  Bello}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Evaluating Hierarchical Structure in Music
+  Annotations}.
+\newblock \bibinfo{journal}{\emph{Frontiers in psychology}}
+  \bibinfo{volume}{8} (\bibinfo{year}{2017}), \bibinfo{pages}{1337}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Sarkar and Chaudhuri}{Sarkar and
+  Chaudhuri}{1994}]%
+        {sarkar1994efficient}
+\bibfield{author}{\bibinfo{person}{Nirupam Sarkar} {and} \bibinfo{person}{BB
+  Chaudhuri}.} \bibinfo{year}{1994}\natexlab{}.
+\newblock \showarticletitle{An efficient differential box-counting approach to
+  compute fractal dimension of image}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on systems, man, and
+  cybernetics}} \bibinfo{volume}{24}, \bibinfo{number}{1}
+  (\bibinfo{year}{1994}), \bibinfo{pages}{115--120}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Thorpe}{Thorpe}{2016}]%
+        {thorpe2016perception}
+\bibfield{author}{\bibinfo{person}{Michael~JA Thorpe}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \emph{\bibinfo{title}{The perception of transformed auditory and
+  visual pattern structure: an exploration of supramodal pattern space}}.
+\newblock \bibinfo{thesistype}{Ph.D. Dissertation}. \bibinfo{school}{University
+  of Roehampton}.
+\newblock
+
+
+\end{thebibliography}

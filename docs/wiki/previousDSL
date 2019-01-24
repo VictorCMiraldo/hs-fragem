@@ -1,0 +1,13 @@
+
+# Functions
+Parse :: Midi -> [TimeSignature, [(pitch, ticks)]]
+
+~~Zoom :: Midi -> Config -> MusicTree
+(Encode different levels of granularity in a tree)
+(Laziness can be used here)~~
+
+CalcMass :: Tree -> Int
+
+CalcFractalDimension :: MusicTree -> CalcMass -> Float
+
+GetPatternCandidates :: Midi -> [PatternCandidates]

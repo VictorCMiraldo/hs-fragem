@@ -1,0 +1,4 @@
+property:
+choose from a1 a2 a3
+
+prop_fragem_same genformula pat = genformula[0] == fragem genformula[0]

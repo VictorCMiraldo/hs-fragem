@@ -1,0 +1,49 @@
+Try inject time signature into midi files
+From the simulated monophonic files, it worked but lots of weird stuff happened:
+1) The rendering was very strange. Lots of notes lumped together
+2) Trying deleting 4 at a time, ran into unclosed notes and weird time signature and rendering of the original piece. 
+
+Try different thresholds:
+➜  hs-fragem git:(master) ✗ stack exec fragem -- --s --group=2 --threshold=0.001 --export="testcmaj" "cmajor1.mid"
+~0.305271601061 0
+~0.215768581959 1 4 5 6 8 13 14 16 18 19 20 21 22 25 27 30 31 32 33 35 36 37 42 44 45 46 47 48 49 50 51 52 53 54 59 66 67 68 69 70 73 75 76 77 78 80 86 90 91
+~0.217588015284 2 3 17 28 29 34 38 41 43 55 56 58 65 74 79
+~0.214589875533 7 10 15 23 24 60 61 62 63 83 87 88 89 92
+~0.218550130455 9 11 72
+~0.220819789856 12 26 40 57 64 81 82
+~0.222072005704 39
+~0.219760427853 71 84 85
+~0.000084144687 93
+
+And the extracted patterns are not explainable again! 
+
+Try inject something obvious? 
+
+
+---------------
+not so successful?
+
+➜  hs-fragem git:(master) ✗ stack exec fragem -- --s --group=2 --threshold=0.01 --export="testcmaj" "cmajor1.mid"
+~0.305271601061 0
+~0.216559578395 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92
+~0.000084144687 93
+
+
+➜  hs-fragem git:(master) ✗ stack exec fragem -- --s --group=2 --threshold=0 --export="testcmaj" "cmajor1.mid"
+fragem: step2TimeSigFor: No time signature found
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Syntax/FromMidi.hs:163:11 in hs-fragem-0.0.0-Ca0wfZZU6YpE49o7WvCDHP:Fragem.Syntax.FromMidi
+➜  hs-fragem git:(master) ✗ stack exec fragem -- --s --group=2 --threshold=0 --export="testcmaj" "cmajor1.mid"
+fragem: step2TimeSigFor: No time signature found
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Syntax/FromMidi.hs:163:11 in hs-fragem-0.0.0-Ca0wfZZU6YpE49o7WvCDHP:Fragem.Syntax.FromMidi
+➜  hs-fragem git:(master) ✗ stack exec fragem -- --s --group=2 --threshold=0 --export="testcmaj" "cmajor1.mid"
+fragem: step2TimeSigFor: No time signature found
+CallStack (from HasCallStack):
+  error, called at src/Fragem/Syntax/FromMidi.hs:163:11 in hs-fragem-0.0.0-Ca0wfZZU6YpE49o7WvCDHP:Fragem.Syntax.FromMidi
+➜  hs-fragem git:(master) ✗ stack exec fragem -- --s --group=2 --threshold=0 --export="testcmaj" "cmajor1.mid"
+~0.305271601061 0
+~0.215877967846 1
+~0.217395298474 2
+~0.217653023388 3
+~0.216264455979 4

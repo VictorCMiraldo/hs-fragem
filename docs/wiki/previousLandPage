@@ -1,0 +1,68 @@
+Welcome to the hs-fragem wiki!
+
+Fragem provides a domain specific language (DSL) to analyse and calculate the fractal dimension of music!
+
+
+# Quick Start
+
+Installation: stack build
+
+How to import the files: EXAMPLE
+(Input format： Quantised midi files)
+
+How to get the reduction analysis: EXAMPLE
+
+How to get the fractal dimension: EXAMPLE
+
+How to get prominent patterns: EXAMPLE
+
+# Music Representation
+Vanilla: [(TimeSignature, [[Notes]])] 
+Comprehensive: [([Expression], [[Notes]])]
+
+Music piece => Voice => Sections => Measures = list of Notes
+
+# Reduction analysis (zooming in and out)
+* Based on Local Metric
+* Based on Beat Metric
+* Based on Accent/Dynamics Data
+* Based on Transformation
+* Based on Annotation
+
+# Fractal Dimension
+Intuition: Fractal dimension measures the roughness of surfaces. As is often the case, by eyeballing sheet music, we see different degrees of roughness from different melodic lines. This roughness can be measured via how much details(mass) we "see" when we zoom in. To align with the visual intuition from sheet music representation, we use the Euclidean distance between notes as a measurement of mass.
+ 
+Summary: To calculate the fractal dimension, we 
+Zoom-in -> Calculate Mass -> Ratio between different levels of zoom-in
+
+For mathematical formulations, please see the wiki page: [Fractal](fractal)
+
+# DSL
+This library essentially provides a DSL for analysing music. 
+
+For more details, please see the wiki page:
+[Types and Functions and Examples](DSL)
+
+# Musical Patterns 
+Using the fractal framework, identically repeated patterns would have the same fractal dimension. However, it's a necessary condition but not a sufficient one.
+
+Repetition at a coarser (higher) level would give the same mass at the level. 
+
+A similar way of detailing (decorating) the music would give a similar fractal dimension. 
+
+# Paper and Results
+
+# Reference
+Science and Culture: Hunting fractals in the music of J. S. Bach (Stephen Ornes, 2014)
+
+Chaos, Self-Similarity, Musical Phrase and Form (Gabriel Pareyon, 2014)
+
+The Applications of Fractal Geometry and Self-Similarity to Art Music (Ilse Steynberg, 2014)
+
+On Musical Self-Similarity (Gabriel Pareyon, 2011)
+
+Fractal Music (Dmitry Kormann, 2010)
+
+Structural Scaling in Bach's Cello Suite No. 3 (HJ BROTHERS, ‎2007)
+
+The Fractal Geometry of Nature (Mandelbrot Benoit, 1982) 
