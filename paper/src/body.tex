@@ -1,5 +1,155 @@
+\newcommand{\victor}[1]{\textit{\color{blue} #1}}
+
 \section{Introduction}
 \label{sec:intro}
+
+  Musical patterns are usually easily spotted by a trained performer,
+even when they show up under different \emph{variations}.  These
+variations include transpositions, inversions, time dilations, between
+others. Amongst the favorite examples where patterns show up under a
+plethora of variations are the fugues by J.S. Bach. Take
+\Cref{fig:bwv861-start}, we see two patterns showing up under
+inversions and transpositions already.
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{src/img/bwv861-start-section-patterns.pdf}
+  \caption{Two patterns and their variations in the beginning of BWV 861}
+  \label{fig:egbach}
+\end{figure}
+
+  Writting a computer program that is supposed to identify these
+patterns modulo their variations is no easy feat. The naive approach
+would be to select a candidate pattern, then go over the whole
+piece comparing interval per interval. This would have to be computed
+for every possible pattern candidate. The exponential nature of this
+naive approach makes it unrealistic and will not get us very far.
+
+  In this paper we propose an alternative method of mining a musical
+piece for its patterns under certain variations. Instead of comparing 
+the possible patterns of a musical piece for propositional equality, 
+we compute a \emph{measure} that identifies the \emph{candidate pattern}.
+This reduces the problem to comparing measures and deciding if they are
+close enough to be considered a pattern. We use fractal dimension~\cite{fractaldimension}
+as our measure. \victor{we need a better phrase or two about related
+work, in the lines of: Although Fractal Geometry and Music goes a long way\cite{bigerelle2000fractal,hsu1990fractal,hsu1991self},
+we are applying it to a novel part in music analisys.}
+
+%% \textbf{Previous work} In the research area of MIR, many useful tools
+%% and investigation have been made to understand the hierachical
+%% structures of music.  For example, there are music musical analysis
+%% assistant \cite{hamanaka2009interactive, hamanaka2005atta},
+%% compositional tools \cite{hamanaka2004automatic,
+%% hamanaka2005automatic}, evaluation investigation
+%% \cite{mcfee2017evaluating, mcfee2015hierarchical} based on a variety
+%% of hierachical structure analysis in music.  Self-similarity concepts,
+%% and fractals in particular have inspired many research in audio and
+%% music analysis \cite{bigerelle2000fractal,hsu1990fractal,hsu1991self}
+%% and composition \cite{sukumaran2009generation,leach1995nature}.  In
+%% other domain of applications, the fractal theory has been widely used
+%% in investigating time series, dynamical systems, and non-linearity
+%% \cite{accardo1997use, higuchi1988approach}.  To the best of our
+%% knowledge, there has not been an attempt on computing the fractal
+%% dimensions equivalent in symbolic music by drawing the parallel
+%% between the box-counting method and hierarchical structures in music.
+
+
+  Our contributions are summarized below.
+
+\begin{itemize}
+  \item We provide a novel adaptation of fractal geometry for identifying patterns
+        in a musical piece under a number of variations.
+  \item We have implemented our analisys as a library and made it publicly available.
+  \item We have empirically shown the effectiveness of our method for musical pattern
+        recognition by running our tool in a number of musical pieces.
+\end{itemize}
+
+\section{The Fractal Geometry of Symbolic Music}
+\label{sec:fractal-geom}
+
+  On this section we review the necessary parts of fractal geometry
+and explain how to apply them to symbolic music notation in order to 
+obtain an identifier for a pattern that remains the same under variations
+such as transpositions, inversions, time dilations, etc.  
+
+  The box-count (BC) dimension~\cite{find-a-ref} of a shape is a
+measure of the \emph{roughness} of that shape. It coincides with the
+Euclidean dimension for the familiar shapes but it is given by a Real number. 
+Consequently, it is capable of capturing differences between objects with
+the same eucliden dimension, for example.
+
+\victor{dimension is invariant to a bunch of transformations, hence,
+it is great for our use case}
+
+  We can approximate the box-count (BC) dimension~\cite{findref} of a
+shape through a process known as box-counting. The idea is simple. We
+lay a shape in a grid and count how many squares it touches, call it
+$N$, then scale the shape by a factor $s$ and count how many quares it
+touches again, call it $N_s$. The box-counting dimension $d$ of the
+given shape is defined by the value that $\log_s(\frac{N_s}{N})$
+converges to, for $s \rightarrow \infty$.  In \Cref{fig:egboxcount} we show this
+technique applied to a circle and the Sierpinski Triangle. On the left
+we see a small circle, touching 186 boxes, and a circle double the size of the first, touching 714.
+If we apply the BC dimension formule to that data, we obtain:
+\[
+\begin{array}{l l l l}
+  d_{\circ}    &= log_2{\frac{714}{186}} &= 1.94 &\approx 2 \\[.5em]
+  d_{\tiny \triangle} &= log_2{\frac{363}{122}} &= 1.57 &\approx 1.5849 \\
+\end{array}
+\]
+
+  We see that the dimension our data gives is just
+\emph{approximately} the correct value. It is worth noting that this
+values converge very slowly.  \victor{I'm not very attached to the plot \Cref{fig:egplots},
+maybe use it just in case we need to fill in space?} In \Cref{fig:egplots} we see the data we
+gathered through box counting both the circle and the Sierpinski
+triangle plotted against the curve of their known BC dimension.
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{src/img/box-counting-example-alt.pdf}
+  \caption{Box counting applied to a circle and the Sierpinsky Triangle. The numbers
+indicate the number of boxes touched by the object before and after scaling by a factor of 2.}
+  \label{fig:egboxcount}
+\end{figure}
+
+\begin{figure}
+\begin{tikzpicture}
+\begin{axis}[
+  legend pos=north west
+]
+\addplot [mark=*,blue,only marks,opacity=0.5] table {
+0  0
+1  186
+2  714
+};
+\addlegendentry{box-count Circle}
+\addplot [mark=*,red,only marks,opacity=0.5] table {
+0 0
+1 122
+2 363
+};
+\addlegendentry{box-count Sierp.}
+\addplot [no marks,color=black!40!blue,domain=0:3] expression {
+  (814 / 4) * x ^ 2
+};
+\addlegendentry{$f(x) = c\times x^{2\textcolor{white}{.0000}}$}
+\addplot [no marks,color=black!40!red,domain=0:3] expression {
+  (412 / 2^1.5) * x ^ 1.5849
+};
+\addlegendentry{$f(x) = c\times x^{1.5849}$}
+\end{axis}
+\end{tikzpicture}
+\caption{Plot of the data obtained through box counting (\Cref{fig:egboxcount})
+versus the known dimensions of the objects.}
+\label{fig:egplots}
+\end{figure}
+
+\subsection{Scalling in Music}
+
+\subsection{Box-counting dimension of Musical Patterns}
+
+
+\victor{I'm here}
+
 
 \textbf{Storyline: hierarchical structure -> fractal dimension -> feature -> pattern discovery -> contribution }
 
@@ -15,14 +165,6 @@ The concept of fractal dimension has been devised to measure the change of conte
 In the one-dimensional case, the fractal dimensions takes into account of the line segment lengths at different scales.
 % For example, as shown in Figure \ref{fig:bc}, empirically, the fractal dimension can be measured given any contour.
 Therefore, given a segment of music, one can also use the box-counting method to calculate a parallel of the fractal dimension by looking into the different levels of details exhibited on different levels of hierarchies in music.
-
-\textbf{Previous work}
-In the research area of MIR, many useful tools and investigation have been made to understand the hierachical structures of music.
-For example, there are music musical analysis assistant \cite{hamanaka2009interactive, hamanaka2005atta}, compositional tools \cite{hamanaka2004automatic, hamanaka2005automatic}, evaluation investigation \cite{mcfee2017evaluating, mcfee2015hierarchical} based on a variety of hierachical structure analysis in music.
-Self-similarity concepts, and fractals in particular have inspired many research in audio and music analysis \cite{bigerelle2000fractal,hsu1990fractal,hsu1991self} and composition \cite{sukumaran2009generation,leach1995nature}.
-In other domain of applications, the fractal theory has been widely used in investigating time series, dynamical systems, and non-linearity \cite{accardo1997use, higuchi1988approach}.
-To the best of our knowledge, there has not been an attempt on computing the fractal dimensions equivalent in symbolic music by drawing the parallel between the box-counting method and hierarchical structures in music. 
-
 \begin{figure}
   \includegraphics[width=\linewidth]{src/img/eg.png}
   \caption{Two levels of hierarchies in Bach's Preludium in C major \cite{wiki:bach}: the original piece and the underlying chords.
