@@ -1,4 +1,4 @@
-\newcommand{\victor}[1]{\textit{\color{blue} #1}}
+\newcommand{\victor}[1]{{\color{blue}\textbf{[victor:}\textit{#1}\textbf{]}}}
 
 \section{Introduction}
 \label{sec:intro}
@@ -67,9 +67,9 @@ we are applying it to a novel part in music analisys.}
 \label{sec:fractal-geom}
 
   On this section we review the necessary parts of fractal geometry
-and explain how to apply them to symbolic music notation in order to 
-obtain an identifier for a pattern that remains the same under variations
-such as transpositions, inversions, time dilations, etc.  
+and explain how to apply it to symbolic music notation. This enables
+us to identify a pattern with a numer that is constant under
+variations such as transpositions, inversions, time dilations, etc.
 
   The box-count (BC) dimension~\cite{find-a-ref} of a shape is a
 measure of the \emph{roughness} of that shape. It coincides with the
@@ -80,30 +80,6 @@ the same eucliden dimension, for example.
 \victor{dimension is invariant to a bunch of transformations, hence,
 it is great for our use case}
 
-  We can approximate the box-count (BC) dimension~\cite{findref} of a
-shape through a process known as box-counting. The idea is simple. We
-lay a shape in a grid and count how many squares it touches, call it
-$N$, then scale the shape by a factor $s$ and count how many quares it
-touches again, call it $N_s$. The box-counting dimension $d$ of the
-given shape is defined by the value that $\log_s(\frac{N_s}{N})$
-converges to, for $s \rightarrow \infty$.  In \Cref{fig:egboxcount} we show this
-technique applied to a circle and the Sierpinski Triangle. On the left
-we see a small circle, touching 186 boxes, and a circle double the size of the first, touching 714.
-If we apply the BC dimension formule to that data, we obtain:
-\[
-\begin{array}{l l l l}
-  d_{\circ}    &= log_2{\frac{714}{186}} &= 1.94 &\approx 2 \\[.5em]
-  d_{\tiny \triangle} &= log_2{\frac{363}{122}} &= 1.57 &\approx 1.5849 \\
-\end{array}
-\]
-
-  We see that the dimension our data gives is just
-\emph{approximately} the correct value. It is worth noting that this
-values converge very slowly.  \victor{I'm not very attached to the plot \Cref{fig:egplots},
-maybe use it just in case we need to fill in space?} In \Cref{fig:egplots} we see the data we
-gathered through box counting both the circle and the Sierpinski
-triangle plotted against the curve of their known BC dimension.
-
 \begin{figure}
   \includegraphics[width=\linewidth]{src/img/box-counting-example-alt.pdf}
   \caption{Box counting applied to a circle and the Sierpinsky Triangle. The numbers
@@ -111,44 +87,128 @@ indicate the number of boxes touched by the object before and after scaling by a
   \label{fig:egboxcount}
 \end{figure}
 
+  We can approximate the box-count (BC) dimension~\cite{findref} of a
+shape through a process known as box-counting. The idea is simple. We
+lay a shape in a grid and count how many squares it touches, call it
+$N$, then scale the shape by a factor $s$ and count how many quares it
+touches again, call it $N_s$. The box-counting dimension $d$ of the
+given shape is defined by the value that $\log_s(\frac{N_s}{N})$
+converges to, for $s \rightarrow \infty$.  In \Cref{fig:egboxcount} we
+show this technique applied to a circle and the Sierpinski
+Triangle. On the left we see a small circle, touching 186 boxes, and a
+circle double the size of the first, touching 714.  The circle has a
+known dimension of 2. On the right we see the same for the Sierpinski
+Triangle, which has a known fractal dimension of $\log_2 3 \approx 1.585$.
+If we apply the BC dimension formula to the data in \Cref{fig:egboxcount} we obtain:
+\[
+\begin{array}{l l l l}
+  d_{\circ}    &= \log_2{\frac{714}{186}} &= 1.94 &\approx 2 \\[.5em]
+  d_{\tiny \triangle} &= \log_2{\frac{363}{122}} &= 1.57 &\approx 1.585 \\
+\end{array}
+\]
+
+  We see that the dimension our data gives is just
+\emph{approximately} the correct value. If we were to iterate this
+process and plot the number of boxes touched by the scaled version of
+our shapes, over the scale factor, we would see that the data for the
+circle fits almost perfectly fit the curve $f(x) = cx^2$, for $c$
+being a constant. The Sierpinski triangle would fit the curve $f(x) =
+cx^{1.585}$.  That is, for a given shape with BC dimension $d$, the
+number of boxes touched by the shape scaled by $s$ gets closer and
+closer to $cs^d$ as $s$ grows.
+
+  Note that if we rotate our Sierpinski Triangle, or translate it
+to another position in the plane, or even scale it, its BC dimension
+stays the same.
+
+\subsection{Scaling in Music} 
+In order to compute the BC dimension of
+a potential music pattern, we must first define what to we mean by scaling 
+in music. There are a variety of options for defining the meaning of
+the \emph{scale factor} in symbolic music. The simplest one 
+is to look at a section of music one note value at a time.
+This means that at a sixteenth-note scale factor, the
+line in \Cref{fig:egscalingmusic} has $xxx$ pixels, but
+at the eight-note scale factor, it only has $yyy$ pixels.
+
+\victor{finish this}
+
 \begin{figure}
-\begin{tikzpicture}
-\begin{axis}[
-  legend pos=north west
-]
-\addplot [mark=*,blue,only marks,opacity=0.5] table {
-0  0
-1  186
-2  714
-};
-\addlegendentry{box-count Circle}
-\addplot [mark=*,red,only marks,opacity=0.5] table {
-0 0
-1 122
-2 363
-};
-\addlegendentry{box-count Sierp.}
-\addplot [no marks,color=black!40!blue,domain=0:3] expression {
-  (814 / 4) * x ^ 2
-};
-\addlegendentry{$f(x) = c\times x^{2\textcolor{white}{.0000}}$}
-\addplot [no marks,color=black!40!red,domain=0:3] expression {
-  (412 / 2^1.5) * x ^ 1.5849
-};
-\addlegendentry{$f(x) = c\times x^{1.5849}$}
-\end{axis}
-\end{tikzpicture}
-\caption{Plot of the data obtained through box counting (\Cref{fig:egboxcount})
-versus the known dimensions of the objects.}
-\label{fig:egplots}
+  \includegraphics[width=\linewidth]{src/img/musical-scaling-example.pdf}
+  \caption{The ``box-count'' under different scalings for the first measure in BWV 1007.}
+  \label{fig:egscalingmusic}
 \end{figure}
 
-\subsection{Scalling in Music}
+\subsection{Box-Count dimension of symbolic music}
+\victor{write a bit about this}
 
-\subsection{Box-counting dimension of Musical Patterns}
+\section{Experiment}
+
+\victor{Describe the setup: wrote some haskell code,
+got some data from MIDI, mined for patterns using technique shown in
+\Cref{sec:fractal-geom}}
+
+\section{Results}
+
+\victor{What did we get out of running our tool from the midi dataset?}
+
+\subsection{Threats to Validity}
+
+\victor{We are not airtight. What did we not consider?}
+
+\section{Discussion and Conclusion}
+
+\subsection{Related and Future Work}
+
+\subsection{Conclusion}
 
 
-\victor{I'm here}
+
+  
+
+%% 
+%% It is worth noting that this
+%% values converges very slowly.  \victor{I'm not very attached to the plot \Cref{fig:egplots},
+%% maybe use it just in case we need to fill in space?} In \Cref{fig:egplots} we see the data we
+%% gathered through box counting both the circle and the Sierpinski
+%% triangle plotted against the curve of their known BC dimension.
+%% 
+%% 
+%% \begin{figure}
+%% \begin{tikzpicture}
+%% \begin{axis}[
+%%   legend pos=north west
+%% ]
+%% \addplot [mark=*,blue,only marks,opacity=0.5] table {
+%% 0  0
+%% 1  186
+%% 2  714
+%% };
+%% \addlegendentry{box-count Circle}
+%% \addplot [mark=*,red,only marks,opacity=0.5] table {
+%% 0 0
+%% 1 122
+%% 2 363
+%% };
+%% \addlegendentry{box-count Sierp.}
+%% \addplot [no marks,color=black!40!blue,domain=0:3] expression {
+%%   (814 / 4) * x ^ 2
+%% };
+%% \addlegendentry{$f(x) = c\times x^{2\textcolor{white}{.0000}}$}
+%% \addplot [no marks,color=black!40!red,domain=0:3] expression {
+%%   (412 / 2^1.5) * x ^ 1.5849
+%% };
+%% \addlegendentry{$f(x) = c\times x^{1.5849}$}
+%% \end{axis}
+%% \end{tikzpicture}
+%% \caption{Plot of the data obtained through box counting (\Cref{fig:egboxcount})
+%% versus the known dimensions of the objects.}
+%% \label{fig:egplots}
+%% \end{figure}
+
+
+
+\victor{Below is the previous content}
 
 
 \textbf{Storyline: hierarchical structure -> fractal dimension -> feature -> pattern discovery -> contribution }

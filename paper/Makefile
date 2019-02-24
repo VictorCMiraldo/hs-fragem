@@ -3,6 +3,7 @@ TGT=index
 LATEX=pdflatex -shell-escape -output-directory=dist
 
 default : src/index.tex src/body.tex src/references.bib
+	make -C src/img
 	@mkdir -p dist
 	export TEXMFHOME=".:$(TEXMFHOME)" && \
 	$(LATEX) src/$(TGT).tex 
