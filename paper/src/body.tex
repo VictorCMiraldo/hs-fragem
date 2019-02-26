@@ -1,4 +1,5 @@
 \newcommand{\victor}[1]{{\color{blue}\textbf{[victor:}\textit{#1}\textbf{]}}}
+\newcommand{\dimbc}{\mathrm{dim}^{\mathrm{BC}}}
 
 \section{Introduction}
 \label{sec:intro}
@@ -35,16 +36,33 @@ $\epsilon$.  A potential pattern consists simply in a group of
 notes. If we want to check whether a pattern of $n$ notes shows up but
 in half tempo, for example, we can compute the pattern identifier for
 all groups of contiguous $2n$ notes and compare the pattern
-identifiers.
+identifiers.  
 
-  A prime option for pattern identifier is to use 
-  In this paper we propose an alternative method of mining a musical
-piece for its patterns under certain variations. Instead of comparing 
-the possible patterns of a musical piece for propositional equality, 
-we compute a \emph{measure} that identifies the \emph{candidate pattern}.
-This reduces the problem to comparing measures and deciding if they are
-close enough to be considered a pattern. We use fractal dimension~\cite{fractaldimension}
-as our measure. \victor{we need a better phrase or two about related
+  Defining the pattern identifier as the Minkowski-Bouligand
+dimension~\cite{bouligand1928ensembles} is a prime option in our
+arsenal.  This is also known as the Box-Count (BC) dimension, and we
+shall denote it by $\dimbc$. There are two main reasons for choosing
+the Box-Count dimension for our identifier: (A) it is simple to
+approximate by computational means, and, (B) it approximates the
+fractal dimension of a shape.  These reasons make a good case
+together. We must be able to efficiently compute the pattern
+identifier and it must identify similar patterns with at most
+$\epsilon$ distance, where similar here means inversions,
+transpositions and time-dilations. Fractals are self-similar to
+rotated, translated or scaled out versions of themselves, and hence
+share a common dimension. Consequently, beind able to efficiently
+compute an approximation for this dimension is key.  
+
+
+\victor{ It is worth
+noting that usinc fractal dimensions might give false positives, for
+we need to perform some check after correlating the fractal dimensions
+of different candidates. Nevertheless, this process allows us to focus
+our computational resources and analyze only candidate occurences of
+patterns that are likely to be, in fact, the same pattern. }
+
+
+\victor{we need a better phrase or two about related
 work, in the lines of: Although Fractal Geometry and Music goes a long way\cite{bigerelle2000fractal,hsu1990fractal,hsu1991self},
 we are applying it to a novel part in music analisys.}
 
@@ -85,14 +103,23 @@ and explain how to apply it to symbolic music notation. This enables
 us to identify a pattern with a numer that is constant under
 variations such as transpositions, inversions, time dilations, etc.
 
-  The box-count (BC) dimension~\cite{find-a-ref} of a shape is a
-measure of the \emph{roughness} of that shape. It coincides with the
-Euclidean dimension for the familiar shapes but it is given by a Real number. 
-Consequently, it is capable of capturing differences between objects with
-the same eucliden dimension, for example.
+  The box-count (BC) dimension~\cite{bouligand1928ensembles} of a shape
+can be seen as a measure of the \emph{roughness} of that shape. It coincides with the
+Euclidean dimension for the familiar shapes but it might be non integer. For example,
+the BC-dimension of the Sierpinski Triangle (\Cref{fig:egboxcount}, right) is $\log_2 3 \approx 1.585$
 
-\victor{dimension is invariant to a bunch of transformations, hence,
-it is great for our use case}
+  We can calculate the box-count (BC) dimension of a shape through a
+process known as box-counting. The idea is simple. We lay a shape in a
+grid and count how many squares it touches, call it $N$, then scale
+the shape by a factor $s$ and count how many quares it touches again,
+call it $N_s$. The box-counting dimension $d$ of the given shape is
+defined by the value that $\log_s(\frac{N_s}{N})$ converges to, for
+growing values of $s$.  Since this limit might not exist, it is common
+to consider the upper and lower box-count dimensions.  For our
+purposes, we can safely ignore these complications. In fact, we will
+only approximate the BC-dimension of a shape by considering a discrete
+number of scalings. \victor{why can we do this? Well, Since false positives exist anyway,
+why care so much for extreeme precision?}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/img/box-counting-example-alt.pdf}
@@ -101,60 +128,88 @@ indicate the number of boxes touched by the object before and after scaling by a
   \label{fig:egboxcount}
 \end{figure}
 
-  We can approximate the box-count (BC) dimension~\cite{findref} of a
-shape through a process known as box-counting. The idea is simple. We
-lay a shape in a grid and count how many squares it touches, call it
-$N$, then scale the shape by a factor $s$ and count how many quares it
-touches again, call it $N_s$. The box-counting dimension $d$ of the
-given shape is defined by the value that $\log_s(\frac{N_s}{N})$
-converges to, for $s \rightarrow \infty$.  In \Cref{fig:egboxcount} we
-show this technique applied to a circle and the Sierpinski
-Triangle. On the left we see a small circle, touching 186 boxes, and a
-circle double the size of the first, touching 714.  The circle has a
-known dimension of 2. On the right we see the same for the Sierpinski
-Triangle, which has a known fractal dimension of $\log_2 3 \approx 1.585$.
-If we apply the BC dimension formula to the data in \Cref{fig:egboxcount} we obtain:
+
+In \Cref{fig:egboxcount} we show box-counting being applied to a
+circle and the Sierpinski Triangle. On the left we see a small circle,
+touching 186 boxes, and a circle double the size of the first,
+touching 714.  The circle has a known dimension of 2. On the right we
+see the same for the Sierpinski Triangle, which has a known fractal
+dimension of $\log_2 3 \approx 1.585$.  If we apply the BC dimension
+formula to the data in \Cref{fig:egboxcount} we obtain:
+
 \[
 \begin{array}{l l l l}
-  d_{\circ}    &= \log_2{\frac{714}{186}} &= 1.94 &\approx 2 \\[.5em]
-  d_{\tiny \triangle} &= \log_2{\frac{363}{122}} &= 1.57 &\approx 1.585 \\
+  \dimbc (\mathrm{circle}) &= \log_2{\frac{714}{186}} &= 1.94 &\approx 2 \\[.5em]
+  \dimbc (\mathrm{sierp})  &= \log_2{\frac{363}{122}} &= 1.57 &\approx 1.585 \\
 \end{array}
 \]
 
   We see that the dimension our data gives is just
-\emph{approximately} the correct value. If we were to iterate this
-process and plot the number of boxes touched by the scaled version of
-our shapes, over the scale factor, we would see that the data for the
-circle fits almost perfectly fit the curve $f(x) = cx^2$, for $c$
-being a constant. The Sierpinski triangle would fit the curve $f(x) =
-cx^{1.585}$.  That is, for a given shape with BC dimension $d$, the
-number of boxes touched by the shape scaled by $s$ gets closer and
-closer to $cs^d$ as $s$ grows.
+\emph{approximately} the correct value, but it serves its purpose
+perfectly for our objective: to isolate pattern candidates that have
+no connection whatsoever. Note that this number distinguishes the
+the circle from the Sierpinski Triangle for any $\epsilon < 0.37$,
+which is a \emph{big} margin. Moreover, if we rotate, translate 
+to another position in the plane, or even scale the circle and
+Sierpinski triangle, their approximated BC dimension stays the same.
 
-  Note that if we rotate our Sierpinski Triangle, or translate it
-to another position in the plane, or even scale it, its BC dimension
-stays the same.
+%% If we were to iterate this
+%% process and plot the number of boxes touched by the scaled version of
+%% our shapes, over the scale factor, we would see that the data for the
+%% circle fits almost perfectly fit the curve $f(x) = cx^2$, for $c$
+%% being a constant. The Sierpinski triangle would fit the curve $f(x) =
+%% cx^{1.585}$.  That is, for a given shape with BC dimension $d$, the
+%% number of boxes touched by the shape scaled by $s$ gets closer and
+%% closer to $cs^d$ as $s$ grows.
 
-\subsection{Scaling in Music} 
-In order to compute the BC dimension of
-a potential music pattern, we must first define what to we mean by scaling 
-in music. There are a variety of options for defining the meaning of
-the \emph{scale factor} in symbolic music. The simplest one 
-is to look at a section of music one note value at a time.
-This means that at a sixteenth-note scale factor, the
-line in \Cref{fig:egscalingmusic} has $xxx$ pixels, but
-at the eight-note scale factor, it only has $yyy$ pixels.
+  We have seen how the approximate BC-dimension of a shape is a good
+measure for isolating occurences of a pattern minus false positives.
+In order to apply this to symbolic music, however, we must define what
+do we mean by \emph{scaling} in symbolic music.
 
-\victor{finish this}
+\subsection{Scaling and BC-dimension in Music} 
+  Note values provide a simple notion of scaling for symbolic music.
+Take a piece of music and look only on one note every time a metronome
+beats on a quarter note. Now do the same but change the metronome to
+click on every sixteenth note. The second pass will uncover, in general,
+more detail than the first. This is a crucial observation. The notion
+of scaling, specially in the fractal geometric sense, is tightly tied
+to the notion of detail. The closer we look at a shape, the more detail we see.
+
+  In \Cref{fig:egscalingmusic} we show an example of looking at the first
+measure in J. S. Bach's first Cello Suite on different scales. We start at 
+a more coarse scale, the half note, and progress to a finer scale, the sixteenth note.
+We also connect the notes we see on each respective scaling factor.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/img/musical-scaling-example.pdf}
-  \caption{The ``box-count'' under different scalings for the first measure in BWV 1007.}
+  \caption{The ``box-count'' under different scalings for the first measure in BWV 1007,
+the numbers indicate the length, in pixels, for their respective lines.}
   \label{fig:egscalingmusic}
 \end{figure}
 
-\subsection{Box-Count dimension of symbolic music}
-\victor{write a bit about this}
+  \victor{There are a number of notions one could consider, for example
+blah, inner metric (cite Anja's inner metric), blih or bloh. We leave
+those for future work and use a simpler version}
+
+  Next, in order to approximate the BC-dimension of a group of notes
+we can apply the same process as in \Cref{fig:egboxcount}. Counting boxes for
+a figure in the plane is a way of approximating the area, also called
+the \emph{mass} of the shape. For a line it is quite easy to calculate
+the mass directly: it is the length of that line. Hence, if we take 
+the lines in \Cref{fig:egscalingmusic}, they measure $308$ at scale
+$s$, $390$ at scale $2s$ and $485$ at scale $4s$. With this data
+at hand, we can approximate the BC-dimension of the first measure in
+BWV 1007:
+
+\[
+\begin{array}{l l l}
+ \dimbc (\mathrm{BWV1007}_1)  &\approx \log_2 \frac{390}{308} &= 0.340 \\[.5em]
+                              &\approx \log_4 \frac{485}{308} &= 0.327 \\
+\end{array}
+\]
+
+\victor{finish this}
 
 \section{Experiment}
 
