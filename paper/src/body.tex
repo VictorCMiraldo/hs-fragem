@@ -3,13 +3,13 @@
 \section{Introduction}
 \label{sec:intro}
 
-  Musical patterns are usually easily spotted by a trained performer,
-even when they show up under different \emph{variations}.  These
+  Musical patterns are easily spotted by a trained performer,
+even if the pattern appears under different \emph{variations}.  These
 variations include transpositions, inversions, time dilations, between
-others. Amongst the favorite examples where patterns show up under a
+others. Amongst the favorite examples of patterns showing up under a
 plethora of variations are the fugues by J.S. Bach. Take
 \Cref{fig:bwv861-start}, we see two patterns showing up under
-inversions and transpositions already.
+inversions and transpositions in the first two bars.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{src/img/bwv861-start-section-patterns.pdf}
@@ -17,13 +17,27 @@ inversions and transpositions already.
   \label{fig:egbach}
 \end{figure}
 
-  Writting a computer program that is supposed to identify these
+  Writting a computer program that is capable to identify these
 patterns modulo their variations is no easy feat. The naive approach
 would be to select a candidate pattern, then go over the whole
 piece comparing interval per interval. This would have to be computed
 for every possible pattern candidate. The exponential nature of this
-naive approach makes it unrealistic and will not get us very far.
+approach makes it unrealistic and will not get us very far.
 
+  Fractal~\cite{bouligand1928ensembles}
+
+  In this paper we discuss an alternative, and efficient, approach to
+identifying patterns in symbolic music. The idea is to assign a real
+number to a potential pattern in such a way that \emph{similar}
+patterns have \emph{similar} numbers. We call this the pattern
+identifier.  This enables us to group patterns that differ by
+$\epsilon$.  A potential pattern consists simply in a group of
+notes. If we want to check whether a pattern of $n$ notes shows up but
+in half tempo, for example, we can compute the pattern identifier for
+all groups of contiguous $2n$ notes and compare the pattern
+identifiers.
+
+  A prime option for pattern identifier is to use 
   In this paper we propose an alternative method of mining a musical
 piece for its patterns under certain variations. Instead of comparing 
 the possible patterns of a musical piece for propositional equality, 
