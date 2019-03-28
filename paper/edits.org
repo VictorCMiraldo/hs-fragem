@@ -1,0 +1,11 @@
+* Terminology
+- time dilations -> augmentation, diminution
+* Paper Content
+- I'm tempted to add in another paragraph in the introduction: in comparison to other pattern discovery algorithms, we consider a hierarchical comparison. This gives us advantages even when there is no requirements on efficiency. This also gives us to introduce the "scaling" methods we use. 
+- Adding provable properties: BC-dimension is invariant in certain transformations. 
+- Figure 3 is self-explanatory, but should we still describe how we calculated the mass in the actual midi number and duration? We are not taking the pixels after all? It might confuse people in optical score recognition research.  
+- Adding experiments: hanon as example for plotting the time series, mozart as an example of extracted patterns
+* Paper Structure
+- Related work put in front
+* Meta
+- I'm not very used to hard line-break. And I normally put sentences on different lines. If you don't mind me trying this? 

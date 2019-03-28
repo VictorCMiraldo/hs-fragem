@@ -1,0 +1,26 @@
+(TeX-add-style-hook
+ "index"
+ (lambda ()
+   (setq TeX-command-extra-options
+         "-shell-escape")
+   (TeX-add-to-alist 'LaTeX-provided-package-options
+                     '(("fontenc" "T1") ("inputenc" "utf8")))
+   (TeX-run-style-hooks
+    "latex2e"
+    "src/body"
+    "article"
+    "art10"
+    "fontenc"
+    "inputenc"
+    "ismir"
+    "amsmath"
+    "cite"
+    "url"
+    "graphicx"
+    "color"
+    "pgfplots"
+    "cleveref")
+   (LaTeX-add-bibliographies
+    "references"))
+ :latex)
+
