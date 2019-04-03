@@ -1,6 +1,8 @@
 \newcommand{\victor}[1]{{\color{blue}\textbf{[victor:}\textit{#1}\textbf{]}}}
 \newcommand{\iris}[1]{{\color{purple}\textbf{[iris:}\textit{#1}\textbf{]}}}
 \newcommand{\dimbc}{\mathrm{dim}^{\mathrm{BC}}}
+\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+\newcommand{\changed}[1]{{\color{ao(english)}{#1}}}
 
 \section{Introduction}
 \label{sec:intro}
@@ -15,9 +17,12 @@ There have been many musical theories on the hierarchical structure of music, su
 One tool that could be used to study the hierarchical structure in music is fractal theory.
 Fractal geometry is an established area of mathematics that studies self-similar patterns on different levels of details.
 The concept of fractal dimension has been devised to measure the change of contents across different levels of hierarchies.
-In the one-dimensional case, the fractal dimensions takes into account of the line segment lengths at different scales.
-% For example, as shown in Figure \ref{fig:bc}, empirically, the fractal dimension can be measured given any contour.
-Therefore, given a segment of music, one can also use the box-counting method to calculate a parallel of the fractal dimension by looking into the different levels of details exhibited on different levels of hierarchies in music.
+\changed{
+Because of the imposed recursive rules that generate the hierarchical structures, the fractal dimensions of fractal objects are often not integers; in regular non-fractal objects, however, the dimensions correspond to the common sense definition of dimensions: a square is of fractal dimensions two, and a cube is of fractal dimension three. 
+For example, in the one/two-dimensional case of a Koch's snowflake, taking into account of the line segment lengths at different scales (different steps of iterations), it has a fractal dimension $\approx$ 1.26.
+Empirically, the fractal dimension can be measured given any contour using the box-counting method, such as the often referenced examples in the geometry of coastlines.
+Similarly, given a segment of a melodic line, one can also calculate a parallel of the fractal dimension by looking into the different levels of details exhibited on different levels of hierarchies in the melodic lines.
+A detailed mathematical description is given in \secref{sec:fractal-geom}.}
 
 \textbf{Related Work}
 In the research area of MIR, many useful tools and investigation have been made to understand the hierachical structures of music.
@@ -43,8 +48,9 @@ inversions and transpositions in the first two bars.
   \label{fig:bwv861-start}
 \end{figure}
 
-  Writting a computer program that is capable to identify these
-patterns modulo their variations is no easy feat. The naive approach
+Writing a computer program that is capable to identify these patterns modulo their variations is no easy feat.
+\changed{The challenges in musical pattern discovery has been detailed in \cite{janssen2013finding, meredith2015music,ren153analysis}. }
+The naive approach
 would be to select a candidate pattern, then go over the whole
 piece comparing interval per interval. This would have to be computed
 for every possible pattern candidate. The exponential nature of this
@@ -106,12 +112,21 @@ Just to clarify that we can also be more precise and certain on what kind of pat
 \section{The Fractal Geometry of Symbolic Music}
 \label{sec:fractal-geom}
 
-  In this section we review the necessary parts of fractal geometry
-and explain how to apply it to symbolic music notation. This enables
-us to identify a pattern with a number that is constant under
-variations such as transpositions, inversions, time dilations, etc.
+  % In this section we review the necessary parts of fractal geometry
+% and explain how to apply it to symbolic music notation. This enables
+% us to identify a pattern with a number that is constant under
+% variations such as transpositions, inversions, time dilations, etc.
 
-  The box-count (BC) dimension~\cite{bouligand1928ensembles} of a shape
+\changed{
+Mathematically, the fractal dimension is defined as $$D=-\frac{logM}{logs}$$
+where $M=Mass$, usually defined in terms of lengths or areas of the geometric objects, and $s=scaling$, usually defined as how many recursive steps has been taken in creating the fractals.
+
+One intuition of fractal dimension is how rough or how much detail are embedded in the geometric object.
+Continuing on the example from the introduction section, the coastlines of different countries can be measured in terms of fractal dimensions by using the box-counting method \cite{sarkar1994efficient}, where one control the scaling factor $s$ and count the ``boxes'' to obtain the mass $M$.
+Thus we can empirically compute fractal dimensions given any geometric objects. 
+}
+
+ In more detail, the box-count (BC) dimension~\cite{bouligand1928ensembles} of a shape
 can be seen as a measure of the \emph{roughness} of that shape. It coincides with the
 Euclidean dimension for the familiar shapes but it might be non integer. For example,
 the BC-dimension of the Sierpinski Triangle (\Cref{fig:egboxcount}, right) is $\log_2 3 \approx 1.585$
@@ -234,18 +249,17 @@ BWV 1007:
 
 \victor{finish this}
 
-
-
 \iris{The explanation computation on Figure \ref{fig:egscalingmusic} is very clear, 
 but should we still describe how we calculated the mass in the actual midi number and duration? 
 We are not taking the pixels after all? It might confuse people in optical score recognition research?  }
+
 % \textbf{A simplified example to compute the features}
 % First, we split a music entry into m parts, n bars per part.
 % We then perform the following actions for each bar: take the notes in the most
 % important positions in the bar.
 % For example, in a 4/4 bar, we have a importance grid of [5,2,3,2,4,2,3,2] in the resolution of a quiver. 
-% so only the notes on position of the first quiver will be taken); 
-% take the notes in the most and the second most important positions in the bar 
+% Only the notes on position of the first quiver will be taken. 
+% Take the notes in the most and the second most important positions in the bar 
 % (we have the positions of the first and the fifth quiver in this case); 
 % repeat till we consider all the importance level. 
 % Next, we compute measurement (mass) on the hierarchy. 
@@ -255,54 +269,67 @@ We are not taking the pixels after all? It might confuse people in optical score
 % The last step is to take ratios and the log of the mass between the selected two
 % hierachies: $dim = log_2(mass_{I1}/mass_{I2})$.
 
-\iris{\textbf{Resolved!} Below is the music related background and my previous description on explaining the fractal dimensions. 
-If there are still bits that could be helpful, they should probably come in this section. 
-\textbf{@Victor, @Anja, @Wouter, @Remco}, could you please take a look and see if anything is worth mentioning?
-(Maybe even a rough hand annotation circling out where you find helpful? I'll try to edit them in the structure.)}
-
-
-% \begin{figure}
-%   \includegraphics[width=\linewidth]{src/img/eg.png}
-%   \caption{Two levels of hierarchies in Bach's Preludium in C major \cite{wiki:bach}: the original piece and the underlying chords.
-%           The details in the first two staffs can be summarised into the chords in the third staff}
-%   \label{fig:egbach}
-% \end{figure}
-
-% \begin{figure}
-%   \includegraphics[width=\linewidth]{src/img/egscale.png}
-%   \caption{Four levels of hierarchies in an artificial example using scales: from the top to the bottom staff, we have different levels of details in different levels of hierarchies.
-%     The notes at different levels of hierarchies are specified based on the metrical positions of the notes.}
-%   \label{fig:egscale}
-% \end{figure}
-
-
-
-% \textbf{Fractal Dimension}
-% Mathematically, the fractal dimension is defined as $$D=-\frac{logM}{logs}$$
-
-% where $M=Mass$, usually defined in terms of lengths or areas of the geometric objects, and $s=scaling$, usually defined as how many recursive steps has been taken in creating the fractals.
-
-% One intuition of fractal dimension is how rough or how much detail are embedded in the geometric object.
-% For example, the coast lines of different countries can be measured in terms of fractal dimensions by using the box-counting method \cite{sarkar1994efficient}, where one control the scaling factor $s$ and count the ``boxes'' to obtain the mass $M$.
-% Thus we can empirically compute fractal dimensions given any geometric objects. 
 
 % \textbf{Similarity dimension in music}
-% In the context of music, there have been evidences that a visual-audio correspondence exists amongst music objects \cite{thorpe2016perception}.
-% This can also be observed from the sheet music.
-% Without musical training, one can differentiate the uneven, irregular contours of music notes against the smooth, regular contours, and have certain expectations in the corresponding musical events.
-% Following the intuition given in the last paragraph, a rougher contour which contains many details would correspond to a higher ``Mass'' in terms of the fractal geometry.
-
-% Different measures can be defined to measure $M$, the mass of melodic contour.
 % And given a hierarchy of melodic reduction, we can ``zoom-in/out'' across the hierarchy and examine have different levels of details, which can function as the scaling $s$.
 % Therefore, in a monophonic scenario, we can calculate a similarity dimension using two levels in musical hierarchy using $M$ and $s$. 
 
-% In this paper, we take a simple mass measurement
-% $$M(n_1, n_2) = \sqrt{(t_1-t_2)^2 +(p_1-p_2)^2}$$
-%   where $n_i=(t_i, p_i)$, that is, a musical note is characterised by its onset time and the pitch number. 
-% Intuitively, it is the line segment between two notes.
-% By taking the sum of the line segments, we obtain the length sum approximating the roughness of the contour of a melodic line.
+\changed{
 
+\subsection{Parameters}
+From the descriptions above, we need to decide at least the scope and the zooming levels for calculating the fractal dimensions:
+\begin{itemize}
+\item Window size (g): integers indicating how many bars are used for the computation at a time. 
+\item Zoom levels (z): two integers indicating which levels on the hierarchy we are computing the fractal dimensions with. 
+\end{itemize}
 
+There is also an option to use a hopping or a sliding window. 
+Our default set of parameters are $g=2$, $z=(2,1)$ with hopping window. 
+
+\subsection{Properties of Fractal Dimension}
+From the computation defined in the last subsection, we are guaranteed to extract certain types of patterns.
+We give mathematical accounts for such connections in this section.
+
+% \textbf{Mirror forms}
+\textbf{Symmetric musical transformation}
+There are certain circumstances where the following rigid symmetric musical transformations do not change the fractal dimensions.
+
+\begin{itemize}
+\item Inversion: reverse pitch intervals
+\item Retrograde: mirror pitches and durations backwords
+\item Inversion-Retrograde: the composition of inversion and then retrograde
+\item Retrograde-Inversion: the composition of retrograde and then inversion
+\end{itemize}
+
+We can show that the inversion transformation do not affect the fractal dimension, however, this is not the case for other transformations on the list.
+
+For proving that the fractal dimension is an invariance under the inversion transformation, we only need to show that the mass of the melodic line do not change after the transformations. 
+We use $M$ for taking the mass, $D = [(t_1, p_1), (t_2,p_2),...]$ stands for the input music data in the form of time-pitch pairs, and $I, R, IR, RI$ stands for the transformations.
+
+By definition of the mass calculation, we have:
+$M(D) = \sum\limits_n ((t_n-t_{(n+1)})^2 + (p_n - p_{n+1})^2)^{\frac{1}{2}} $
+For inversion, we have $M(I(D))$:
+\begin{flalign*}
+  \tiny
+&= M(I([(t_1, p_1), (t_2,p_2),...]))&\\
+&= M([(t_1, p_1), (t_2, p_1-(p_2-p_1),&\\
+& \qquad (t_3, p_1 - (p_2-p_1) - (p_3-p_2), ...))])&\\
+&= ((t_1-t_2)^2 + (p_2 - p_1)^2)^{\frac{1}{2}}&\\
+& \qquad + ((t_2-t_3)^2 + (p_2 - p_3)^2)^{\frac{1}{2}} + ...&\\
+&= M(D)
+\end{flalign*}
+
+For retrograde, in general,
+\[
+ \sum\limits_n(\Delta t_n + \Delta p_n)^{\frac{1}{2}} - \sum_{\substack{n=1,2,...,T \\ m=T,T-1,...,1}}(\Delta t_{m} + \Delta p_n)^{\frac{1}{2}} \neq 0
+\]
+
+unless $\Delta t_n = \Delta t_m$, that is, when the time intervals exhibit a symmetry with respect to the middle time interval.
+However, since the difference (the left hand side of the equation) is a polynomial function, we can expect that the fractal dimension does not change drastically after the retrograde transformation. 
+
+\textbf{Ornamentation and simplification}
+When we add in a note or subtract a note, as long as the changed notes do not enter the set of important notes we consider, the fractal dimensions remain the same.
+}
 
 \section{Experiment}
 
@@ -310,13 +337,13 @@ If there are still bits that could be helpful, they should probably come in this
 got some data from MIDI, mined for patterns using technique shown in \Cref{sec:fractal-geom}}
 
 
-
 \textbf{Simple Examples}
-As an example, we plot the similarity dimension time series in Hanon, as shown in \figref{fig:simpeg}. 
-The symmetric structure of the piece was captured by the time series. 
+As an example, we plot the similarity dimension time series in Hanon, as shown in \figref{fig:simpeg}.
+The symmetric structure of the piece was captured by the time series of fractal dimensions.
+
 \begin{figure}
-  \includegraphics[width=\linewidth]{src/img/simpeg.png}
-  \caption{The similarity dimension in Hanon}
+  \includegraphics[width=\linewidth]{src/img/frac-simpeg.pdf}
+  \caption{The fractal dimensions of patterns in the Hanon Exercise No.6. Each data point corresponds to the four-bar window we took.  }
   \label{fig:simpeg}
 \end{figure}
 
@@ -324,18 +351,34 @@ The symmetric structure of the piece was captured by the time series.
 By comparing with other musically meaningful features, we verify that the BC-dimension is not redundant. 
 At p-value threshold 0.01, the fractal feature only correlates with three features out of the 150 features in jSymbolic2.2, Mean Pitch, Pitch Skewness, Variability of Partial Rest Durations. 
 
+\textbf{Distance matrix}
+By taking different distance measures, we can use the devised fractal dimensions for classification purposes.
+\begin{figure}
+  \includegraphics[width=\linewidth]{src/img/fragemdist.pdf}
+  \caption{The distance matrix of the fractal dimension time series. }
+  \label{fig:simpeg}
+\end{figure}
 
-\section{Results}
-
-\victor{What did we get out of running our tool from the midi dataset?}
-
-
+\changed{
 \textbf{Pattern discovery}
-By thresholding the similarity dimension, we can retrieval musical pattern candidates. 
+We can extract patterns based on the fractal dimensions as shown in \figref{fig:extract}.
+This monophonic version of the Mozart piece is one out of five pieces in the JKU-PDD dataset.
+Due to space limit, we only show one pattern that is extracted by the tool with our default setting.
+An exploration using a full parameter sweep is out of scope of this paper.
+The pattern discovery functionality is packaged with our analysis tool, which can be accessed online.\footnote{\url{https://github.com/xxx/hs-fragem}}.
+As expected, the exact repetitions are all foregrounded in the newly generated MIDI file.
+For a long MIDI file with low readability, our tool could be useful for highlighting the repetitions across the piece.
 
-\subsection{Threats to Validity}
+Although we do not conduct a comprehensive comparison to other existing musical pattern discovery algorithms~\cite{meredith2016using,velarde2016wavelet,pesek2017symchm,collins2013siarct,conklin2002representation,conklin2010discovery,ren2016closed}, our methods feature an end-to-end compiled application for pattern discovery in music. 
+There is also a recent web-based tool that find patterns with a certain degree of flexibility in jazz solos~\cite{FrielerHPD18}; our tool has more considerations with the hierarchical structures in music. 
+}
 
-\victor{We are not airtight. What did we not consider?}
+\begin{figure*}
+  \includegraphics[width=\linewidth]{src/img/fragempat.pdf}
+  \caption{Using fractal dimensions to extract repeated patterns in a monophonic version of Mozart's Piano Sonata No.4 in E-flat major, K282, second movement. Our tool extract patterns from a MIDI file and generate a new MIDI file with the presence of the patterns only. }
+  \label{fig:extract}
+\end{figure*}
+
 
 \section{Discussion and Conclusion}
  
@@ -394,3 +437,18 @@ We provide a tool for pattern discovery based on this feature.
 %% versus the known dimensions of the objects.}
 %% \label{fig:egplots}
 %% \end{figure}
+
+% two figures from the first version
+% \begin{figure}
+%   \includegraphics[width=\linewidth]{src/img/eg.png}
+%   \caption{Two levels of hierarchies in Bach's Preludium in C major \cite{wiki:bach}: the original piece and the underlying chords.
+%           The details in the first two staffs can be summarised into the chords in the third staff}
+%   \label{fig:egbach}
+% \end{figure}
+
+% \begin{figure}
+%   \includegraphics[width=\linewidth]{src/img/egscale.png}
+%   \caption{Four levels of hierarchies in an artificial example using scales: from the top to the bottom staff, we have different levels of details in different levels of hierarchies.
+%     The notes at different levels of hierarchies are specified based on the metrical positions of the notes.}
+%   \label{fig:egscale}
+% \end{figure}

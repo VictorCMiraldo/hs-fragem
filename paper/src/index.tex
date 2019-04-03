@@ -27,7 +27,7 @@
 
 % Title.
 % ------
-\title{Using a parallel of Hausdorff dimension for pattern discovery in symbolic music data}
+\title{Using a parallel of fractal dimension for pattern discovery in symbolic music data}
 
 % Note: Please do NOT use \thanks or a \footnote in any of the author markup
 
@@ -79,7 +79,15 @@
 \maketitle
 %
 \begin{abstract}
-Taking the hierarchical structures of music into consideration, we devise features to extract patterns from symbolic music data. By conditioning on the features, we can extract pattern candidates with the same or similar melodic line. 
+  Fractals are highly regular objects with repetitions at different scales.
+  This has a counterpart in music: musical patterns repeat at different granularities of time.
+  The hierarchical structures in fractals and music offer a connection to describe these varying repetitions. 
+  In this paper, we explore this connection quantitatively by looking at different levels of hierarchies and devising a computational tool to measure the fractal dimensions of musical structures.
+  We showcase the effectiveness of our conceptual framework by employing the system to compute time series of fractal dimensions in monophonic symbolic corpora and synthesised data.
+  For these different corpora, the distance matrix of the fractal dimensions exhibit distinct differences, and shows a potential for measuring music similarity. 
+  Comparing with other computational features of symbolic music, we further establish the unique values in the fractal dimensions by reporting low correlations between these fractal dimensions and the existing features.
+  For pattern discovery, we obtain patterns of certain geometric properties by thresholding on the fractal dimensions, consequently extracting pattern candidates with the same or similar melodic line.
+
 \end{abstract}
 
 \input{src/body.tex}

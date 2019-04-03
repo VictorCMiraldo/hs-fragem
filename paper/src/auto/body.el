@@ -4,6 +4,7 @@
    (setq TeX-command-extra-options
          "-shell-escape")
    (TeX-add-symbols
+    '("changed" 1)
     '("iris" 1)
     '("victor" 1)
     "dimbc")
@@ -13,6 +14,7 @@
     "sec:fractal-geom"
     "fig:egboxcount"
     "fig:egscalingmusic"
-    "fig:simpeg"))
+    "fig:simpeg"
+    "fig:extract"))
  :latex)
 
