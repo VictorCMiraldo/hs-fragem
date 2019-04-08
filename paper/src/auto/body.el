@@ -10,6 +10,8 @@
     "dimbc")
    (LaTeX-add-labels
     "sec:intro"
+    "fig:egbach"
+    "fig:egscale"
     "fig:bwv861-start"
     "sec:fractal-geom"
     "fig:egboxcount"

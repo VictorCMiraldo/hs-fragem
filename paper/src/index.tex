@@ -27,7 +27,7 @@
 
 % Title.
 % ------
-\title{Using a parallel of fractal dimension for pattern discovery in symbolic music data}
+\title{Fractal dimension for music similarity and patterns in symbolic music data}
 
 % Note: Please do NOT use \thanks or a \footnote in any of the author markup
 
@@ -73,6 +73,8 @@
 
 \sloppy % please retain sloppy command for improved formatting
 
+\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+\newcommand{\alternative}[1]{{\color{ao(english)}{#1}}}
 \begin{document}
 
 %
@@ -80,13 +82,15 @@
 %
 \begin{abstract}
   Fractals are highly regular objects with repetitions at different scales.
-  This has a counterpart in music: musical patterns repeat at different granularities of time.
-  The hierarchical structures in fractals and music offer a connection to describe these varying repetitions. 
-  In this paper, we explore this connection quantitatively by looking at different levels of hierarchies and devising a computational tool to measure the fractal dimensions of musical structures.
-  We showcase the effectiveness of our conceptual framework by employing the system to compute time series of fractal dimensions in monophonic symbolic corpora and synthesised data.
-  For these different corpora, the distance matrix of the fractal dimensions exhibit distinct differences, and shows a potential for measuring music similarity. 
-  Comparing with other computational features of symbolic music, we further establish the unique values in the fractal dimensions by reporting low correlations between these fractal dimensions and the existing features.
-  For pattern discovery, we obtain patterns of certain geometric properties by thresholding on the fractal dimensions, consequently extracting pattern candidates with the same or similar melodic line.
+  \alternative{(Alternative intro sentence, for a more cross-disciplinary audience in mathematics and complex system research?:
+    In mathematics, a fractal is a geometric object which exhibits regularity through self-similarity --- the whole being repeated at different scales, resulting to similar parts of itself.) }
+  This has a natural counterpart in music: musical patterns repeat at different granularities of time.
+  The hierarchical structures in fractals and music offer a starting point to describing and detecting these varying repetitions. 
+  In this paper, we explore this connection quantitatively by examining these hierarchies at different levels and computationally measure the fractal dimension in music.
+  We apply our framework to compute the time series of the fractal dimensions in monophonic symbolic corpora and synthesised data.
+  For these different corpora, the distance matrices of the fractal dimensions exhibit distinct differences, showing a potential means to measure music similarity. 
+  We further substantiate the novelty and usefulness of the fractal dimension by reporting its low correlations with previously-studied features.
+  Using our approach, we are able to obtain patterns exhibiting certain geometric properties by thresholding on the fractal dimensions, permitting the extraction of pattern candidates with the same or similar melodic contours.
 
 \end{abstract}
 
@@ -94,4 +98,4 @@
 
 \bibliography{references}
 
-\end{document}
+\end{document} 

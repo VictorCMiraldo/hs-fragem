@@ -24,7 +24,11 @@
     "color"
     "pgfplots"
     "cleveref")
+   (TeX-add-symbols
+    '("alternative" 1))
    (LaTeX-add-bibliographies
-    "references"))
+    "references")
+   (LaTeX-add-color-definecolors
+    "ao(english)"))
  :latex)
 
