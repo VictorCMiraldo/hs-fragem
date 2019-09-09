@@ -127,7 +127,7 @@ midiGetNoteEvents = sortBy go . process M.empty . simplify
     simplify :: Midi.Track a -> [(a , Bool , Int)]
     simplify = map convert . filter (isNoteEvent . snd)
       where
-        convert (x , Midi.NoteOn  _ key _) = (x , True  , key)
+        convert (x , Midi.NoteOn  _ key v) = (x , v > 0 , key)
         convert (x , Midi.NoteOff _ key _) = (x , False , key)
  
 -- VCM: TODO: We will not record tempo changes here; only time signature
