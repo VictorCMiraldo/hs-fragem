@@ -160,7 +160,8 @@ step2TimeSigFor :: Midi.Ticks -> Step2 TimeSig
 step2TimeSigFor t
   = (maybe err snd . M.lookupLE t) <$> (timesigChanges <$> get)
   where
-    err = error "step2TimeSigFor: No time signature found"
+    -- err = error "step2TimeSigFor: No time signature found"
+    err = TimeSig 4 4
 
 -- |Was there a time signature in between the ticks? This
 --  happens when the time signature of two ticks is different.

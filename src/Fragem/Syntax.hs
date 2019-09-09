@@ -1,5 +1,9 @@
 {-# LANGUAGE TupleSections #-}
+{-# LANGUAGE DeriveGeneric #-}
 module Fragem.Syntax where
+
+import GHC.Generics
+import Control.DeepSeq
 
 import Data.List (transpose)
 import Text.Printf
@@ -21,7 +25,8 @@ data Note = Note
   , noteDuration :: Ticks
   -- | Pitch of the note (or rest)
   , notePitch    :: Int
-  } deriving (Eq , Ord)
+  } deriving (Eq , Ord, Generic)
+instance NFData Note where
 
 instance Show Note where
   show (Note nd ndur p) = show nd ++ "+" ++ show ndur ++ ";" ++ show p
@@ -30,11 +35,13 @@ instance Show Note where
 data TimeSig = TimeSig
   { timesigNum   :: Int
   , timesigDenum :: Int
-  } deriving (Eq , Show , Ord)
+  } deriving (Eq , Show , Ord , Generic)
+instance NFData TimeSig where
 
 -- |A 'Measure' consists in a list of notes.
 newtype Measure = Measure { measureNotes :: [Note] }
-  deriving (Eq , Show , Ord)
+  deriving (Eq , Show , Ord , Generic)
+instance NFData Measure where
 
 -- |Concatenate the notes of n measures into a
 --  single group of notes; useful for computing the mass
@@ -61,7 +68,6 @@ regroupMeasureSlide n ls
 extractMeasures :: Int -> Section -> [Measure]
 extractMeasures i = take i . sectionMeasures
 
-
 -- |A 'Section' consists in a a list of measures in a given time signature.
 data Section = Section
   -- |Current section's time signature
@@ -70,11 +76,13 @@ data Section = Section
   , sectionTPB       :: Int
   -- |Measures in the given tempo
   , sectionMeasures  :: [Measure]
-  } deriving (Eq , Show , Ord)
+  } deriving (Eq , Show , Ord , Generic)
+instance NFData Section where
 
 -- |A 'Voice' is a list of sections.
 newtype Voice = Voice { pieceSections :: [Section] }
-  deriving (Eq , Show , Ord)
+  deriving (Eq , Show , Ord, Generic)
+instance NFData Voice where
 
 -- |Returns the meta-information of a piece
 --  in a humam-consumable format.

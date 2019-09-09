@@ -1,6 +1,7 @@
 {-# LANGUAGE TupleSections #-}
 module Fragem.Syntax.FromMidiSpec (spec) where
 
+import Control.DeepSeq
 import Data.Maybe
 
 import Fragem.Syntax.FromMidi
@@ -12,7 +13,7 @@ import Test.QuickCheck.Monadic
 parse1 :: FilePath -> PropertyM IO Bool
 parse1 file = do
   res <- run (fromMidi file)
-  case seq res res of
+  case res `deepseq` res of
     Left err -> run (putStrLn (file ++ "; " ++ err))
              >> return False
     Right _  -> return True
